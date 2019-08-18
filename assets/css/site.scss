@@ -1,0 +1,90 @@
+---
+---
+@charset "utf-8";
+
+// Bulma
+$column-gap: 0.375em;
+$variable-columns: true;
+
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/form/_all.sass";
+@import "../../node_modules/bulma/sass/grid/_all.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/elements/title.sass";
+@import "../../node_modules/bulma/sass/elements/content.sass";
+@import "../../node_modules/bulma/sass/elements/button.sass";
+@import "../../node_modules/bulma/sass/elements/image.sass";
+
+
+//
+// Fonts
+//
+
+
+@font-face {
+    font-family: 'Titillium';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(/assets/fonts/titillium-web.woff2) format('woff2');
+}
+
+//
+// Global
+//
+
+$bg-color: lighten(#eae7e1, 5%);
+$site-width: 768px;
+
+html, body {
+    background-color: $bg-color;
+}
+
+body {
+    font-family: 'Titillium';
+    font-size: 10pt;
+    color: #000;
+}
+
+.is-cover img {
+    object-fit: cover;
+}
+
+.container {
+    max-width: $site-width !important;
+
+    &.padded {
+        padding-bottom: 0.75em;
+    }
+}
+
+.content {
+    padding: 0 0.5em 0 0.5em;
+    margin-bottom: 0 !important;
+
+    li + li {
+        margin-top: 0.8em !important;
+    }
+    
+    &.nopadding {
+        padding: 0 !important;
+    }
+}
+
+.floatimg {
+    figure {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+}
+.columns {
+    &.reverse {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .is-scentered {
+        align-items: start;
+    }
+}

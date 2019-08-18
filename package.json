@@ -1,0 +1,25 @@
+{
+  "name": "geoDavey.us",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assets/js/dev.js",
+  "dependencies": {
+    "bulma": "^0.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "parcel build --no-source-maps -d assets/js -o site.js assets/js/dev.js",
+    "build_dev": "parcel build --no-minify --no-source-maps -d assets/js -o site.js assets/js/dev.js",
+    "watch": "watch -n5 -x npm run build_dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1papaya/geoDavey.us.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1papaya/geoDavey.us/issues"
+  },
+  "homepage": "https://github.com/1papaya/geoDavey#readme"
+}
