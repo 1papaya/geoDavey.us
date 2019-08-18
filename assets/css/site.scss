@@ -3,8 +3,10 @@
 @charset "utf-8";
 
 // Bulma
-$column-gap: 0.375em;
+$column-gap: 0.2em;
 $variable-columns: true;
+$link: hsl(0, 0%, 21%);
+$link-hover: hsl(217, 71%, 53%);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
@@ -24,6 +26,13 @@ $variable-columns: true;
 
 
 @font-face {
+    font-family: 'BadScript';
+    font-style: normal;
+    font-weight: 400;
+    src: local('BadScript Web Regular'), local('BadScriptWeb-Regular'), url(/assets/fonts/badscript-web.woff2) format('woff2');
+}
+
+@font-face {
     font-family: 'Titillium';
     font-style: normal;
     font-weight: 400;
@@ -35,7 +44,7 @@ $variable-columns: true;
 //
 
 $bg-color: lighten(#eae7e1, 5%);
-$site-width: 768px;
+$site-width: 320px;
 
 html, body {
     width: 100%;
@@ -91,18 +100,37 @@ body {
     }
 }
 
+.is-badscript {
+    font-family: 'BadScript';
+}
+
 //
 // Site
 //
 
-.logo {
+$logo-padding: 0.2em;
+$logo-width: $logo-padding*2;
+#home {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    & img {
-        max-width: 512px;
+    .logo {
+        margin: 0.4em;
+        max-width: $site-width;
+        width: calc( 100% - 0.4em );
+        height: auto;
     }
+    .contact {
+        .column {
+        }
+        .icon {
+            vertical-align: middle;
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
 }
