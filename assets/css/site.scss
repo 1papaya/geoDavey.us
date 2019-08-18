@@ -3,7 +3,7 @@
 @charset "utf-8";
 
 // Bulma
-$column-gap: 0.2em;
+$column-gap: 0.1em;
 $variable-columns: true;
 $link: hsl(0, 0%, 21%);
 $link-hover: hsl(217, 71%, 53%);
@@ -110,21 +110,23 @@ body {
 
 $logo-padding: 0.2em;
 $logo-width: $logo-padding*2;
+
 #home {
     width: 100%;
     min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+
     .logo {
         margin: 0.4em;
         max-width: $site-width;
         width: calc( 100% - 0.4em );
         height: auto;
     }
+
     .contact {
-        .column {
-        }
+        font-size: 0.9rem;
         .icon {
             vertical-align: middle;
             margin-right: 0.2em;
