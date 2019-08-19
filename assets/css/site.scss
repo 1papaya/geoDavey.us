@@ -118,10 +118,13 @@ $logo-width: $logo-padding*2;
     align-items: center;
     justify-content: center;
 
+    .container {
+        padding: 0 0.5em;
+    }
+
     .logo {
-        margin: 0.4em;
         max-width: $site-width;
-        width: calc( 100% - 0.4em );
+        width: 100%;
         height: auto;
     }
 
