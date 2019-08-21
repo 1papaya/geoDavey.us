@@ -38,7 +38,7 @@ $link-hover: hsl(217, 71%, 53%);
 //
 
 $bg-color: lighten(#eae7e1, 5%);
-$site-width: 680px;
+$site-width: 512px;
 
 html, body {
     width: 100%;
@@ -163,7 +163,7 @@ body {
             width: 100%;
             height: calc(100% + 6px);
             background-image: url(/assets/img/geoDavey_logo_hollow_small_text_low.png);
-            background-size: cover;
+            background-size: 100% 100%;
 
         }
     }
