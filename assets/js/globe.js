@@ -12,6 +12,8 @@ import XYZ from 'ol/source/XYZ';
 import {linear} from 'ol/easing';
 import arc from 'arc';
 
+import stys from './styles';
+
 var Globe = function(opt) {
 
     console.log(opt.places);
@@ -96,6 +98,7 @@ var Globe = function(opt) {
 
     var ptsLayer = new VectorLayer({
         name: "points",
+        style: stys.points,
         updateWhileAnimating: true,
         source: new VectorSource({
             features: ptsFeatures
@@ -136,7 +139,8 @@ var Globe = function(opt) {
         updateWhileAnimating: true,
         source: new VectorSource({
             features: lnsFeatures
-        })
+        }),
+        style: stys.lines
     });
 
     //
