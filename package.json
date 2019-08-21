@@ -7,7 +7,8 @@
     "bulma": "^0.7.1",
     "cesium": "^1.60.0",
     "ol": "^5.3.3",
-    "olcs": "^2.9.0"
+    "olcs": "^2.9.0",
+    "parcel": "^1.12.3"
   },
   "devDependencies": {},
   "scripts": {
