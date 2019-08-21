@@ -38,11 +38,11 @@ $link-hover: hsl(217, 71%, 53%);
 //
 
 $bg-color: lighten(#eae7e1, 5%);
-$site-width: 320px;
+$site-width: 512px;
 
 html, body {
     width: 100%;
-    height: 100%;
+    height: 100%; 
     background-color: $bg-color;
 }
 
@@ -145,7 +145,6 @@ body {
         img.overlay {
             position: absolute;
             width: 100%;
-            height: 100%;
         }
     }
 
