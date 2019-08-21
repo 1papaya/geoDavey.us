@@ -1,13 +1,12 @@
 import {Map, View, inherits} from 'ol';
 
-import {fromLonLat, transformExtent} from 'ol/proj';
+import {fromLonLat, toLonLat, transformExtent} from 'ol/proj';
 import BingMaps from 'ol/source/BingMaps';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
+import {linear} from 'ol/easing';
 
 var Globe = function(opt) {
-
-    // TODO save options from opt to globe object
 
     this.target = opt.target;
     this.proj = opt.proj || "EPSG:3857";
@@ -31,63 +30,65 @@ var Globe = function(opt) {
     inherits(this.FitView, View);
 
     //
-    // Globe Load
+    // Animation
     //
 
-    var lyrs = {
-        osm_road: new TileLayer({
-            title: "OSM Road",
-            name: 'osm_road',
-            baseLayer: true,
-            source: new XYZ({
-                url: '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            })
-        }),
-        osm_topo: new TileLayer({
-            title: "OSM Topo",
-            name: 'osm_topo',
-            baseLayer: true,
-            source: new XYZ({
-                url: '//a.tile.opentopomap.org/{z}/{x}/{y}.png'
-            })
-        }),
-        bng_satellite: new TileLayer({
-            title: "Bing Satellite",
-            name: "bng_satellite",
-            baseLayer: true,
-            source: new BingMaps({
-                key: "Ap_AF_-eOJAURQf6LAyArtmuF5-USl1bRKPrtqp0U9BpaqyVaU78_k7Pua6Q-e07",
-                imagerySet: "Aerial"
-            })
-        })
+    this.animate = function(msec) {
+        // msec = mseconds per rotation
+
+        let view = this.getView();
+        let origin_y = toLonLat(view.getCenter(), view.getProjection())[1];
+
+        let rotation = [];
+        let stops = [90, 180, -90, 0];
+
+        for (var stop of stops)
+        {
+            rotation.push({
+                center: fromLonLat([stop, origin_y]),
+                duration: parseInt( msec/4 ),
+                easing: linear
+            });
+
+            // gotta switch to -180 at map edge
+            if (stop == 180)
+                rotation.push({
+                    center: fromLonLat([-180, origin_y]),
+                    duration: 0,
+                    easing: linear
+                });
+        }
+
+        view.animate.apply(view, rotation);
+
+        setInterval(function(){
+            view.animate.apply(view, rotation);
+        }, msec);
+
     };
+
+    //
+    // Globe Load
+    //
 
     Map.call(this, {
         target: this.target,
         controls: [],
-        layers: [ lyrs[opt.layer] ],
+        layers: [
+            new TileLayer({
+                title: "OSM Road",
+                name: 'osm_road',
+                baseLayer: true,
+                source: new XYZ({
+                    url: '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                })
+            })
+        ],
         view: new this.FitView(this.target, this.init_bounds),
         loadTilesWhileAnimating: true
     });
-
 };
-
-//
-// Animation
-//
-
-Globe.prototype.spin = function() {
-
-    let center = this.getView().getCenter();
-    console.log(center);
-
-    //view.animate({
-    //    center: istanbul,
-    //    duration: 2000,
-    //    easing: bounce
-    //});
-}
 
 inherits(Globe, Map);
 
-module.exports = Globe;
+export default Globe;
