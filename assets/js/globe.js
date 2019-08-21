@@ -19,7 +19,7 @@ var Globe = function(opt) {
     console.log(opt.places);
     this.target = opt.target;
     this.proj = opt.proj || "EPSG:3857";
-    this.init_bounds = opt.init_bounds || [-30, -55, 30, 72];
+    this.init_bounds = opt.init_bounds || [-180, -55, -180, 72];
     this.init_bounds = transformExtent(this.init_bounds, "EPSG:4326", this.proj);
 
     //
@@ -43,27 +43,25 @@ var Globe = function(opt) {
     //
 
     this.animate = function(msec) {
-        // msec = mseconds per rotation
 
         let view = this.getView();
         let origin_y = toLonLat(view.getCenter(), view.getProjection())[1];
 
         let rotation = [];
-        let stops = [90, 180, -90, 0];
+        let stops = [-90, 0, 90, 180, -180];
 
         for (var stop of stops)
         {
-            rotation.push({
-                center: fromLonLat([stop, origin_y]),
-                duration: parseInt( msec/4 ),
-                easing: linear
-            });
-
-            // gotta switch to -180 at map edge
-            if (stop == 180)
+            if (stop == -180)
                 rotation.push({
                     center: fromLonLat([-180, origin_y]),
                     duration: 0,
+                    easing: linear
+                });
+            else
+                rotation.push({
+                    center: fromLonLat([stop, origin_y]),
+                    duration: parseInt( msec/4 ),
                     easing: linear
                 });
         }
