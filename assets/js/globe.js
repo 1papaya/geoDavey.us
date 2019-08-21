@@ -1,13 +1,20 @@
 import {Map, View, inherits} from 'ol';
 
 import {fromLonLat, toLonLat, transformExtent} from 'ol/proj';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 import BingMaps from 'ol/source/BingMaps';
+import Point from 'ol/geom/Point';
+import LineString from 'ol/geom/LineString';
+import Feature from 'ol/Feature';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import {linear} from 'ol/easing';
+import arc from 'arc';
 
 var Globe = function(opt) {
 
+    console.log(opt.places);
     this.target = opt.target;
     this.proj = opt.proj || "EPSG:3857";
     this.init_bounds = opt.init_bounds || [-30, -55, 30, 72];
@@ -68,6 +75,71 @@ var Globe = function(opt) {
     };
 
     //
+    // Generate Points Layer
+    //
+
+    let ptsFeatures = [];
+
+    for (var i=0; i<opt.places.length; i++) {
+        let plc = opt.places[i];
+
+        var ft = new Feature({
+            name: plc["address"],
+            last: !!( i == opt.places.length - 1),
+            geometry: new Point(
+                fromLonLat([parseFloat(plc["x"]), parseFloat(plc["y"])], this.proj)
+            )
+        });
+
+        ptsFeatures.push(ft);
+    }
+
+    var ptsLayer = new VectorLayer({
+        name: "points",
+        updateWhileAnimating: true,
+        source: new VectorSource({
+            features: ptsFeatures
+        })
+    });
+
+    //
+    // Generate Lines Layer
+    //
+
+    let lnsFeatures = [];
+
+    for (var i=0; i<opt.places.length-1; i++) {
+        let a = opt.places[i];
+        let b = opt.places[i+1];
+
+
+        var arcGen = new arc.GreatCircle(
+            {x: parseFloat(a["x"]), y: parseFloat(a["y"])},
+            {x: parseFloat(b["x"]), y: parseFloat(b["y"])}
+        );
+
+        var arcLine = new LineString(
+            arcGen.Arc(10, {offset: 10}).geometries[0].coords
+        );
+
+        arcLine.transform('EPSG:4326', this.proj);
+
+        let ft = new Feature({
+            geometry: arcLine
+        });
+
+        lnsFeatures.push(ft);
+    }
+
+    var lnsLayer = new VectorLayer({
+        name: "lines",
+        updateWhileAnimating: true,
+        source: new VectorSource({
+            features: lnsFeatures
+        })
+    });
+
+    //
     // Globe Load
     //
 
@@ -82,7 +154,9 @@ var Globe = function(opt) {
                 source: new XYZ({
                     url: '//a.tile.opentopomap.org/{z}/{x}/{y}.png'
                 })
-            })
+            }),
+            lnsLayer,
+            ptsLayer
             //new TileLayer({
             //    title: "Bing Satellite",
             //   name: "bng_satellite",
@@ -112,6 +186,8 @@ var Globe = function(opt) {
         view: new this.FitView(this.target, this.init_bounds),
         loadTilesWhileAnimating: true
     });
+
+    this.render();
 };
 
 inherits(Globe, Map);
