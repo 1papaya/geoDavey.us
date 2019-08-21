@@ -10,14 +10,8 @@ $link-hover: hsl(217, 71%, 53%);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
-@import "../../node_modules/bulma/sass/form/_all.sass";
 @import "../../node_modules/bulma/sass/grid/_all.sass";
 @import "../../node_modules/bulma/sass/elements/container.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
-@import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/elements/content.sass";
-@import "../../node_modules/bulma/sass/elements/button.sass";
-@import "../../node_modules/bulma/sass/elements/image.sass";
 
 
 //
@@ -104,12 +98,20 @@ body {
     font-family: 'BadScript';
 }
 
+.square {
+    position: relative;
+    width: 50%;
+
+    &:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
+}
+
 //
 // Site
 //
-
-$logo-padding: 0.2em;
-$logo-width: $logo-padding*2;
 
 #home {
     width: 100%;
@@ -123,10 +125,28 @@ $logo-width: $logo-padding*2;
     }
 
     .logo {
-        max-width: $site-width;
         width: 100%;
-        margin-bottom: 0.5em;
-        height: auto;
+        height: 100%;
+        max-width: $site-width;
+        max-height: $site-width;
+
+        #globe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+            .ol-viewport {
+                border-radius: 50%;
+            }
+        }
+
+        img.overlay {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .contact {

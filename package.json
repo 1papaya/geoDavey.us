@@ -4,7 +4,10 @@
   "description": "",
   "main": "assets/js/dev.js",
   "dependencies": {
-    "bulma": "^0.7.1"
+    "bulma": "^0.7.1",
+    "cesium": "^1.60.0",
+    "ol": "^5.3.3",
+    "olcs": "^2.9.0"
   },
   "devDependencies": {},
   "scripts": {
