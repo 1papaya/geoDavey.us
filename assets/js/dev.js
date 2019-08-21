@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", function(){
         layer: "osm_topo"
     });
 
-    window.gD_globe.animate(10000);
+    window.gD_globe.animate(14000);
 
 });

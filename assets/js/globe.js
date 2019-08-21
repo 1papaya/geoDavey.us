@@ -76,13 +76,38 @@ var Globe = function(opt) {
         controls: [],
         layers: [
             new TileLayer({
-                title: "OSM Road",
-                name: 'osm_road',
+                title: "OSM Topo",
+                name: 'osm_topo',
                 baseLayer: true,
                 source: new XYZ({
-                    url: '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    url: '//a.tile.opentopomap.org/{z}/{x}/{y}.png'
                 })
             })
+            //new TileLayer({
+            //    title: "Bing Satellite",
+            //   name: "bng_satellite",
+            //    baseLayer: true,
+            //    source: new BingMaps({
+            //        key: "Ap_AF_-eOJAURQf6LAyArtmuF5-USl1bRKPrtqp0U9BpaqyVaU78_k7Pua6Q-e07",
+            //        imagerySet: "Aerial"
+            //    })
+            //})
+            //new TileLayer({
+            //    title: "HOTOSM",
+            //    name: 'hotosm',
+            //    baseLayer: true,
+            //    source: new XYZ({
+            //        url: "//a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+            //    })
+            //})
+            //new TileLayer({
+            //    title: "OSM Road",
+            //    name: 'osm_road',
+            //    baseLayer: true,
+            //    source: new XYZ({
+            //        url: '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            //    })
+            //})
         ],
         view: new this.FitView(this.target, this.init_bounds),
         loadTilesWhileAnimating: true
