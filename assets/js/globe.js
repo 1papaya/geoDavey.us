@@ -53,11 +53,17 @@ var Globe = function(opt) {
         for (var stop of stops)
         {
             if (stop == -180)
+            {
                 rotation.push({
                     center: fromLonLat([-180, origin_y]),
                     duration: 0,
                     easing: linear
                 });
+                rotation.push(function(done) {
+                    if (done)
+                        view.animate.apply(view, rotation);
+                });
+            }
             else
                 rotation.push({
                     center: fromLonLat([stop, origin_y]),
@@ -67,10 +73,6 @@ var Globe = function(opt) {
         }
 
         view.animate.apply(view, rotation);
-
-        setInterval(function(){
-            view.animate.apply(view, rotation);
-        }, msec);
 
     };
 
