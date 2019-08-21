@@ -1,34 +1,38 @@
 import {Map, View, inherits} from 'ol';
 
-import {defaults as defaultsControl} from 'ol/control';
+import {fromLonLat, transformExtent} from 'ol/proj';
 import BingMaps from 'ol/source/BingMaps';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 
-var globe = function(opt) {
+var Globe = function(opt) {
 
-    // opt: target
-    // opt: start_lon
+    // TODO save options from opt to globe object
 
-    function SwaziView(target, padding=10) {
+    this.target = opt.target;
+    this.proj = opt.proj || "EPSG:3857";
+    this.init_bounds = opt.init_bounds || [-30, -55, 30, 72];
+    this.init_bounds = transformExtent(this.init_bounds, "EPSG:4326", this.proj);
 
-        const bounds = [3427637.922163467, -3163184.323967456,
-                        3577228.0000320906, -2964196.586792509];
+    //
+    // Fit View
+    //
 
-        View.call(this, {
-            extent: bounds
-        });
+    this.FitView = function(target, bounds, padding=10) {
+        View.call(this, {});
 
         this.fit(bounds, {
             size: [target.offsetHeight, target.offsetWidth],
             padding: [padding, padding, padding, padding],
             constrainResolution: false
         });
+    };
 
-        this.setMinZoom(this.getZoom() - 1);
-    }
+    inherits(this.FitView, View);
 
-    inherits(SwaziView, View);
+    //
+    // Globe Load
+    //
 
     var lyrs = {
         osm_road: new TileLayer({
@@ -36,7 +40,7 @@ var globe = function(opt) {
             name: 'osm_road',
             baseLayer: true,
             source: new XYZ({
-                url: '//{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                url: '//a.tile.openstreetmap.org/{z}/{x}/{y}.png'
             })
         }),
         osm_topo: new TileLayer({
@@ -44,7 +48,7 @@ var globe = function(opt) {
             name: 'osm_topo',
             baseLayer: true,
             source: new XYZ({
-                url: '//{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png'
+                url: '//a.tile.opentopomap.org/{z}/{x}/{y}.png'
             })
         }),
         bng_satellite: new TileLayer({
@@ -59,17 +63,31 @@ var globe = function(opt) {
     };
 
     Map.call(this, {
-        target: opt.target,
+        target: this.target,
         controls: [],
         layers: [ lyrs[opt.layer] ],
-        view: new View({
-            center: [0,0],
-            zoom: 2
-        }),
+        view: new this.FitView(this.target, this.init_bounds),
+        loadTilesWhileAnimating: true
     });
 
 };
 
-inherits(globe, Map);
+//
+// Animation
+//
 
-module.exports = globe;
+Globe.prototype.spin = function() {
+
+    let center = this.getView().getCenter();
+    console.log(center);
+
+    //view.animate({
+    //    center: istanbul,
+    //    duration: 2000,
+    //    easing: bounce
+    //});
+}
+
+inherits(Globe, Map);
+
+module.exports = Globe;
