@@ -2,13 +2,8 @@ import {Fill, RegularShape, Stroke, Style} from 'ol/style';
 
 var styles = {
     points: function(ft) {
-        console.log(ft);
-
         return new Style({
             image: new RegularShape({
-                fill: new Fill({
-                    
-                }),
                 stroke: new Stroke({
                     color: "red",
                     width: 2
