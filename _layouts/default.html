@@ -4,12 +4,12 @@
 
   {% include head.html %}
 
-  <body>
+  <body class="{{ page.title }}">
       {% include header.html %}
 
       {{ content }}
 
-    {% include footer.html %}
+      {% include footer.html %}
   </body>
 
 </html>
