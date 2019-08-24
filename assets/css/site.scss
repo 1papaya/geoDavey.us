@@ -52,10 +52,6 @@ body {
     color: #000;
 }
 
-.is-cover img {
-    object-fit: cover;
-}
-
 .container {
     max-width: $site-width !important;
 
@@ -81,13 +77,6 @@ body {
     z-index: 999999;
 }
 
-.floatimg {
-    figure {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-}
 .columns {
     &.reverse {
         display: flex;
@@ -171,8 +160,14 @@ body {
             background-size: 100% 100%;
         }
     }
+
     .title {
         margin-bottom: 0.1em;
+
+        & span.upside-down {
+            display: inline-block;
+            transform: rotate(-180deg) translateY(0.35em);
+        }
     }
 
     .contact {
