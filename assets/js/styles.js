@@ -5,7 +5,7 @@ var styles = {
         return new Style({
             image: new RegularShape({
                 stroke: new Stroke({
-                    color: "red",
+                    color: ft.get('last') ? "red":"black",
                     width: 2
                 }),
                 points: 4,
