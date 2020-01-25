@@ -155,7 +155,7 @@ var Globe = function(opt) {
                 name: 'osm_topo',
                 baseLayer: true,
                 source: new XYZ({
-                    url: '//a.tile.opentopomap.org/{z}/{x}/{y}.png'
+                    url: '/assets/img/opentopomap/{z}/{x}/{y}.png'
                 })
             }),
             lnsLayer,
