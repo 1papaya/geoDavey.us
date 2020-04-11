@@ -21,14 +21,14 @@ $link-hover: hsl(217, 71%, 53%);
     font-family: 'BadScript';
     font-style: normal;
     font-weight: 400;
-    src: local('BadScript Web Regular'), local('BadScriptWeb-Regular'), url(/assets/fonts/badscript-web.woff2) format('woff2');
+    src: local('BadScript Web Regular'), local('BadScriptWeb-Regular'), url(./fonts/badscript-web.woff2) format('woff2');
 }
 
 @font-face {
     font-family: 'Titillium';
     font-style: normal;
     font-weight: 400;
-    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(/assets/fonts/titillium-web.woff2) format('woff2');
+    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(./fonts/titillium-web.woff2) format('woff2');
 }
 
 //
