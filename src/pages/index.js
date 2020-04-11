@@ -1,8 +1,8 @@
 import React from "react";
+import Loadable from "react-loadable";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import Globe from "../components/globe";
 
 class Index extends React.Component {
   constructor(props) {
@@ -102,14 +102,18 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    const globe = new Globe({
+    const globe = new LoadableGlobe({
       target: this.mapRef.current,
       places: this.props.data.allPlacesJson.edges,
+      duration: 31000
     });
-
-    globe.animate(31000);
   }
 }
+
+const LoadableGlobe = Loadable({
+    loader: () => import("../components/globe"),
+    loading: <div></div>
+});
 
 export default Index;
 

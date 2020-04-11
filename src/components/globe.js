@@ -127,6 +127,7 @@ class Globe extends Map {
     });
 
     this.render();
+    this.animate(opt.duration);
   }
 
   animate(msec) {
