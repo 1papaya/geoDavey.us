@@ -1,15 +1,15 @@
 # geoDavey.us
-https://geoDavey.us is a static website built with Jekyll, OpenLayers, and Bulma
+https://geoDavey.us is a static website built with Gatsby.js
 
 ## Build & Serve
-1. Install package managers
+1. Install package manager
 
-   [NPM](https://npmjs.com) & [Ruby Bundler](https://bundler.io) 
+   [NPM](https://npmjs.com)
    
-2. Build Javascript source
+2. Install dependencies
 
-   `npm run build`
+   `npm install`
    
 3. Build & serve static website
 
-   `bundle exec jekyll serve`
+   `npm run develop`

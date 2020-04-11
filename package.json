@@ -2,18 +2,34 @@
   "name": "geoDavey.us",
   "version": "1.0.0",
   "description": "",
-  "main": "assets/js/dev.js",
+  "main": "n/a",
   "dependencies": {
     "arc": "^0.1.1",
     "bulma": "^0.7.1",
+    "gatsby": "^2.20.17",
+    "gatsby-plugin-react-helmet": "^3.2.2",
+    "gatsby-plugin-sass": "^2.2.1",
+    "gatsby-plugin-sharp": "^2.5.4",
+    "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-json": "^2.3.1",
+    "gatsby-transformer-sharp": "^2.4.4",
+    "node-sass": "^4.13.1",
     "ol": "^5.3.3",
-    "parcel": "^1.12.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "react-loadable": "^5.5.0",
+    "react-typography": "^0.16.19",
+    "typography": "^0.16.19"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.9.0"
+  },
   "scripts": {
-    "build": "parcel build --no-source-maps -d assets/js -o site.js assets/js/dev.js",
-    "build_dev": "parcel build --no-minify --no-source-maps -d assets/js -o site.js assets/js/dev.js",
-    "watch": "watch -n5 -x npm run build_dev"
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
   },
   "repository": {
     "type": "git",
