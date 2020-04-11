@@ -9,6 +9,9 @@ class Index extends React.Component {
     super(props);
     
     this.mapRef = React.createRef();
+    this.state = {
+        globe: null
+    }
   }
   render() {
     const iconStyle = {
@@ -102,18 +105,20 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    const globe = new LoadableGlobe({
-      target: this.mapRef.current,
-      places: this.props.data.allPlacesJson.edges,
-      duration: 31000
-    });
+      import("../components/globe").then(( {default: Globe} ) => {
+          let globe = new Globe({
+            target: this.mapRef.current,
+            places: this.props.data.allPlacesJson.edges,
+            duration: 31000
+          })
+
+          this.setState({
+              ...this.state,
+              globe
+          })
+      });
   }
 }
-
-const LoadableGlobe = Loadable({
-    loader: () => import("../components/globe"),
-    loading: <div></div>
-});
 
 export default Index;
 
