@@ -56,10 +56,11 @@ html, body {
         padding-bottom: "";
     }
 }
-div[role="group"][tabindex] {
-    height: 100%;
-  }
-
+.globe {
+    .ol-viewport {
+        border-radius: 50%;
+    }
+}
 body {
     font-family: 'Titillium';
     font-size: 10pt;
