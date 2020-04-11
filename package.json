@@ -15,7 +15,6 @@
     "gatsby-transformer-sharp": "^2.4.4",
     "node-sass": "^4.13.1",
     "ol": "^5.3.3",
-    "parcel": "^1.12.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
