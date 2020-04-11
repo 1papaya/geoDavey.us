@@ -5,7 +5,9 @@ const Layout = ({ children }) => {
         <div
         style={{
             marginLeft: 'auto',
-            marginRight: 'auto'
+            marginRight: 'auto',
+            width: "100%",
+            height: "100%"
         }}
         >
             <main>{children}</main>

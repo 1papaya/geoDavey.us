@@ -44,31 +44,26 @@ html, body {
     background-color: $bg-color;
 }
 
+#___gatsby {
+    height: 100%;
+    width: 100%;
+}
+
+.square {
+    &::after {
+        content: "";
+        display: "block";
+        padding-bottom: "";
+    }
+}
+div[role="group"][tabindex] {
+    height: 100%;
+  }
+
 body {
     font-family: 'Titillium';
     font-size: 10pt;
     color: #000;
-}
-
-.container {
-    max-width: $site-width !important;
-
-    &.padded {
-        padding-bottom: 0.75em;
-    }
-}
-
-.content {
-    padding: 0 0.5em 0 0.5em;
-    margin-bottom: 0 !important;
-
-    li + li {
-        margin-top: 0.8em !important;
-    }
-    
-    &.nopadding {
-        padding: 0 !important;
-    }
 }
 
 .on-top {
