@@ -4,14 +4,16 @@ import Loadable from "react-loadable";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+// TODO loading div in between silhouette & map w/ z-index
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.mapRef = React.createRef();
     this.state = {
-        globe: null
-    }
+      globe: null,
+    };
   }
   render() {
     const iconStyle = {
@@ -67,37 +69,22 @@ class Index extends React.Component {
                 width: "100%",
                 height: "100%",
                 backgroundSize: "100% 100%",
+                zIndex: 9999
               }}
             ></div>
           </div>
           <div
-            className="title is-size-3 is-size-4-mobile is-badscript has-text-centered has-text-weight-bold"
-            style={{ marginTop: "8px", marginBottom: "4px" }}
+            class="title is-size-5 is-size-6-mobile is-badscript has-text-centered has-text-weight-bold"
+            style={{
+              marginTop: "8px",
+              marginBottom: "4px",
+              top: "23%",
+              background: "rgba(255,255,255,0)",
+              padding: "4px",
+              borderRadius: "4px"
+            }}
           >
-            <span className="upside-down">!</span> viva la open source !
-          </div>
-          <div
-            className="contact columns is-mobile has-text-centered"
-            style={{ minWidth: "280px" }}
-          >
-            <div className="column is-narrow">
-              <a href="http://github.com/1papaya">
-                <img style={iconStyle} src={this.props.data.githubIcon.publicURL} />
-                1papaya
-              </a>
-            </div>
-            <div className="column">
-              <a href="mailto:me@geoDavey.us">
-                <img style={iconStyle} src={this.props.data.emailIcon.publicURL} />
-                me@geodavey.us
-              </a>
-            </div>
-            <div className="column is-narrow">
-              <a href="https://openstreetmap.org/user/mDav">
-                <img style={iconStyle} src={this.props.data.osmIcon.publicURL} />
-                mDav
-              </a>
-            </div>
+            map &lsaquo;&rsaquo; blog &lsaquo;&rsaquo; projects &lsaquo;&rsaquo; contact
           </div>
         </div>
       </Layout>
@@ -105,18 +92,18 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-      import("../components/globe").then(( {default: Globe} ) => {
-          let globe = new Globe({
-            target: this.mapRef.current,
-            places: this.props.data.allPlacesJson.edges,
-            duration: 31000
-          })
-
-          this.setState({
-              ...this.state,
-              globe
-          })
+    import("../components/globe").then(({ default: Globe }) => {
+      let globe = new Globe({
+        target: this.mapRef.current,
+        places: this.props.data.allPlacesJson.edges,
+        duration: 31000,
       });
+
+      this.setState({
+        ...this.state,
+        globe,
+      });
+    });
   }
 }
 
