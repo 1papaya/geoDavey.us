@@ -44,7 +44,7 @@ class Globe extends Map {
     let ptsFeatures = [];
 
     for (var i = 0; i < opt.places.length; i++) {
-      let plc = opt.places[i];
+      let plc = opt.places[i]["node"];
 
       var ft = new Feature({
         name: plc["address"],
@@ -73,8 +73,8 @@ class Globe extends Map {
     let lnsFeatures = [];
 
     for (var i = 0; i < opt.places.length - 1; i++) {
-      let a = opt.places[i];
-      let b = opt.places[i + 1];
+      let a = opt.places[i]["node"];
+      let b = opt.places[i + 1]["node"];
 
       var arcGen = new arc.GreatCircle(
         { x: parseFloat(a["x"]), y: parseFloat(a["y"]) },

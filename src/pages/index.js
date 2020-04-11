@@ -7,12 +7,16 @@ import Globe from "../components/globe";
 class Index extends React.Component {
   constructor(props) {
     super(props);
-
-    this.data = props.data;
+    
     this.mapRef = React.createRef();
   }
   render() {
-    const globeRing = this.data.globeRing.publicURL;
+    const iconStyle = {
+      verticalAlign: "middle",
+      marginRight: "0.2em",
+      width: "20px",
+      height: "20px",
+    };
 
     return (
       <Layout>
@@ -26,6 +30,7 @@ class Index extends React.Component {
             left: 0,
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
             justifyContent: "center",
             padding: "0 0.5em",
           }}
@@ -52,7 +57,7 @@ class Index extends React.Component {
             ></div>
             <div
               style={{
-                backgroundImage: `url(${globeRing})`,
+                backgroundImage: `url(${this.props.data.globeRing.publicURL})`,
                 position: "absolute",
                 top: 0,
                 left: 0,
@@ -62,6 +67,35 @@ class Index extends React.Component {
               }}
             ></div>
           </div>
+          <div
+            className="title is-size-3 is-size-4-mobile is-badscript has-text-centered has-text-weight-bold"
+            style={{ marginTop: "8px", marginBottom: "4px" }}
+          >
+            <span className="upside-down">!</span> viva la open source !
+          </div>
+          <div
+            className="contact columns is-mobile has-text-centered"
+            style={{ minWidth: "280px" }}
+          >
+            <div className="column is-narrow">
+              <a href="http://github.com/1papaya">
+                <img style={iconStyle} src={this.props.data.githubIcon.publicURL} />
+                1papaya
+              </a>
+            </div>
+            <div className="column">
+              <a href="mailto:me@geoDavey.us">
+                <img style={iconStyle} src={this.props.data.emailIcon.publicURL} />
+                me@geodavey.us
+              </a>
+            </div>
+            <div className="column is-narrow">
+              <a href="https://openstreetmap.org/user/mDav">
+                <img style={iconStyle} src={this.props.data.osmIcon.publicURL} />
+                mDav
+              </a>
+            </div>
+          </div>
         </div>
       </Layout>
     );
@@ -70,14 +104,7 @@ class Index extends React.Component {
   componentDidMount() {
     const globe = new Globe({
       target: this.mapRef.current,
-      places: [
-        { id: "0", address: "Denver, CO, USA", x: "-104.9903", y: "39.7392" },
-        { id: "1", address: "Boston, MA, USA", x: "-71.0589", y: "42.3601" },
-        { id: "2", address: "Mbabane, Eswatini", x: "31.1367", y: "-26.3054" },
-        { id: "3", address: "Heidelberg, Germany", x: "8.6724", y: "49.3988" },
-        { id: "4", address: "Alcudia, Spain", x: "3.124", y: "39.8533" },
-        { id: "5", address: "Vilaflor, Spain", x: "-16.6372", y: "28.1578" },
-      ],
+      places: this.props.data.allPlacesJson.edges,
     });
 
     globe.animate(31000);
@@ -93,7 +120,30 @@ export const pageQuery = graphql`
         title
       }
     }
+
+    allPlacesJson {
+      edges {
+        node {
+          address
+          x
+          y
+        }
+      }
+    }
+
     globeRing: file(relativePath: { eq: "img/globe-ring.png" }) {
+      publicURL
+    }
+
+    githubIcon: file(relativePath: { eq: "img/icons/github.png" }) {
+      publicURL
+    }
+
+    emailIcon: file(relativePath: { eq: "img/icons/email.png" }) {
+      publicURL
+    }
+
+    osmIcon: file(relativePath: { eq: "img/icons/osm.png" }) {
       publicURL
     }
   }

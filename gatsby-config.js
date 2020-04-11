@@ -2,10 +2,10 @@ module.exports = {
   siteMetadata: {
     title: `geoDavey.us`,
     author: {
-        name: `geoDavey`
+      name: `geoDavey`,
     },
     description: `geoDavey website`,
-    siteUrl: `https://geoDavey.us/`
+    siteUrl: `https://geoDavey.us/`,
   },
   plugins: [
     {
@@ -15,9 +15,17 @@ module.exports = {
         name: `assets`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/data`,
+        name: `data`,
+      },
+    },
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-json`
   ],
 };
