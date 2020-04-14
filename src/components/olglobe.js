@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Map, View } from "ol";
 
 import { RegularShape, Stroke, Style } from "ol/style";
@@ -12,7 +14,77 @@ import XYZ from "ol/source/XYZ";
 import { linear } from "ol/easing";
 import arc from "arc";
 
-class Globe extends Map {
+import OLGlobeCSS from "../styles/ol-globe.scss";
+
+class OLGlobe extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      olGlobe: null,
+      isInitialLoaded: false,
+    };
+
+    this.mapRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.setState(
+      {
+        ...this.state,
+        olGlobe: new OLGlobeMap({
+          target: this.mapRef.current,
+          places: this.props.places,
+          duration: this.props.duration,
+        }),
+      },
+      () => {
+        this.state.olGlobe.once("rendercomplete", () => {
+          this.setState({ isInitialLoaded: true });
+        });
+      }
+    );
+  }
+
+  render() {
+    return (
+      <div
+        className={
+          "ol-globe square " + (this.state.isInitialLoaded ? "loaded" : "")
+        }
+        style={{ width: "100%", height: "100%", maxWidth: 460, maxHeight: 460 }}
+      >
+        <div
+          ref={this.mapRef}
+          className="ol-globe-container"
+          style={{
+            borderRadius: "50%",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        ></div>
+        <div
+          className="ol-globe-ring"
+          style={{
+            backgroundImage: `url(/assets/img/globe-ring.png)`,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundSize: "100% 100%",
+            zIndex: 9999,
+          }}
+        ></div>
+      </div>
+    );
+  }
+}
+
+class OLGlobeMap extends Map {
   constructor(opt) {
     const target = opt.target;
     const proj = opt.proj || "EPSG:3857";
@@ -185,4 +257,12 @@ const stys = {
   },
 };
 
-export default Globe;
+export const pageQuery = graphql`
+  query {
+    globeRing: file(relativePath: { eq: "img/globe-ring.png" }) {
+      publicURL
+    }
+  }
+`;
+
+export default OLGlobe;

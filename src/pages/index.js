@@ -1,6 +1,8 @@
 import React from "react";
 import Loadable from "react-loadable";
 
+import OLGlobe from "../components/olglobe";
+import D3Globe from "../components/d3globe";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
@@ -27,6 +29,7 @@ class Index extends React.Component {
       <Layout>
         <SEO title="home" />
         <div
+          className="splash-container"
           style={{
             position: "absolute",
             width: "100%",
@@ -41,69 +44,69 @@ class Index extends React.Component {
           }}
         >
           <div
-            className="square globe"
+            className="splash"
             style={{
-              position: "relative",
               width: "100%",
-              maxWidth: 512,
-              maxHeight: 512,
+              maxWidth: "400px",
+              display: "grid"
             }}
           >
             <div
-              ref={this.mapRef}
+              className="globe"
               style={{
-                borderRadius: "50%",
+                position: "relative",
                 width: "100%",
                 height: "100%",
-                position: "absolute",
-                top: 0,
-                left: 0,
               }}
-            ></div>
+            >
+              <OLGlobe
+                places={this.props.data.allPlacesJson.edges}
+                duration={31000}
+              />
+            </div>
+
             <div
-              style={{
-                backgroundImage: `url(${this.props.data.globeRing.publicURL})`,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundSize: "100% 100%",
-                zIndex: 9999
-              }}
-            ></div>
-          </div>
-          <div
-            class="title is-size-5 is-size-6-mobile is-badscript has-text-centered has-text-weight-bold"
-            style={{
-              marginTop: "8px",
-              marginBottom: "4px",
-              top: "23%",
-              background: "rgba(255,255,255,0)",
-              padding: "4px",
-              borderRadius: "4px"
-            }}
-          >
-            map &lsaquo;&rsaquo; blog &lsaquo;&rsaquo; projects &lsaquo;&rsaquo; contact
+              className="title is-size-3 is-size-4-mobile is-badscript has-text-centered has-text-weight-bold"
+              style={{ marginTop: "8px", marginBottom: "4px" }}
+            >
+              <span className="upside-down">!</span> viva la open source !
+            </div>
+            <div
+              className="columns is-mobile has-text-centered"
+              style={{ width: "280px", margin: "0 auto" }}
+            >
+              <div className="column is-narrow">
+                <a href="http://github.com/1papaya">
+                  <img
+                    style={iconStyle}
+                    src={this.props.data.githubIcon.publicURL}
+                  />
+                  1papaya
+                </a>
+              </div>
+              <div className="column">
+                <a href="mailto:me@geoDavey.us">
+                  <img
+                    style={iconStyle}
+                    src={this.props.data.emailIcon.publicURL}
+                  />
+                  me@geodavey.us
+                </a>
+              </div>
+              <div className="column is-narrow">
+                <a href="https://openstreetmap.org/user/mDav">
+                  <img
+                    style={iconStyle}
+                    src={this.props.data.osmIcon.publicURL}
+                  />
+                  mDav
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </Layout>
     );
-  }
-
-  componentDidMount() {
-    import("../components/globe").then(({ default: Globe }) => {
-      let globe = new Globe({
-        target: this.mapRef.current,
-        places: this.props.data.allPlacesJson.edges,
-        duration: 31000,
-      });
-
-      this.setState({
-        ...this.state,
-        globe,
-      });
-    });
   }
 }
 

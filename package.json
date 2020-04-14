@@ -6,6 +6,7 @@
   "dependencies": {
     "arc": "^0.1.1",
     "bulma": "^0.7.1",
+    "d3": "^5.15.1",
     "gatsby": "^2.20.17",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-sass": "^2.2.1",

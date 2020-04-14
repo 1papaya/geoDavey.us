@@ -76,23 +76,3 @@ body {
 .upside-down {
     transform: rotate(-180deg);
 }
-
-// Homepage
-
-.globe {
-    .ol-viewport {
-        border-radius: 50%;
-    }
-}
-
-
-
-.square {
-    position: relative;
-
-    &:after {
-        content: "";
-        display: block;
-        padding-bottom: 100%;
-    }
-}

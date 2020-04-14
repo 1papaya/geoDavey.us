@@ -1,0 +1,22 @@
+.square {
+    position: relative;
+
+    &:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
+}
+
+.ol-globe {
+    &:not(.loaded) {
+        opacity: 0;
+    }
+    &.loaded {
+        opacity: 1;
+        transition: opacity 3s ease-out;
+    }
+    .ol-viewport {
+        border-radius: 50%;
+    }
+}
