@@ -2,7 +2,6 @@ import React from "react";
 import Loadable from "react-loadable";
 
 import OLGlobe from "../components/olglobe";
-import D3Globe from "../components/d3globe";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
