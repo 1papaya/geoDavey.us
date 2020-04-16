@@ -21,7 +21,7 @@ class OLGlobe extends React.Component {
     super(props);
 
     this.state = {
-      olGlobe: null
+      olGlobe: null,
     };
 
     this.mapRef = React.createRef();
@@ -35,7 +35,7 @@ class OLGlobe extends React.Component {
         places: this.props.places,
         duration: this.props.duration,
         onLoad: this.props.onLoad,
-        initBounds: [-180, -55, -180, 72]
+        initBounds: [-180, -55, -180, 72],
       }),
     });
   }
@@ -83,40 +83,70 @@ class OLGlobe extends React.Component {
 
 class OLGlobeMap extends Map {
   constructor(opt) {
-    const target = opt.target;
-    const proj = opt.proj || "EPSG:3857";
+    // opt:
+    //   target: target map container element
+    //   proj:   target map projection
+    //   initBounds: initial bounds to fit to viewport before rotation
+    //   places: array of objects with ["node"]["x"] and ["node"]["y"] properties
+    //   duration: duration in msec of one globe rotation for rotation animation
+    //   onLoad: callback for once map is loaded initially
 
-    // Transform initial bounds to web mercator
-    let init_bounds = transformExtent(opt.initBounds, "EPSG:4326", proj);
+    let target = opt.target;
+    let proj = opt.proj || "EPSG:3857";
+    let initBounds = transformExtent(opt.initBounds, "EPSG:4326", proj);
 
-    //
-    // Fit View
-    //
+    let ptsLayer = getPointsLayer(opt.places);
+    let lnsLayer = getLinesLayer(opt.places);
 
-    class FitView extends View {
-      constructor(target, bounds, padding = 10) {
-        super({});
+    super({
+      target: target,
+      controls: [],
+      layers: [
+        new TileLayer({
+          title: "OSM Topo",
+          name: "osm_topo",
+          baseLayer: true,
+          source: new XYZ({
+            url: "/assets/opentopomap/{z}/{x}/{y}.png",
+          }),
+        }),
+        lnsLayer,
+        ptsLayer,
+      ],
+      view: new FitView(target, initBounds),
+      loadTilesWhileAnimating: true,
+    });
 
-        this.fit(bounds, {
-          size: [target.offsetHeight, target.offsetWidth],
-          padding: [padding, padding, padding, padding],
-          constrainResolution: false,
-        });
-      }
-    }
+    this.once("rendercomplete", opt.onLoad);
+    this.render();
+    this.animate(opt.duration);
+  }
 
-    //
-    // Generate Points Layer
-    //
+  getPointsLayer(places) {
+    // generate OL vector layer of travel points
 
     let ptsFeatures = [];
+    let ptsStyle = (ft) => {
+      return new Style({
+        image: new RegularShape({
+          stroke: new Stroke({
+            color: ft.get("last") ? "red" : "black",
+            width: 2,
+          }),
+          points: 4,
+          radius: 5,
+          radius2: 0,
+          angle: Math.PI / 4,
+        }),
+      });
+    }
 
-    for (var i = 0; i < opt.places.length; i++) {
-      let plc = opt.places[i]["node"];
+    for (var i = 0; i < places.length; i++) {
+      let plc = places[i]["node"];
 
       var ft = new Feature({
         name: plc["address"],
-        last: !!(i == opt.places.length - 1),
+        last: !!(i == places.length - 1),
         geometry: new Point(
           fromLonLat([parseFloat(plc["x"]), parseFloat(plc["y"])], proj)
         ),
@@ -125,24 +155,33 @@ class OLGlobeMap extends Map {
       ptsFeatures.push(ft);
     }
 
-    var ptsLayer = new VectorLayer({
+    return new VectorLayer({
       name: "points",
-      style: stys.points,
+      style: ptsStyle,
       updateWhileAnimating: true,
       source: new VectorSource({
         features: ptsFeatures,
       }),
     });
+  }
 
-    //
-    // Generate Lines Layer
-    //
+  getLinesLayer(places) {
+    // generate OL vector layer of travel lines calculated with great arc circle
 
     let lnsFeatures = [];
+    let lnsStyle = (ft) => {
+      return new Style({
+        stroke: new Stroke({
+          width: 1,
+          color: "black",
+          lineDash: [1, 5],
+        }),
+      });
+    };
 
-    for (var i = 0; i < opt.places.length - 1; i++) {
-      let a = opt.places[i]["node"];
-      let b = opt.places[i + 1]["node"];
+    for (var i = 0; i < places.length - 1; i++) {
+      let a = places[i]["node"];
+      let b = places[i + 1]["node"];
 
       var arcGen = new arc.GreatCircle(
         { x: parseFloat(a["x"]), y: parseFloat(a["y"]) },
@@ -162,44 +201,19 @@ class OLGlobeMap extends Map {
       lnsFeatures.push(ft);
     }
 
-    var lnsLayer = new VectorLayer({
+    return new VectorLayer({
       name: "lines",
       updateWhileAnimating: true,
       source: new VectorSource({
         features: lnsFeatures,
       }),
-      style: stys.lines,
+      style: lnsStyle,
     });
-
-    //
-    // Globe Load
-    //
-
-    super({
-      target: target,
-      controls: [],
-      layers: [
-        new TileLayer({
-          title: "OSM Topo",
-          name: "osm_topo",
-          baseLayer: true,
-          source: new XYZ({
-            url: "/assets/opentopomap/{z}/{x}/{y}.png",
-          }),
-        }),
-        lnsLayer,
-        ptsLayer,
-      ],
-      view: new FitView(target, init_bounds),
-      loadTilesWhileAnimating: true,
-    });
-
-    this.once("rendercomplete", opt.onLoad);
-    this.render();
-    this.animate(opt.duration);
   }
 
   animate(msec) {
+    // animate globe rotation west -> east with `msec` to make one full rotation
+
     let view = this.getView();
     let origin_y = toLonLat(view.getCenter(), view.getProjection())[1];
 
@@ -228,30 +242,18 @@ class OLGlobeMap extends Map {
   }
 }
 
-const stys = {
-  points: function (ft) {
-    return new Style({
-      image: new RegularShape({
-        stroke: new Stroke({
-          color: ft.get("last") ? "red" : "black",
-          width: 2,
-        }),
-        points: 4,
-        radius: 5,
-        radius2: 0,
-        angle: Math.PI / 4,
-      }),
+class FitView extends View {
+  // fit an view to extent and target element before map render
+
+  constructor(target, bounds, padding = 10) {
+    super({});
+
+    this.fit(bounds, {
+      size: [target.offsetHeight, target.offsetWidth],
+      padding: [padding, padding, padding, padding],
+      constrainResolution: false,
     });
-  },
-  lines: function (ft) {
-    return new Style({
-      stroke: new Stroke({
-        width: 1,
-        color: "black",
-        lineDash: [1, 5],
-      }),
-    });
-  },
-};
+  }
+}
 
 export default OLGlobe;
