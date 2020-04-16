@@ -1,9 +1,29 @@
-.splash {
+.splash-container {
+  &::after {
+    display: block;
+    content: "( loading ... )";
+    position: absolute;
+    font-style: italic;
+    color: #aaa;
+  }
   &:not(.loaded) {
-    opacity: 0;
+    .splash {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
   &.loaded {
-    opacity: 1;
-    transition: opacity 3s ease-out;
+    .splash {
+      opacity: 1;
+      transition: opacity 3s ease-out;
+    }
+
+    &::after {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
   }
 }

@@ -35,7 +35,7 @@ class Index extends React.Component {
       <Layout>
         <SEO title="home" />
         <div
-          className="splash-container"
+          className={"splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")}
           style={{
             position: "absolute",
             width: "100%",
@@ -50,7 +50,7 @@ class Index extends React.Component {
           }}
         >
           <div
-            className={"splash" + (this.state.isGlobeLoaded ? " loaded" : "")}
+            className="splash"
             style={{
               width: "100%",
               maxWidth: maxWidth,
