@@ -1,17 +1,25 @@
 import React from "react";
-import Loadable from "react-loadable";
+import loadable from "@loadable/component";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+// TODO loading div in between silhouette & map w/ z-index
+// TODO make splash a component
+
+import IndexStyle from "../styles/index.scss";
+
+const OLGlobe = loadable(() => import("../components/olglobe"), {
+  fallback: <div>loading...</div>,
+});
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.mapRef = React.createRef();
+
     this.state = {
-        globe: null
-    }
+      isGlobeLoaded: false,
+    };
   }
   render() {
     const iconStyle = {
@@ -21,10 +29,13 @@ class Index extends React.Component {
       height: "20px",
     };
 
+    const maxWidth = 520;
+
     return (
       <Layout>
         <SEO title="home" />
         <div
+          className={"splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")}
           style={{
             position: "absolute",
             width: "100%",
@@ -39,84 +50,29 @@ class Index extends React.Component {
           }}
         >
           <div
-            className="square globe"
+            className="splash"
             style={{
-              position: "relative",
               width: "100%",
-              maxWidth: 512,
-              maxHeight: 512,
+              maxWidth: maxWidth
             }}
           >
             <div
-              ref={this.mapRef}
+              className="globe"
               style={{
-                borderRadius: "50%",
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                top: 0,
-                left: 0,
+                position: "relative"
               }}
-            ></div>
-            <div
-              style={{
-                backgroundImage: `url(${this.props.data.globeRing.publicURL})`,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundSize: "100% 100%",
-              }}
-            ></div>
-          </div>
-          <div
-            className="title is-size-3 is-size-4-mobile is-badscript has-text-centered has-text-weight-bold"
-            style={{ marginTop: "8px", marginBottom: "4px" }}
-          >
-            <span className="upside-down">!</span> viva la open source !
-          </div>
-          <div
-            className="contact columns is-mobile has-text-centered"
-            style={{ minWidth: "280px" }}
-          >
-            <div className="column is-narrow">
-              <a href="http://github.com/1papaya">
-                <img style={iconStyle} src={this.props.data.githubIcon.publicURL} />
-                1papaya
-              </a>
-            </div>
-            <div className="column">
-              <a href="mailto:me@geoDavey.us">
-                <img style={iconStyle} src={this.props.data.emailIcon.publicURL} />
-                me@geodavey.us
-              </a>
-            </div>
-            <div className="column is-narrow">
-              <a href="https://openstreetmap.org/user/mDav">
-                <img style={iconStyle} src={this.props.data.osmIcon.publicURL} />
-                mDav
-              </a>
+            >
+              <OLGlobe
+                places={this.props.data.allPlacesJson.edges}
+                duration={31000}
+                maxWidth={maxWidth}
+                onLoad={() => {this.setState({isGlobeLoaded: true})}}
+              />
             </div>
           </div>
         </div>
       </Layout>
     );
-  }
-
-  componentDidMount() {
-      import("../components/globe").then(( {default: Globe} ) => {
-          let globe = new Globe({
-            target: this.mapRef.current,
-            places: this.props.data.allPlacesJson.edges,
-            duration: 31000
-          })
-
-          this.setState({
-              ...this.state,
-              globe
-          })
-      });
   }
 }
 
