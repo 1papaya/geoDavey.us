@@ -53,16 +53,13 @@ class Index extends React.Component {
             className="splash"
             style={{
               width: "100%",
-              maxWidth: maxWidth,
-              display: "grid",
+              maxWidth: maxWidth
             }}
           >
             <div
               className="globe"
               style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
+                position: "relative"
               }}
             >
               <OLGlobe
