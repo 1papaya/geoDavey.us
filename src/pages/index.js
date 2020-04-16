@@ -69,45 +69,6 @@ class Index extends React.Component {
                 onLoad={() => {this.setState({isGlobeLoaded: true})}}
               />
             </div>
-
-            <div
-              className="title is-size-3 is-size-4-mobile is-badscript has-text-centered has-text-weight-bold"
-              style={{ marginTop: "8px", marginBottom: "4px" }}
-            >
-              <span className="upside-down">!</span> viva la open source !
-            </div>
-            <div
-              className="columns is-mobile has-text-centered"
-              style={{ width: "280px", margin: "0 auto" }}
-            >
-              <div className="column is-narrow">
-                <a href="http://github.com/1papaya">
-                  <img
-                    style={iconStyle}
-                    src={this.props.data.githubIcon.publicURL}
-                  />
-                  1papaya
-                </a>
-              </div>
-              <div className="column">
-                <a href="mailto:me@geoDavey.us">
-                  <img
-                    style={iconStyle}
-                    src={this.props.data.emailIcon.publicURL}
-                  />
-                  me@geodavey.us
-                </a>
-              </div>
-              <div className="column is-narrow">
-                <a href="https://openstreetmap.org/user/mDav">
-                  <img
-                    style={iconStyle}
-                    src={this.props.data.osmIcon.publicURL}
-                  />
-                  mDav
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </Layout>
