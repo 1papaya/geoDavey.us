@@ -21,49 +21,46 @@ class OLGlobe extends React.Component {
     super(props);
 
     this.state = {
-      olGlobe: null,
-      isInitialLoaded: false,
+      olGlobe: null
     };
 
     this.mapRef = React.createRef();
   }
 
   componentDidMount() {
-    this.setState(
-      {
-        ...this.state,
-        olGlobe: new OLGlobeMap({
-          target: this.mapRef.current,
-          places: this.props.places,
-          duration: this.props.duration,
-        }),
-      },
-      () => {
-        this.state.olGlobe.once("rendercomplete", () => {
-          this.setState({ isInitialLoaded: true });
-        });
-      }
-    );
+    // once component is mounted, render OL map inside container
+    this.setState({
+      olGlobe: new OLGlobeMap({
+        target: this.mapRef.current,
+        places: this.props.places,
+        duration: this.props.duration,
+        onLoad: this.props.onLoad,
+        initBounds: [-180, -55, -180, 72]
+      }),
+    });
   }
 
   render() {
     return (
       <div
-        className={
-          "ol-globe square " + (this.state.isInitialLoaded ? "loaded" : "")
-        }
-        style={{ width: "100%", height: "100%", maxWidth: 460, maxHeight: 460 }}
+        className="ol-globe square"
+        style={{
+          width: "100%",
+          height: "100%",
+          maxWidth: this.props.maxWidth,
+          maxHeight: this.props.maxWidth,
+        }}
       >
         <div
           ref={this.mapRef}
           className="ol-globe-container"
           style={{
             borderRadius: "50%",
-            width: "100%",
-            height: "100%",
             position: "absolute",
             top: 0,
             left: 0,
+            width: "100%",
+            height: "100%",
           }}
         ></div>
         <div
@@ -76,7 +73,7 @@ class OLGlobe extends React.Component {
             width: "100%",
             height: "100%",
             backgroundSize: "100% 100%",
-            zIndex: 9999,
+            zIndex: 1337,
           }}
         ></div>
       </div>
@@ -90,8 +87,7 @@ class OLGlobeMap extends Map {
     const proj = opt.proj || "EPSG:3857";
 
     // Transform initial bounds to web mercator
-    let init_bounds = opt.init_bounds || [-180, -55, -180, 72];
-    init_bounds = transformExtent(init_bounds, "EPSG:4326", proj);
+    let init_bounds = transformExtent(opt.initBounds, "EPSG:4326", proj);
 
     //
     // Fit View
@@ -198,6 +194,7 @@ class OLGlobeMap extends Map {
       loadTilesWhileAnimating: true,
     });
 
+    this.once("rendercomplete", opt.onLoad);
     this.render();
     this.animate(opt.duration);
   }
@@ -256,13 +253,5 @@ const stys = {
     });
   },
 };
-
-export const pageQuery = graphql`
-  query {
-    globeRing: file(relativePath: { eq: "img/globe-ring.png" }) {
-      publicURL
-    }
-  }
-`;
 
 export default OLGlobe;

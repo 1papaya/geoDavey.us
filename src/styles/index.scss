@@ -1,0 +1,9 @@
+.splash {
+  &:not(.loaded) {
+    opacity: 0;
+  }
+  &.loaded {
+    opacity: 1;
+    transition: opacity 3s ease-out;
+  }
+}

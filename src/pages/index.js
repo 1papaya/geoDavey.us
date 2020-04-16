@@ -1,19 +1,24 @@
 import React from "react";
-import Loadable from "react-loadable";
+import loadable from "@loadable/component";
 
-import OLGlobe from "../components/olglobe";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 // TODO loading div in between silhouette & map w/ z-index
+// TODO make splash a component
+
+import IndexStyle from "../styles/index.scss";
+
+const OLGlobe = loadable(() => import("../components/olglobe"), {
+  fallback: <div>loading...</div>,
+});
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
 
-    this.mapRef = React.createRef();
     this.state = {
-      globe: null,
+      isGlobeLoaded: false,
     };
   }
   render() {
@@ -23,6 +28,8 @@ class Index extends React.Component {
       width: "20px",
       height: "20px",
     };
+
+    const maxWidth = 520;
 
     return (
       <Layout>
@@ -43,11 +50,11 @@ class Index extends React.Component {
           }}
         >
           <div
-            className="splash"
+            className={"splash" + (this.state.isGlobeLoaded ? " loaded" : "")}
             style={{
               width: "100%",
-              maxWidth: "400px",
-              display: "grid"
+              maxWidth: maxWidth,
+              display: "grid",
             }}
           >
             <div
@@ -61,6 +68,8 @@ class Index extends React.Component {
               <OLGlobe
                 places={this.props.data.allPlacesJson.edges}
                 duration={31000}
+                maxWidth={maxWidth}
+                onLoad={() => {this.setState({isGlobeLoaded: true})}}
               />
             </div>
 
