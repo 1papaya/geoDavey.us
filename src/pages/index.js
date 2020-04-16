@@ -22,20 +22,15 @@ class Index extends React.Component {
     };
   }
   render() {
-    const iconStyle = {
-      verticalAlign: "middle",
-      marginRight: "0.2em",
-      width: "20px",
-      height: "20px",
-    };
-
-    const maxWidth = 520;
+    const maxWidth = 420;
 
     return (
       <Layout>
         <SEO title="home" />
         <div
-          className={"splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")}
+          className={
+            "splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")
+          }
           style={{
             position: "absolute",
             width: "100%",
@@ -53,21 +48,61 @@ class Index extends React.Component {
             className="splash"
             style={{
               width: "100%",
-              maxWidth: maxWidth
+              maxWidth: maxWidth,
             }}
           >
             <div
               className="globe"
               style={{
-                position: "relative"
+                position: "relative",
               }}
             >
               <OLGlobe
                 places={this.props.data.allPlacesJson.edges}
                 duration={31000}
                 maxWidth={maxWidth}
-                onLoad={() => {this.setState({isGlobeLoaded: true})}}
+                onLoad={() => {
+                  this.setState({ isGlobeLoaded: true });
+                }}
               />
+
+              <div
+                className="is-hidden is-size-3"
+                style={{
+                  borderRadius: "2px",
+                  position: "absolute",
+                  top: "20%",
+                  left: "35%",
+                  boxShadow2: "1px 1px 2px #000",
+                  textShadow2:
+                    "0px 0px 2px #fff, 1px 1px 2px #fff, 2px 2px 2px #fff, 3px 3px 2px #fff, -1px -1px 2px #fff",
+
+                  background: "rgba(255,255,255,0.2)",
+                }}
+              >
+                <div
+                  className=""
+                  style={{
+                    borderRadius: "2px",
+                    color: "#000",
+                    border: "1px solid #fff",
+                    padding: "0 10px",
+                    margin: "10px",
+                    background: "rgba(255,255,255,0.8)",
+                  }}
+                >
+                  enter site
+                </div>
+              </div>
+              <ul
+                className="menu is-badscript has-text-centered is-size-4 is-size-5-mobile"
+                style={{}}
+              >
+                <li className="title">gDv</li>
+                <li>blog</li>
+                <li>contact</li>
+                <li><span className="is-size-5" style={{color: "red"}}>&#9829;</span></li>
+              </ul>
             </div>
           </div>
         </div>
