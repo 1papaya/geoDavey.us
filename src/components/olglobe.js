@@ -28,7 +28,7 @@ class OLGlobe extends React.Component {
   }
 
   componentDidMount() {
-    // once component is mounted, render OL map inside container
+    // once component is mounted, render OL map inside mapRef container
     this.setState({
       olGlobe: new OLGlobeMap({
         target: this.mapRef.current,
@@ -85,21 +85,15 @@ class OLGlobeMap extends Map {
   constructor(opt) {
     // opt:
     //   target: target map container element
-    //   proj:   target map projection
-    //   initBounds: initial bounds to fit to viewport before rotation
+    //   initBounds: initial bounds to fit to viewport before rotation, in wgs84
     //   places: array of objects with ["node"]["x"] and ["node"]["y"] properties
     //   duration: duration in msec of one globe rotation for rotation animation
-    //   onLoad: callback for once map is loaded initially
+    //   onLoad: callback for once map is initially loaded
 
-    let target = opt.target;
-    let proj = opt.proj || "EPSG:3857";
-    let initBounds = transformExtent(opt.initBounds, "EPSG:4326", proj);
-
-    let ptsLayer = getPointsLayer(opt.places);
-    let lnsLayer = getLinesLayer(opt.places);
+    let initBounds = transformExtent(opt.initBounds, "EPSG:4326", "EPSG:3857");
 
     super({
-      target: target,
+      target: opt.target,
       controls: [],
       layers: [
         new TileLayer({
@@ -109,20 +103,22 @@ class OLGlobeMap extends Map {
           source: new XYZ({
             url: "/assets/opentopomap/{z}/{x}/{y}.png",
           }),
-        }),
-        lnsLayer,
-        ptsLayer,
+        })
       ],
-      view: new FitView(target, initBounds),
+      view: new FitView(opt.target, initBounds),
       loadTilesWhileAnimating: true,
     });
 
     this.once("rendercomplete", opt.onLoad);
+
+    this.addPointsLayer(opt.places);
+    this.addLinesLayer(opt.places);
+
     this.render();
     this.animate(opt.duration);
   }
 
-  getPointsLayer(places) {
+  addPointsLayer(places) {
     // generate OL vector layer of travel points
 
     let ptsFeatures = [];
@@ -148,14 +144,14 @@ class OLGlobeMap extends Map {
         name: plc["address"],
         last: !!(i == places.length - 1),
         geometry: new Point(
-          fromLonLat([parseFloat(plc["x"]), parseFloat(plc["y"])], proj)
+          fromLonLat([parseFloat(plc["x"]), parseFloat(plc["y"])], "EPSG:3857")
         ),
       });
 
       ptsFeatures.push(ft);
     }
 
-    return new VectorLayer({
+    let ptsLayer = new VectorLayer({
       name: "points",
       style: ptsStyle,
       updateWhileAnimating: true,
@@ -163,9 +159,11 @@ class OLGlobeMap extends Map {
         features: ptsFeatures,
       }),
     });
+
+    this.addLayer(ptsLayer);
   }
 
-  getLinesLayer(places) {
+  addLinesLayer(places) {
     // generate OL vector layer of travel lines calculated with great arc circle
 
     let lnsFeatures = [];
@@ -192,7 +190,7 @@ class OLGlobeMap extends Map {
         arcGen.Arc(10, { offset: 10 }).geometries[0].coords
       );
 
-      arcLine.transform("EPSG:4326", proj);
+      arcLine.transform("EPSG:4326", "EPSG:3857");
 
       let ft = new Feature({
         geometry: arcLine,
@@ -201,7 +199,7 @@ class OLGlobeMap extends Map {
       lnsFeatures.push(ft);
     }
 
-    return new VectorLayer({
+    let lnsLayer = new VectorLayer({
       name: "lines",
       updateWhileAnimating: true,
       source: new VectorSource({
@@ -209,6 +207,8 @@ class OLGlobeMap extends Map {
       }),
       style: lnsStyle,
     });
+
+    this.addLayer(lnsLayer);
   }
 
   animate(msec) {
@@ -243,7 +243,7 @@ class OLGlobeMap extends Map {
 }
 
 class FitView extends View {
-  // fit an view to extent and target element before map render
+  // fit an view to extent and target element
 
   constructor(target, bounds, padding = 10) {
     super({});
