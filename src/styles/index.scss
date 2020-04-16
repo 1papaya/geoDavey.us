@@ -18,7 +18,7 @@
   &.loaded {
     .splash {
       opacity: 1;
-      transition: opacity 3s ease-out;
+      transition: opacity 6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     &::after {
