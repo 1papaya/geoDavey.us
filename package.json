@@ -12,7 +12,9 @@
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-plugin-sharp": "^2.5.4",
+    "gatsby-source-cloudinary": "^0.1.11",
     "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-cloudinary": "^0.3.3",
     "gatsby-transformer-json": "^2.3.1",
     "gatsby-transformer-sharp": "^2.4.4",
     "node-sass": "^4.13.1",
@@ -25,7 +27,8 @@
     "typography": "^0.16.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "dotenv": "^8.2.0"
   },
   "scripts": {
     "build": "gatsby build",

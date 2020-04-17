@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: `geoDavey.us`,
@@ -26,6 +28,8 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-transformer-json`
+    `gatsby-transformer-json`,
+    `gatsby-source-cloudinary`,
+    `gatsby-transformer-cloudinary`
   ],
 };
