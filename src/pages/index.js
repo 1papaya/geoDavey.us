@@ -101,7 +101,7 @@ class Index extends React.Component {
                 <li className="title">gDv</li>
                 <li>blog</li>
                 <li>contact</li>
-                <li><span className="is-size-5" style={{color: "red"}}>&#9829;</span></li>
+                <li><span className="is-size-5" style={{color: "red"}}>&#9829;&#xFE0E;</span></li>
               </ul>
             </div>
           </div>
