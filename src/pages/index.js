@@ -5,10 +5,12 @@ import { Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+import Loader from 'react-loader-spinner'
+
 import IndexStyle from "../styles/index.scss";
 
 const OLGlobe = loadable(() => import("../components/olglobe"), {
-  fallback: <div>loading...</div>,
+  fallback: null,
 });
 
 class Index extends React.Component {
@@ -25,6 +27,7 @@ class Index extends React.Component {
     return (
       <Layout>
         <SEO title="home" />
+        {!this.state.isGlobeLoaded && <Loader className="gdv-loader" type="TailSpin" color="#ccc"/>}
         <div
           className={
             "splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")

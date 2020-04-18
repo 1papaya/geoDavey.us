@@ -4,6 +4,9 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import { point, featureCollection } from "@turf/helpers";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
+import "../styles/map.scss";
 
 class Map extends React.Component {
   constructor(props) {

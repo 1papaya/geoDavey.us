@@ -1,11 +1,4 @@
 .splash-container {
-  &::after {
-    display: block;
-    content: "( loading ... )";
-    position: absolute;
-    font-style: italic;
-    color: #aaa;
-  }
   &:not(.loaded) {
     .splash {
       opacity: 0;
