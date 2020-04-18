@@ -37,7 +37,6 @@ let importGeophoto = (geophotoPath) => {
 
   // read photo
   Jimp.read(geophotoPath, (err, geophoto) => {
-
     //
     // Prompt user for tags
     //
@@ -96,6 +95,7 @@ let importGeophoto = (geophotoPath) => {
             public_id: slug,
             folder: options.cloudinaryFolder,
             tags: tagsArr,
+            timeout: 8675309,
             context: {
               alt: result.name,
               caption: result.desc,
@@ -103,8 +103,8 @@ let importGeophoto = (geophotoPath) => {
             },
           },
           (err, result) => {
-            log.info("%s: done...", slug);
-            log.info("%s: url: %s", slug, result.secure_url);
+            if (err) log.error("%s %s", err.name, err.message);
+            else log.info("%s: done: %s", slug, result.secure_url);
           }
         );
       });
