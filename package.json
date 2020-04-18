@@ -5,14 +5,18 @@
   "main": "n/a",
   "dependencies": {
     "@loadable/component": "^5.12.0",
+    "@turf/helpers": "^6.1.4",
     "arc": "^0.1.1",
     "bulma": "^0.7.1",
+    "cloudinary-core": "^2.8.2",
     "d3": "^5.15.1",
     "gatsby": "^2.20.17",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-plugin-sharp": "^2.5.4",
+    "gatsby-source-cloudinary": "^0.1.11",
     "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-transformer-cloudinary": "^0.3.3",
     "gatsby-transformer-json": "^2.3.1",
     "gatsby-transformer-sharp": "^2.4.4",
     "node-sass": "^4.13.1",
@@ -21,11 +25,23 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
     "react-loadable": "^5.5.0",
+    "react-loader-spinner": "^3.1.14",
+    "react-map-gl": "^5.2.3",
+    "react-spinners": "^0.8.1",
     "react-typography": "^0.16.19",
     "typography": "^0.16.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "cloudinary": "^1.21.0",
+    "commander": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "jimp": "^0.10.2",
+    "piexifjs": "^1.0.4",
+    "prompt": "^1.0.0",
+    "slugify": "^1.4.0",
+    "winston": "^3.2.1"
   },
   "scripts": {
     "build": "gatsby build",

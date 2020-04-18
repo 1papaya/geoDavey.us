@@ -11,6 +11,7 @@ $link-hover: hsl(217, 71%, 53%);
 @import "~bulma/sass/grid/_all.sass";
 @import "~bulma/sass/elements/container.sass";
 
+@import "~react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 //
 // Fonts
@@ -76,4 +77,19 @@ body {
 .upside-down {
     transform: rotate(-180deg) translateY(7px);
     display: inline-block
+}
+
+.gdv-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>svg {
+
+    }
 }

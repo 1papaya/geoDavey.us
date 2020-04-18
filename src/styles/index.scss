@@ -1,11 +1,4 @@
 .splash-container {
-  &::after {
-    display: block;
-    content: "( loading ... )";
-    position: absolute;
-    font-style: italic;
-    color: #aaa;
-  }
   &:not(.loaded) {
     .splash {
       opacity: 0;
@@ -26,4 +19,56 @@
       transition: opacity 1s ease-out;
     }
   }
+}
+
+.menu {
+
+    margin: 0.5em 0;
+
+    img {
+        width: 32px;
+        height: 32px;
+    }
+
+    li {
+        position: relative;
+        display: inline-block;
+        margin: 0.1em 0.5em;
+        border: 0px solid #ccc;
+        padding: 2px 6px;
+        border-radius: 1em;
+
+
+        &::after, &::before {
+          position: absolute;
+          display: block;
+          content: " ";
+          top: 10%; height: 80%;
+          width: 1px;
+          background-color: #aaa;
+          transform: rotate(25deg);
+      }
+
+      &::after {
+        right: 0;
+        display: none;
+      }
+
+      &::before {
+        left: 0;
+      }
+
+        &.title {
+            padding: 2px 12px;
+            margin-right: 12px;
+            position: relative;
+            
+        }
+    }
+
+
+}
+
+.is-size-99 {
+    font-size: 6.5em;
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import loadable from "@loadable/component";
 
+import { Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-// TODO loading div in between silhouette & map w/ z-index
-// TODO make splash a component
+import Loader from 'react-loader-spinner'
 
 import IndexStyle from "../styles/index.scss";
 
 const OLGlobe = loadable(() => import("../components/olglobe"), {
-  fallback: <div>loading...</div>,
+  fallback: null,
 });
 
 class Index extends React.Component {
@@ -22,20 +22,16 @@ class Index extends React.Component {
     };
   }
   render() {
-    const iconStyle = {
-      verticalAlign: "middle",
-      marginRight: "0.2em",
-      width: "20px",
-      height: "20px",
-    };
-
-    const maxWidth = 520;
+    const maxWidth = 420;
 
     return (
       <Layout>
         <SEO title="home" />
+        {!this.state.isGlobeLoaded && <Loader className="gdv-loader" type="TailSpin" color="#ccc"/>}
         <div
-          className={"splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")}
+          className={
+            "splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")
+          }
           style={{
             position: "absolute",
             width: "100%",
@@ -53,21 +49,32 @@ class Index extends React.Component {
             className="splash"
             style={{
               width: "100%",
-              maxWidth: maxWidth
+              maxWidth: maxWidth,
             }}
           >
             <div
               className="globe"
               style={{
-                position: "relative"
+                position: "relative",
               }}
             >
               <OLGlobe
                 places={this.props.data.allPlacesJson.edges}
                 duration={31000}
                 maxWidth={maxWidth}
-                onLoad={() => {this.setState({isGlobeLoaded: true})}}
+                onLoad={() => {
+                  this.setState({ isGlobeLoaded: true });
+                }}
               />
+              <ul
+                className="menu is-hidden is-badscript has-text-centered is-size-5"
+                style={{}}
+              >
+                <li><Link to="/map">map</Link></li>
+                <li><Link to="/blog">blog</Link></li>
+                <li><Link to="/contact">contact</Link></li>
+                <li><Link style={{fontSize: "0.8em"}} to="/contact">&hearts;</Link></li>
+              </ul>
             </div>
           </div>
         </div>
