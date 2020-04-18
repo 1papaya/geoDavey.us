@@ -48,7 +48,7 @@ let importGeophoto = (geophotoPath) => {
       imageViewer.kill("SIGINT");
 
       // parse metadata from user input
-      let slug = slugify(result.name);
+      let slug = slugify(result.name).toLowerCase();
       let tagsArr = result.tags.split(";").concat(["geophoto"]); // include geophoto tag
       let gpscArr = result.gpsc.split(",").map((a, b) => {
         return parseFloat(a.trim());
