@@ -64,13 +64,13 @@ class Index extends React.Component {
                 }}
               />
               <ul
-                className="menu is-badscript has-text-centered is-size-4 is-size-5-mobile"
+                className="menu is-badscript has-text-centered is-size-5"
                 style={{}}
               >
-                <li className="title">gDv</li>
                 <li><Link to="/map">map</Link></li>
                 <li><Link to="/blog">blog</Link></li>
-                <li><span className="is-size-5" style={{color: ""}}>&#9829;&#xFE0E;</span></li>
+                <li><Link to="/contact">contact</Link></li>
+                <li><Link style={{fontSize: "0.8em"}} to="/contact">&hearts;</Link></li>
               </ul>
             </div>
           </div>

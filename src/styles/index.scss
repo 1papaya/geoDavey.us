@@ -38,36 +38,38 @@
     }
 
     li {
+        position: relative;
         display: inline-block;
-        margin: 0.1em;
+        margin: 0.1em 0.5em;
         border: 0px solid #ccc;
         padding: 2px 6px;
         border-radius: 1em;
+
+
+        &::after, &::before {
+          position: absolute;
+          display: block;
+          content: " ";
+          top: 10%; height: 80%;
+          width: 1px;
+          background-color: #aaa;
+          transform: rotate(25deg);
+      }
+
+      &::after {
+        right: 0;
+        display: none;
+      }
+
+      &::before {
+        left: 0;
+      }
 
         &.title {
             padding: 2px 12px;
             margin-right: 12px;
             position: relative;
-
-            &::after {
-                position: absolute;
-                display: block;
-                content: " ";
-                right: 0;
-                top: 0%; height: 100%;
-                width: 1px;
-                background-color: #aaa;
-                transform: rotate(25deg);
-            }
-        }
-        &:not(.title) {
-            &::before {
-                font-size: 0.4em;
-                display: inline-block;
-                content: ""; // \FE0E to force non-emoji <3
-                padding: 0 2px;
-                vertical-align: middle;
-            }
+            
         }
     }
 

@@ -8,7 +8,6 @@ import { point, featureCollection } from "@turf/helpers";
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.data);
 
     this.state = {
       geophotos: this.getGeophotosGeoJSON(this.props.data.allCloudinaryMedia),
@@ -20,10 +19,9 @@ class Map extends React.Component {
 
     var geophotosFeatures = allCloudinaryMedia.nodes.map((n) => {
       let properties = {
-        id: n["public_id"],
-        name: n["context"]["custom"]["alt"],
-        desc: n["context"]["custom"]["caption"],
-        src: n["secure_url"],
+        public_id: n["public_id"],
+        alt: n["context"]["custom"]["alt"],
+        caption: n["context"]["custom"]["caption"],
         tags: n["tags"],
       };
 
@@ -38,8 +36,8 @@ class Map extends React.Component {
     return featureCollection(geophotosFeatures);
   }
 
-  cloudinaryURL(id, transformations = "q_auto,f_auto"){
-    return `https://res.cloudinary.com/geodavey/image/upload/${transformations}/${id}.jpg`
+  cloudinaryURL(id, transformations = "q_auto,f_auto") {
+    return `https://res.cloudinary.com/geodavey/image/upload/${transformations}/${id}.jpg`;
   }
 
   render() {
@@ -47,13 +45,15 @@ class Map extends React.Component {
       <Layout>
         <SEO title="map" />
         {this.state.geophotos.features.map((f) => {
-            console.log(f.properties);
+          console.log(f.properties);
           return (
             <div key={f.properties.id}>
               <img
-              alt={f.properties.name}
-                src={this.cloudinaryURL(f.properties.id, "w_256,ar_1:1,c_fill,g_auto")}
-                style={{ maxHeight: 200, maxWidth: 200 }}
+                alt={f.properties.name}
+                src={this.cloudinaryURL(
+                  f.properties.public_id,
+                  "w_256,ar_1:1,c_fill,g_auto"
+                )}
               />
             </div>
           );
