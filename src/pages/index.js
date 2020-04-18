@@ -5,9 +5,6 @@ import { Link } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-// TODO loading div in between silhouette & map w/ z-index
-// TODO make splash a component
-
 import IndexStyle from "../styles/index.scss";
 
 const OLGlobe = loadable(() => import("../components/olglobe"), {
@@ -71,9 +68,9 @@ class Index extends React.Component {
                 style={{}}
               >
                 <li className="title">gDv</li>
+                <li><Link to="/map">map</Link></li>
                 <li><Link to="/blog">blog</Link></li>
-                <li><Link to="/contact">contact</Link></li>
-                <li><span className="is-size-5" style={{color: "red"}}>&#9829;&#xFE0E;</span></li>
+                <li><span className="is-size-5" style={{color: ""}}>&#9829;&#xFE0E;</span></li>
               </ul>
             </div>
           </div>
