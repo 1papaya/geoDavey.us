@@ -31,14 +31,16 @@ const SEO = ({ description, lang, meta, title }) => {
     `
   );
 
-  const metaDescription = description || site.siteMetadata.description;
+  const seoDescription = description || site.siteMetadata.description;
+  const seoTitle = title || site.siteMetadata.title;
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: "en",
       }}
       title={title}
+      defaultTitle={"geoDavey"}
       titleTemplate={`geoDavey / %s`}
       link={[
         {
@@ -56,8 +58,12 @@ const SEO = ({ description, lang, meta, title }) => {
       ]}
       meta={[
         {
+          name: `title`,
+          content: seoTitle,
+        },
+        {
           name: `description`,
-          content: metaDescription,
+          content: seoDescription,
         },
       ].concat(meta)}
     />

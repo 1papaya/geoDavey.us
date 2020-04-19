@@ -18,7 +18,7 @@ class Index extends React.Component {
     super(props);
 
     this.state = {
-      isGlobeLoaded: false,
+      isGlobeLoaded: false
     };
   }
   render() {
@@ -26,7 +26,7 @@ class Index extends React.Component {
 
     return (
       <Layout>
-        <SEO title="home" />
+        <SEO />
         {!this.state.isGlobeLoaded && <Loader className="gdv-loader" type="TailSpin" color="#ccc"/>}
         <div
           className={

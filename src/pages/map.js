@@ -47,19 +47,29 @@ class Map extends React.Component {
     return (
       <Layout>
         <SEO title="map" />
-        {this.state.geophotos.features.map((f) => {
-          return (
-            <div key={f.properties.id}>
-              <img
-                alt={f.properties.name}
-                src={this.cloudinaryURL(
-                  f.properties.public_id,
-                  "w_256,ar_1:1,c_fill,g_auto"
-                )}
-              />
+
+        <div className="geoDavey-map">
+          <div className="map">mapGL</div>
+          <div className="sidebar">
+            <div className="section">
+              <div className="heading">geophotos</div>
+              <div className="content geophotos">
+                {this.state.geophotos.features.map((f) => {
+                  return (
+                    <img
+                      key={f.properties.id}
+                      alt={f.properties.name}
+                      src={this.cloudinaryURL(
+                        f.properties.public_id,
+                        "w_256,ar_1:1,c_fill,g_auto"
+                      )}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
       </Layout>
     );
   }
