@@ -67,7 +67,7 @@ class Index extends React.Component {
                 }}
               />
               <ul
-                className="menu is-hidden is-badscript has-text-centered is-size-5"
+                className="menu is-badscript has-text-centered is-size-5"
                 style={{}}
               >
                 <li><Link to="/map">map</Link></li>

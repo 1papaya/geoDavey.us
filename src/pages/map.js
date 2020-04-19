@@ -48,7 +48,6 @@ class Map extends React.Component {
       <Layout>
         <SEO title="map" />
         {this.state.geophotos.features.map((f) => {
-          console.log(f.properties);
           return (
             <div key={f.properties.id}>
               <img
