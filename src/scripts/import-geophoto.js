@@ -37,13 +37,14 @@ let importGeophoto = (geophotoPath) => {
 
   // read photo
   Jimp.read(geophotoPath, (err, geophoto) => {
+
     //
     // Prompt user for tags
     //
 
     prompt.start();
 
-    prompt.get(["name", "desc", "tags", "gpsc"], (err, result) => {
+    prompt.get(["name", "desc", "tags", "loca", "gpsc"], (err, result) => {
       // close viewer window
       imageViewer.kill("SIGINT");
 
@@ -66,6 +67,7 @@ let importGeophoto = (geophotoPath) => {
 
       geophoto.getBase64(Jimp.MIME_JPEG, (error, geophotoBase64) => {
         // insert exif data into base64
+        // convert coords to Dms
         var exifStr = piexif.dump({
           "0th": {
             [piexif.ImageIFD.DocumentName]: result.name,
@@ -99,6 +101,7 @@ let importGeophoto = (geophotoPath) => {
             context: {
               alt: result.name,
               caption: result.desc,
+              location: result.loca,
               latlon: gpscArr.join(","),
             },
           },
