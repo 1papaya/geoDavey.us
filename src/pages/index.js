@@ -1,13 +1,13 @@
 import React from "react";
 import loadable from "@loadable/component";
 
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import Loader from 'react-loader-spinner'
 
-import IndexStyle from "../styles/index.scss";
+import "../styles/index.scss";
 
 const OLGlobe = loadable(() => import("../components/olglobe"), {
   fallback: null,
@@ -22,7 +22,7 @@ class Index extends React.Component {
     };
   }
   render() {
-    const maxWidth = 420;
+    const maxWidth = 480;
 
     return (
       <Layout>
@@ -70,9 +70,9 @@ class Index extends React.Component {
                 className="menu is-badscript has-text-centered is-size-5"
                 style={{}}
               >
-                <li><Link to="/map">map</Link></li>
+                <li><Link to="/map">maps</Link></li>
                 <li><Link to="/blog">blog</Link></li>
-                <li><Link to="/contact">contact</Link></li>
+                <li><Link to="/contact">projects</Link></li>
                 <li><Link style={{fontSize: "0.8em"}} to="/contact">&hearts;</Link></li>
               </ul>
             </div>

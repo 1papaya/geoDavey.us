@@ -10,7 +10,7 @@
     "bulma": "^0.7.1",
     "cloudinary-core": "^2.8.2",
     "d3": "^5.15.1",
-    "gatsby": "^2.20.17",
+    "gatsby": "^2.20.28",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-plugin-sharp": "^2.5.4",

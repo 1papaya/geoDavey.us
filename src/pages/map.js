@@ -3,6 +3,8 @@ import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
+import { graphql } from "gatsby";
+
 import { point, featureCollection } from "@turf/helpers";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -21,10 +23,22 @@ class Map extends React.Component {
     // turn graphQL response into GeoJSON
 
     var geophotosFeatures = allCloudinaryMedia.nodes.map((n) => {
+
+      let photoURL = this.cloudinaryURL(
+        n["public_id"],
+        "w_768,g_auto"
+      )
+      let thumbURL = this.cloudinaryURL(
+        n["public_id"],
+        "w_256,ar_1:1,c_fill,g_auto"
+      );
+
       let properties = {
         public_id: n["public_id"],
         alt: n["context"]["custom"]["alt"],
         caption: n["context"]["custom"]["caption"],
+        thumbURL: thumbURL,
+        photoURL: photoURL,
         tags: n["tags"],
       };
 
@@ -56,14 +70,12 @@ class Map extends React.Component {
               <div className="content geophotos">
                 {this.state.geophotos.features.map((f) => {
                   return (
-                    <img
-                      key={f.properties.id}
-                      alt={f.properties.name}
-                      src={this.cloudinaryURL(
-                        f.properties.public_id,
-                        "w_256,ar_1:1,c_fill,g_auto"
-                      )}
-                    />
+                    <div key={f.properties.id}>
+                      <img
+                        alt={f.properties.name}
+                        src={f.thumbURL}
+                      />
+                    </div>
                   );
                 })}
               </div>

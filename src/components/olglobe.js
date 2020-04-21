@@ -14,7 +14,7 @@ import XYZ from "ol/source/XYZ";
 import { linear } from "ol/easing";
 import arc from "arc";
 
-import OLGlobeCSS from "../styles/ol-globe.scss";
+import "../styles/ol-globe.scss";
 
 class OLGlobe extends React.Component {
   constructor(props) {
@@ -110,12 +110,12 @@ class OLGlobeMap extends Map {
     });
 
     this.once("rendercomplete", opt.onLoad);
+    this.once("rendercomplete", () => { this.animate(opt.duration) });
 
     this.addPointsLayer(opt.places);
     this.addLinesLayer(opt.places);
 
     this.render();
-    this.animate(opt.duration);
   }
 
   addPointsLayer(places) {
@@ -142,7 +142,7 @@ class OLGlobeMap extends Map {
 
       var ft = new Feature({
         name: plc["address"],
-        last: !!(i == places.length - 1),
+        last: !!(i === places.length - 1),
         geometry: new Point(
           fromLonLat([parseFloat(plc["x"]), parseFloat(plc["y"])], "EPSG:3857")
         ),
@@ -221,7 +221,7 @@ class OLGlobeMap extends Map {
     let stops = [-90, 0, 90, 180, -180];
 
     for (var stop of stops) {
-      if (stop == -180) {
+      if (stop === -180) {
         rotation.push({
           center: fromLonLat([-180, origin_y]),
           duration: 0,

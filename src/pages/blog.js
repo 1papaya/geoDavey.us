@@ -2,8 +2,9 @@ import React from "react";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { graphql } from "gatsby";
 
-import BlogStyle from "../styles/blog.scss";
+import "../styles/blog.scss";
 
 class Blog extends React.Component {
   constructor(props) {
@@ -14,8 +15,6 @@ class Blog extends React.Component {
   }
 
   getGeophotosGeoJSON(allCloudinaryMedia) {
-    var tst = allCloudinaryMedia.nodes.map((n) => {
-    })
   }
 
   render() {

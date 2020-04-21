@@ -15,14 +15,21 @@
     flex-grow: 1;
   }
   .sidebar {
-    width: 20%;
+    width: 30%;
 
     .geophotos {
-        display: flex;
-        flex-wrap: wrap;
-      img {
-        flex: 0 0 50%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .geophoto {
+        position: relative;
+        flex: 0 0 20%;
         min-width: 140px;
+        margin: 1px;
+
+        img {
+          
+        }
       }
     }
   }
