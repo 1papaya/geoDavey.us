@@ -4,26 +4,15 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
+function Blog(props) {
+  return (
+    <Layout>
+    <SEO title="blog" />
 
-class Blog extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props.data);
+    blog
+  </Layout>
 
-    this.state = {};
-  }
-
-  getGeophotosGeoJSON(allCloudinaryMedia) {
-  }
-
-  render() {
-    return (
-      <Layout>
-        <SEO title="home" />
-        TESSSSSTTTT BLOOGGGG
-      </Layout>
-    );
-  }
+  )
 }
 
 export default Blog;

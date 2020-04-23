@@ -30,25 +30,29 @@ export default ({ children }) => {
             <div
               className="text-sm mt-2 select-none text-right font-palanquin"
               css={css`
-                &>a::after {
+                a::after {
                   display: inline-block;
                   content: "\\00a0\\00BB";
                 }
+                a:hover {
+                    background: rgba(255,255,255,0.075);
+                    text-decoration: underline;
+                }
               `}
             >
-              <Link className="block p-1" to="/home">
+              <Link className="block outline-none p-1" to="/home">
                 home
               </Link>
-              <Link className="block p-1" to="/blog">
+              <Link className="block outline-none p-1" to="/blog">
                 blog
               </Link>
-              <Link className="block p-1" to="/projects">
+              <Link className="block outline-none p-1" to="/projects">
                 projects
               </Link>
-              <Link className="block p-1" to="/contact">
+              <Link className="block outline-none p-1" to="/contact">
                 contact
               </Link>
-              <Link className="block p-1" to="/gratitude">
+              <Link className="block outline-none p-1" to="/gratitude">
                 &lt;3
               </Link>
             </div>
