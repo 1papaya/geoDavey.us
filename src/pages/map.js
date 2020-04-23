@@ -6,7 +6,6 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
 import { point, featureCollection } from "@turf/helpers";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import "../styles/map.scss";
 

@@ -1,16 +1,16 @@
-import React from "react"
+import React from "react";
+
+import "../styles/layout.scss";
 
 const Layout = ({ children }) => {
     return (
         <div
         style={{
-            marginLeft: 'auto',
-            marginRight: 'auto',
             width: "100%",
             height: "100%"
         }}
         >
-            <main>{children}</main>
+            {children}
         </div>
     )
 }
