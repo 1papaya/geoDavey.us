@@ -4,7 +4,6 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-import "../styles/blog.scss";
 
 class Blog extends React.Component {
   constructor(props) {

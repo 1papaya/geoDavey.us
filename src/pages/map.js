@@ -4,10 +4,8 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import { graphql } from "gatsby";
-
 import { point, featureCollection } from "@turf/helpers";
 
-import "../styles/map.scss";
 
 class Map extends React.Component {
   constructor(props) {

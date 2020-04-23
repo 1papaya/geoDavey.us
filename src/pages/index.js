@@ -2,9 +2,6 @@ import React from "react";
 import loadable from "@loadable/component";
 
 import { Link, graphql } from "gatsby";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-
 import Loader from "react-loader-spinner";
 
 import "../styles/index.scss";
@@ -25,8 +22,7 @@ class Index extends React.Component {
     const maxWidth = 480;
 
     return (
-      <Layout>
-        <SEO />
+      <div className="w-full h-full">
         {!this.state.isGlobeLoaded && (
           <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
         )}
@@ -90,7 +86,7 @@ class Index extends React.Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }

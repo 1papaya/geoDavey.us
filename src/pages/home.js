@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-import LinesSVG from "../components/svg/lines";
-
-import "../styles/home.scss";
 
 function Home(props) {
   return (
@@ -16,7 +13,7 @@ function Home(props) {
       <div className="w-full md:h-full flex justify-center sm:items-start md:items-center">
         <div className="flex rounded-lg">
           <div className="flex flex-col mr-4" style={{ maxWidth: 80 }}>
-            <img src={props.data.gD_lite256.childImageSharp.fixed.src} />
+            <img alt="geoDavey logo" src={props.data.gD_lite256.childImageSharp.fixed.src} />
             <div className="text-sm mt-2 text-right font-palanquin">
               <div className="p-1">home &raquo;</div>
               <div className="p-1 hover:cursor-pointer">blog &raquo;</div>
