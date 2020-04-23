@@ -1,5 +1,6 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { css } from "@emotion/core";
+import { graphql, useStaticQuery, Link } from "gatsby";
 
 export default ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,12 +27,30 @@ export default ({ children }) => {
               alt="geoDavey logo"
               src={data.gD_lite256.childImageSharp.fixed.src}
             />
-            <div className="text-sm mt-2 text-right font-palanquin">
-              <div className="p-1">home &raquo;</div>
-              <div className="p-1 hover:cursor-pointer">blog &raquo;</div>
-              <div className="p-1 hover:cursor-pointer">projects &raquo;</div>
-              <div className="p-1">contact &raquo;</div>
-              <div className="p-1 hover:cursor-pointer">&lt;3 &raquo;</div>
+            <div
+              className="text-sm mt-2 select-none text-right font-palanquin"
+              css={css`
+                &>a::after {
+                  display: inline-block;
+                  content: "\\00a0\\00BB";
+                }
+              `}
+            >
+              <Link className="block p-1" to="/home">
+                home
+              </Link>
+              <Link className="block p-1" to="/blog">
+                blog
+              </Link>
+              <Link className="block p-1" to="/projects">
+                projects
+              </Link>
+              <Link className="block p-1" to="/contact">
+                contact
+              </Link>
+              <Link className="block p-1" to="/gratitude">
+                &lt;3
+              </Link>
             </div>
           </div>
 
