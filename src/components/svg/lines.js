@@ -6,22 +6,23 @@ function LinesSVG(props) {
       style={{
         width: "100%",
         height:
-          props.colors.length * (props.strokeSpacing + props.strokeWidth),
+          props.padding*2 + (props.colors.length-1) * (props.strokeSpacing + props.strokeWidth),
       }}
     >
       {props.colors.map((c, c_idx) => {
         const y =
-          props.strokeSpacing +
+          props.padding +
           c_idx * (props.strokeSpacing + props.strokeWidth);
 
         return (
           <line
+            key={c}
             x1={0}
             x2={"100%"}
             y1={y}
             y2={y}
             stroke={c}
-            stroke-width={props.strokeWidth}
+            strokeWidth={props.strokeWidth}
             opacity={props.opacity}
           ></line>
         );
@@ -34,6 +35,7 @@ LinesSVG.defaultProps = {
   opacity: "0.5",
   strokeWidth: 2,
   strokeSpacing: 4,
+  padding: 4
 };
 
 export default LinesSVG;

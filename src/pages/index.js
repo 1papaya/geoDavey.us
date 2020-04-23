@@ -69,7 +69,7 @@ class Index extends React.Component {
                 }}
               />
               <ul
-                className="menu is-badscript has-text-centered is-size-5"
+                className="menu font-badscript text-center text-xl"
                 style={{}}
               >
                 <li>
@@ -79,7 +79,10 @@ class Index extends React.Component {
                   <Link to="/projects">projects</Link>
                 </li>
                 <li>
-                  <Link style={{ fontSize: "0.8em" }} to="/contact">
+                  <Link to="/contact">contact</Link>
+                </li>
+                <li>
+                  <Link style={{ fontSize: "0.8em" }} to="/gratutyde">
                     &hearts;
                   </Link>
                 </li>

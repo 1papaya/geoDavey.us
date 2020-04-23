@@ -17,53 +17,62 @@ $bg-color: #f5f3f0;
 //
 
 @font-face {
-    font-family: 'BadScript';
-    font-style: normal;
-    font-weight: 400;
-    src: local('BadScript Web Regular'), local('BadScriptWeb-Regular'), url(./fonts/badscript-web.woff2) format('woff2');
+  font-family: "BadScript";
+  font-style: normal;
+  font-weight: 400;
+  src: local("BadScript Web Regular"), local("BadScriptWeb-Regular"),
+    url(./fonts/badscript-web.woff2) format("woff2");
 }
 
+.font-badscript {
+  font-family: "BadScript";
+}
+
+/* palanquin-regular - latin */
 @font-face {
-    font-family: 'Titillium';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(./fonts/titillium-web.woff2) format('woff2');
+  font-family: "Palanquin";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Palanquin Regular"), local("Palanquin-Regular"),
+    url("./fonts/palanquin-v5-web.woff2") format("woff2"); /* Super Modern Browsers */
+}
+
+.font-palanquin {
+  font-family: "Palanquin";
 }
 
 //
 // Global
 //
 
-html, body {
-    width: 100%;
-    height: 100%; 
-    background-color: $bg-color !important;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: $bg-color !important;
 }
 
-#___gatsby, #gatsby-focus-wrapper {
-    height: 100%;
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
 }
 
 .on-top {
-    z-index: 999999;
-}
-
-.is-badscript {
-    font-family: 'BadScript';
+  z-index: 999999;
 }
 
 .upside-down {
-    transform: rotate(-180deg) translateY(7px);
-    display: inline-block
+  transform: rotate(-180deg) translateY(7px);
+  display: inline-block;
 }
 
 .gdv-loader {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
