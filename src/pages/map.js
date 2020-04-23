@@ -96,6 +96,7 @@ export const pageQuery = graphql`
         secure_url
         public_id
         tags
+        type
         context {
           custom {
             alt

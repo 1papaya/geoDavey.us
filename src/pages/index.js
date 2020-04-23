@@ -5,7 +5,7 @@ import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-import Loader from 'react-loader-spinner'
+import Loader from "react-loader-spinner";
 
 import "../styles/index.scss";
 
@@ -18,7 +18,7 @@ class Index extends React.Component {
     super(props);
 
     this.state = {
-      isGlobeLoaded: false
+      isGlobeLoaded: false,
     };
   }
   render() {
@@ -27,7 +27,9 @@ class Index extends React.Component {
     return (
       <Layout>
         <SEO />
-        {!this.state.isGlobeLoaded && <Loader className="gdv-loader" type="TailSpin" color="#ccc"/>}
+        {!this.state.isGlobeLoaded && (
+          <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
+        )}
         <div
           className={
             "splash-container" + (this.state.isGlobeLoaded ? " loaded" : "")
@@ -70,10 +72,17 @@ class Index extends React.Component {
                 className="menu is-badscript has-text-centered is-size-5"
                 style={{}}
               >
-                <li><Link to="/map">maps</Link></li>
-                <li><Link to="/blog">blog</Link></li>
-                <li><Link to="/contact">projects</Link></li>
-                <li><Link style={{fontSize: "0.8em"}} to="/contact">&hearts;</Link></li>
+                <li>
+                  <Link to="/blog">blog</Link>
+                </li>
+                <li>
+                  <Link to="/projects">projects</Link>
+                </li>
+                <li>
+                  <Link style={{ fontSize: "0.8em" }} to="/contact">
+                    &hearts;
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

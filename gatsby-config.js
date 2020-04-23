@@ -33,7 +33,7 @@ module.exports = {
         resourceType: `image`,
         maxResults: 500,
         context: true,
-        tags: true
+        tags: true,
       },
     },
     {
@@ -45,13 +45,20 @@ module.exports = {
         resourceType: `image`,
         maxResults: 500,
         context: true,
-        tags: true
+        tags: true,
       },
     },
-    `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-json`,
-  ],
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [
+          require("tailwindcss")
+        ],
+      },
+    },
+  ]
 };
