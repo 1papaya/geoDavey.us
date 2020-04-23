@@ -18,7 +18,10 @@ export default ({ children }) => {
     <div className="w-full h-full">
       <div className="w-full md:min-h-full flex justify-center sm:items-start md:items-center">
         <div className="flex m-8 rounded-lg">
-          <div className="flex flex-col mr-4" style={{ maxWidth: 80 }}>
+          <div
+            className="flex flex-col self-start sticky mr-4"
+            style={{ maxWidth: 80, top: "2rem" }}
+          >
             <img
               alt="geoDavey logo"
               src={data.gD_lite256.childImageSharp.fixed.src}
@@ -36,11 +39,11 @@ export default ({ children }) => {
             className="flex p-2 flex-wrap relative rounded-lg overflow-hidden"
             style={{
               width: 512,
-              height: 2000,
+              minHeight: 300,
               background: "rgba(0,0,0,0.075)",
             }}
           >
-            { children }
+            {children}
           </div>
         </div>
       </div>
