@@ -53,6 +53,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     `gatsby-transformer-json`,
+    `gatsby-transformer-csv`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {

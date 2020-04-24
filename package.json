@@ -21,6 +21,7 @@
     "gatsby-source-cloudinary": "^0.1.11",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-cloudinary": "^0.3.3",
+    "gatsby-transformer-csv": "^2.2.4",
     "gatsby-transformer-json": "^2.3.1",
     "gatsby-transformer-sharp": "^2.4.4",
     "node-sass": "^4.13.1",

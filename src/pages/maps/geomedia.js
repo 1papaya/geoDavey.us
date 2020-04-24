@@ -13,12 +13,9 @@ function GeomediaMap(props) {
     cloudinaryToGeoJSON(props.data.allCloudinaryMedia)
   );
 
-  console.log(geomedias);
-
   return (
     <MapLayout>
       <SEO title="geoMedia" />
-      maps
       <div className="geoDavey-map">
         <div className="map">mapGL</div>
         <div className="sidebar">
@@ -95,10 +92,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export const metadata = {
-  name: "geoMedia",
-  slug: "geoMedia",
-  desc: "Skoo geo Media Buffs!",
-  tools: "mapbox-gl;react",
-};

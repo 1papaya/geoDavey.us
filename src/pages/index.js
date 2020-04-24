@@ -57,7 +57,7 @@ class Index extends React.Component {
               }}
             >
               <OLGlobe
-                places={this.props.data.allPlacesJson.edges}
+                places={this.props.data.allWaypointsCsv.edges}
                 duration={31000}
                 maxWidth={maxWidth}
                 onLoad={() => {
@@ -82,7 +82,7 @@ export const pageQuery = graphql`
       }
     }
 
-    allPlacesJson {
+    allWaypointsCsv {
       edges {
         node {
           address

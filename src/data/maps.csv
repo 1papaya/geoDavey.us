@@ -1,0 +1,5 @@
+name,slug,desc,tools
+geoMedia,geomedia,Skoo buffs!,mapbox-gl;react
+Gran Canaria,gran-canaria,Buena Isla!,mapbox-gl;react
+Globe animation,globe,Whoooaaaaaa!,d3
+eSwatini Footbridges,eswatini-bridges,Lots of em!,openlayers

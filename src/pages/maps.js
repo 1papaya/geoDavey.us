@@ -3,16 +3,19 @@ import React from "react";
 import Layout from "../components/layouts/page";
 import SEO from "../components/seo";
 
+import { graphql } from "gatsby";
+
 function Maps(props) {
 
   console.log(props.data);
   return (
     <Layout>
       <SEO title="maps" />
-      {props.data.allSitePage.nodes.map((m) => {
-        return <div key={m.path}>{m.path}</div>;
+      {props.data.allMapsCsv.nodes.map((m) => {
+        return <div key={m.slug}>
+          {m.slug}
+          </div>;
       })}
-      maps
     </Layout>
   );
 }
@@ -21,15 +24,12 @@ export default Maps;
 
 export const pageQuery = graphql`
   query {
-    allSitePage(filter: { path: { regex: "/\/maps\/.+/" } }) {
+    allMapsCsv {
       nodes {
-        path
-        fields {
-          name
-          slug
-          desc
-          tools
-        }
+        name
+        slug
+        tools
+        desc
       }
     }
   }
