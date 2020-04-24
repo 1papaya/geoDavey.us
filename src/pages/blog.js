@@ -1,18 +1,17 @@
 import React from "react";
 
-import Layout from "../components/layout";
+import PageLayout from "../components/layouts/page";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
 function Blog(props) {
   return (
-    <Layout>
-    <SEO title="blog" />
+    <PageLayout>
+      <SEO title="blog" />
 
-    blog
-  </Layout>
-
-  )
+      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
+    </PageLayout>
+  );
 }
 
 export default Blog;

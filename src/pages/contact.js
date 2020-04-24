@@ -1,17 +1,15 @@
 import React from "react";
 
-import Layout from "../components/layout";
+import PageLayout from "../components/layouts/page";
 import SEO from "../components/seo";
 
 function Contact(props) {
   return (
-    <Layout>
-    <SEO title="contact" />
-
-    contact
-  </Layout>
-
-  )
+    <PageLayout>
+      <SEO title="contact" />
+      contact
+    </PageLayout>
+  );
 }
 
 export default Contact;

@@ -64,25 +64,6 @@ class Index extends React.Component {
                   this.setState({ isGlobeLoaded: true });
                 }}
               />
-              <ul
-                className="menu font-badscript text-center text-xl"
-                style={{}}
-              >
-                <li>
-                  <Link to="/blog">blog</Link>
-                </li>
-                <li>
-                  <Link to="/projects">projects</Link>
-                </li>
-                <li>
-                  <Link to="/contact">contact</Link>
-                </li>
-                <li>
-                  <Link style={{ fontSize: "0.8em" }} to="/gratutyde">
-                    &hearts;
-                  </Link>
-                </li>
-              </ul>
             </div>
           </div>
         </div>

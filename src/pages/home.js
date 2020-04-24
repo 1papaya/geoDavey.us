@@ -1,15 +1,15 @@
 import React from "react";
 
-import Layout from "../components/layout";
+import PageLayout from "../components/layouts/page";
 import SEO from "../components/seo";
 
 function Home(props) {
   return (
-    <Layout>
+    <PageLayout>
       <SEO title="home" />
 
       <div className="font-badscript">skoobuufff</div>
-    </Layout>
+    </PageLayout>
   );
 }
 
