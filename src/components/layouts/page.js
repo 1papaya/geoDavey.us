@@ -25,18 +25,21 @@ const PageLayout = (props) => {
   }, []);
 
   return (
-    <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center">
-      <div className="flex h-full rounded-lg">
+    <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center"
+    style={{
+      background: "#f5f3f0"
+    }}>
+      <div className="flex h-full rounded-lg m-8">
         <Nav />
 
-        <div className="relative flex h-full flex-col mr-8 mt-8 mb-8">
+        <div className="relative flex h-full flex-col">
           <div
             className="content p-2 rounded-lg"
             ref={contentRef}
             style={{
               width: props.contentWidth,
               background: "rgba(0,0,0,0.075)",
-              transition: "width 2s, height 2s",
+              transition: "all 2s",
             }}
           >
             {contentStyle}
@@ -44,7 +47,7 @@ const PageLayout = (props) => {
           </div>
 
           <div
-            className="fine-print absolute pb-8 right-0 text-right text-gray-500 text-sm"
+            className="fine-print absolute right-0 text-right text-gray-500 text-sm"
             style={{ top: "100%" }}
           >
             ¡{" "}

@@ -3,7 +3,7 @@ import React from "react";
 import TransitionLink from "gatsby-plugin-transition-link";
 import { css, Global } from "@emotion/core";
 import ReactDOM from "react-dom";
-import { useStaticQuery, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 
 function Nav(props) {
   const data = useStaticQuery(graphql`
@@ -20,7 +20,7 @@ function Nav(props) {
 
   const duration = 2;
 
-  const entryAnim = { length: duration, appearAfter: duration+0.1 };
+  const entryAnim = { length: duration, appearAfter: duration };
   const exitAnim = { length: duration };
 
   const trig = async (pages) => {
@@ -52,7 +52,13 @@ function Nav(props) {
   };
 
   return (
-    <div className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4 pl-8 pt-8 pb-8">
+    <div
+      className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4"
+      style={{
+        maxHeight: "calc(100vh - 4rem)",
+        top: "2rem"
+      }}
+    >
       <div>
         <TransitionLink
           entry={entryAnim}
@@ -79,7 +85,7 @@ function Nav(props) {
             }
 
             a {
-                display: block;
+              display: block;
             }
           `}
         >
