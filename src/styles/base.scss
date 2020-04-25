@@ -67,8 +67,13 @@ body {
   display: inline-block;
 }
 
-.tl-edges {
-  overflow-x: inherit !important;
+.tl-wrapper {
+  height: 100%; // this is for full page height issue
+
+  .tl-edges {
+    overflow-x: inherit !important; // this is for scrolling issue
+    height: 100%; // full page height issue *sigh
+  }
 }
 
 .gdv-loader {

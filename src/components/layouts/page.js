@@ -10,14 +10,16 @@ const PageLayout = (props) => {
   const [contentStyle, setContentStyle] = useState(null);
 
   useEffect(() => {
-    setContentStyle(<Global
-      styles={css`
-        .transition {
-          width: ${contentRef.current.offsetWidth}px !important;
-          height: ${contentRef.current.offsetHeight}px !important;
-        }
-      `}
-    />);
+    setContentStyle(
+      <Global
+        styles={css`
+          .transition {
+            width: ${contentRef.current.offsetWidth}px !important;
+            height: ${contentRef.current.offsetHeight}px !important;
+          }
+        `}
+      />
+    );
 
     contentRef.current.classList.add("transition");
   }, []);
@@ -36,7 +38,8 @@ const PageLayout = (props) => {
               background: "rgba(0,0,0,0.075)",
               transition: "width 2s, height 2s",
             }}
-          >        {contentStyle}
+          >
+            {contentStyle}
             {props.children}
           </div>
 
