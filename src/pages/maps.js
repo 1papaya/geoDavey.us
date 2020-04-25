@@ -7,7 +7,6 @@ import { graphql } from "gatsby";
 
 function Maps(props) {
 
-  console.log(props.data);
   return (
     <Layout>
       <SEO title="maps" />

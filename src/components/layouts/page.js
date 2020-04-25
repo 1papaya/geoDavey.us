@@ -18,7 +18,7 @@ const PageLayout = (props) => {
   return (
     <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center">
       <div className="flex h-full rounded-lg">
-        <div className="nav max-h-screen top-0 flex flex-col sticky pr-4 pl-8 pt-8 pb-8">
+        <div className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4 pl-8 pt-8 pb-8">
           <Link to="/home">
             <img
               alt="geoDavey logo"
@@ -63,7 +63,7 @@ const PageLayout = (props) => {
           </div>
         </div>
 
-        <div className="content flex h-full flex-col pr-8 pt-8 pb-8">
+        <div className="content relative flex h-full flex-col mr-8 mt-8 mb-8">
           <div
             className="p-2 flex-1 rounded-lg"
             style={{
@@ -75,7 +75,10 @@ const PageLayout = (props) => {
             {props.children}
           </div>
 
-          <div className="fine-print text-right text-gray-500 text-sm">
+          <div
+            className="fine-print absolute pb-8 right-0 text-right text-gray-500 text-sm"
+            style={{top: "100%"}}
+          >
             ¡{" "}
             <Link
               to="/gratitude"
@@ -96,7 +99,7 @@ const PageLayout = (props) => {
 };
 
 PageLayout.defaultProps = {
-  contentWidth: 600,
+  contentWidth: 420,
 };
 
 export default PageLayout;
