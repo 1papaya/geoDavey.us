@@ -1,5 +1,5 @@
 import React from "react";
-import { css } from "@emotion/core";
+import { Global, css } from "@emotion/core";
 import { graphql, useStaticQuery, Link } from "gatsby";
 
 const PageLayout = (props) => {
@@ -17,7 +17,15 @@ const PageLayout = (props) => {
 
   return (
     <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center">
+      <Global
+        styles={css`
+          body {
+            overflow-y: scroll;
+          }
+        `}
+      />
       <div className="flex h-full rounded-lg">
+        
         <div className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4 pl-8 pt-8 pb-8">
           <Link to="/home">
             <img
@@ -77,7 +85,7 @@ const PageLayout = (props) => {
 
           <div
             className="fine-print absolute pb-8 right-0 text-right text-gray-500 text-sm"
-            style={{top: "100%"}}
+            style={{ top: "100%" }}
           >
             ¡{" "}
             <Link
