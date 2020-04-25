@@ -1,85 +1,42 @@
-import React from "react";
-import { Global, css } from "@emotion/core";
-import { graphql, useStaticQuery, Link } from "gatsby";
+import React, { useRef, useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { css, Global } from "@emotion/core";
+import { Link } from "gatsby";
+
+import Nav from "../nav";
 
 const PageLayout = (props) => {
-  const data = useStaticQuery(graphql`
-    query {
-      gD_lite256: file(relativePath: { eq: "img/gD_lite.png" }) {
-        childImageSharp {
-          fixed(width: 256, height: 256) {
-            src
-          }
+  const contentRef = useRef(null);
+  const [contentStyle, setContentStyle] = useState(null);
+
+  useEffect(() => {
+    setContentStyle(<Global
+      styles={css`
+        .transition {
+          width: ${contentRef.current.offsetWidth}px !important;
+          height: ${contentRef.current.offsetHeight}px !important;
         }
-      }
-    }
-  `);
+      `}
+    />);
+
+    contentRef.current.classList.add("transition");
+  }, []);
 
   return (
     <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center">
-      <Global
-        styles={css`
-          body {
-            overflow-y: scroll;
-          }
-        `}
-      />
       <div className="flex h-full rounded-lg">
-        
-        <div className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4 pl-8 pt-8 pb-8">
-          <Link to="/home">
-            <img
-              alt="geoDavey logo"
-              src={data.gD_lite256.childImageSharp.fixed.src}
-              style={{ maxWidth: "5rem" }}
-            />
-          </Link>
-          <div
-            className="text-sm mt-2 select-none text-right font-palanquin"
-            css={css`
-              a::after {
-                display: inline-block;
-                content: "\\00a0\\00BB";
-              }
-              a:hover {
-                background: rgba(255, 255, 255, 0.075);
-                text-decoration: underline;
-              }
-            `}
-          >
-            <Link
-              className="block outline-none whitespace-no-wrap p-1"
-              to="/blog"
-              activeClassName="font-bold"
-            >
-              blog
-            </Link>
-            <Link
-              className="block outline-none whitespace-no-wrap p-1"
-              to="/maps"
-              activeClassName="font-bold"
-            >
-              maps
-            </Link>
-            <Link
-              className="block outline-none whitespace-no-wrap p-1"
-              to="/contact"
-              activeClassName="font-bold"
-            >
-              contact
-            </Link>
-          </div>
-        </div>
+        <Nav />
 
-        <div className="content relative flex h-full flex-col mr-8 mt-8 mb-8">
+        <div className="relative flex h-full flex-col mr-8 mt-8 mb-8">
           <div
-            className="p-2 flex-1 rounded-lg"
+            className="content p-2 rounded-lg"
+            ref={contentRef}
             style={{
               width: props.contentWidth,
-              minHeight: "calc(100% + 0.875rem)",
               background: "rgba(0,0,0,0.075)",
+              transition: "width 2s, height 2s",
             }}
-          >
+          >        {contentStyle}
             {props.children}
           </div>
 

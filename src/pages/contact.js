@@ -4,6 +4,8 @@ import PageLayout from "../components/layouts/page";
 import Postcard from "../components/postcard";
 import SEO from "../components/seo";
 
+import { graphql } from "gatsby";
+
 function Contact(props) {
   return (
     <PageLayout contentWidth={420}>

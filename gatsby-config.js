@@ -52,15 +52,19 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
+    {
+      resolve: "gatsby-plugin-transition-link",
+      options: {
+        injectPageProps: false,
+      },
+    },
     `gatsby-transformer-json`,
     `gatsby-transformer-csv`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        postCssPlugins: [
-          require("tailwindcss")
-        ],
+        postCssPlugins: [require("tailwindcss")],
       },
     },
-  ]
+  ],
 };

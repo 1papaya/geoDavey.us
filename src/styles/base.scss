@@ -67,6 +67,10 @@ body {
   display: inline-block;
 }
 
+.tl-edges {
+  overflow-x: inherit !important;
+}
+
 .gdv-loader {
   position: absolute;
   top: 0;
