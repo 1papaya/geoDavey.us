@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { css, Global } from "@emotion/core";
 import { Link, useStaticQuery, graphql } from "gatsby";
-import ReactDOM from "react-dom";
-import TransitionLink from "gatsby-plugin-transition-link";
+
+import TransitionLink from "../transitionlink";
 
 import Loader from "react-loader-spinner";
 
@@ -30,10 +30,6 @@ const PageLayout = (props) => {
     else setIsLoaded(props.transitionStatus === "entered" && props.mount)
   }, [props.transitionStatus]);
 
-  //
-  // page transition setup
-  //
-
   // set page content to have "transition" class with its actual height/width, for transition
   useEffect(() => {
     setContentStyle(
@@ -49,38 +45,6 @@ const PageLayout = (props) => {
     contentRef.current.classList.add("transition");
   }, []);
 
-  const entryAnim = {
-    length: props.transitionDuration,
-    appearAfter: props.transitionDuration,
-  };
-  const exitAnim = { length: props.transitionDuration };
-
-  const transitionTrigger = async (pages) => {
-    const exit = await pages.exit;
-    const entry = await pages.entry;
-
-    const entryContent = entry.node.getElementsByClassName("page-content")[0];
-    const exitContent = exit.node.getElementsByClassName("page-content")[0];
-
-    exitContent.innerHTML = ""; // clear content from old page
-
-    // overwrite "transition" class with width/height of new content
-    // once it has been added, add to transition class to element
-    ReactDOM.render(
-      <Global
-        styles={css`
-          .transition {
-            width: ${entryContent.offsetWidth}px !important;
-            height: ${entryContent.offsetHeightt}px !important;
-          }
-        `}
-      />,
-      exitContent,
-      () => {
-        exitContent.classList.add("transition");
-      }
-    );
-  };
 
   return (
     <div
@@ -102,9 +66,6 @@ const PageLayout = (props) => {
         >
           <div>
             <TransitionLink
-              entry={entryAnim}
-              exit={exitAnim}
-              trigger={transitionTrigger}
               to="/home"
             >
               <img
@@ -131,9 +92,6 @@ const PageLayout = (props) => {
               `}
             >
               <TransitionLink
-                entry={entryAnim}
-                exit={exitAnim}
-                trigger={transitionTrigger}
                 className="block outline-none whitespace-no-wrap p-1"
                 to="/blog"
                 activeClassName="font-bold"
@@ -141,9 +99,6 @@ const PageLayout = (props) => {
                 blog
               </TransitionLink>
               <TransitionLink
-                entry={entryAnim}
-                exit={exitAnim}
-                trigger={transitionTrigger}
                 className="block outline-none whitespace-no-wrap p-1"
                 to="/maps"
                 activeClassName="font-bold"
@@ -151,9 +106,6 @@ const PageLayout = (props) => {
                 maps
               </TransitionLink>
               <TransitionLink
-                entry={entryAnim}
-                exit={exitAnim}
-                trigger={transitionTrigger}
                 className="block outline-none whitespace-no-wrap p-1"
                 to="/contact"
                 activeClassName="font-bold"
@@ -184,9 +136,6 @@ const PageLayout = (props) => {
           >
             ¡{" "}
             <TransitionLink
-              entry={entryAnim}
-              exit={exitAnim}
-              trigger={transitionTrigger}
               css={css`
                 &:hover {
                   text-decoration: underline;
