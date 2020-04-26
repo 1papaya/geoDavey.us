@@ -1,17 +1,39 @@
 import React, { useRef, useEffect, useState } from "react";
 import { css, Global } from "@emotion/core";
-import { Link } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import ReactDOM from "react-dom";
+import TransitionLink from "gatsby-plugin-transition-link";
 
 import Loader from "react-loader-spinner";
 
-import Nav from "../nav";
-
 const PageLayout = (props) => {
+  const data = useStaticQuery(graphql`
+    query {
+      gD_lite256: file(relativePath: { eq: "img/gD_lite.png" }) {
+        childImageSharp {
+          fixed(width: 256, height: 256) {
+            src
+          }
+        }
+      }
+    }
+  `);
+
   const contentRef = useRef(null);
-  
+
   const [contentStyle, setContentStyle] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // isLoading state
+  useEffect(() => {
+    setIsLoaded(props.transitionStatus === "entered" && props.mount);
+  }, [props.transitionStatus]);
+
+  //
+  // page transition setup
+  //
+
+  // set page content to have "transition" class with its actual height/width, for transition
   useEffect(() => {
     setContentStyle(
       <Global
@@ -26,9 +48,38 @@ const PageLayout = (props) => {
     contentRef.current.classList.add("transition");
   }, []);
 
-  useEffect(() => {
-    setIsLoaded(props.transitionStatus === "entered" && props.mount)
-  }, [props.transitionStatus]);
+  const entryAnim = {
+    length: props.transitionDuration,
+    appearAfter: props.transitionDuration,
+  };
+  const exitAnim = { length: props.transitionDuration };
+
+  const transitionTrigger = async (pages) => {
+    const exit = await pages.exit;
+    const entry = await pages.entry;
+
+    const entryContent = entry.node.getElementsByClassName("page-content")[0];
+    const exitContent = exit.node.getElementsByClassName("page-content")[0];
+
+    exitContent.innerHTML = ""; // clear content from old page
+
+    // overwrite "transition" class with width/height of new content
+    // once it has been added, add to transition class to element
+    ReactDOM.render(
+      <Global
+        styles={css`
+          .transition {
+            width: ${entryContent.offsetWidth}px !important;
+            height: ${entryContent.offsetHeightt}px !important;
+          }
+        `}
+      />,
+      exitContent,
+      () => {
+        exitContent.classList.add("transition");
+      }
+    );
+  };
 
   return (
     <div
@@ -41,11 +92,80 @@ const PageLayout = (props) => {
         <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
       )}
       <div className="flex h-full rounded-lg m-8">
-        <Nav />
+        <div
+          className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4"
+          style={{
+            maxHeight: "calc(100vh - 4rem)",
+            top: "2rem",
+          }}
+        >
+          <div>
+            <TransitionLink
+              entry={entryAnim}
+              exit={exitAnim}
+              trigger={transitionTrigger}
+              to="/home"
+            >
+              <img
+                alt="geoDavey logo"
+                src={data.gD_lite256.childImageSharp.fixed.src}
+                style={{ maxWidth: "5rem" }}
+              />
+            </TransitionLink>
+            <div
+              className="text-sm mt-2 select-none text-right font-palanquin"
+              css={css`
+                a::after {
+                  display: inline-block;
+                  content: "\\00a0\\00BB";
+                }
+                a:hover {
+                  background: rgba(255, 255, 255, 0.075);
+                  text-decoration: underline;
+                }
+
+                a {
+                  display: block;
+                }
+              `}
+            >
+              <TransitionLink
+                entry={entryAnim}
+                exit={exitAnim}
+                trigger={transitionTrigger}
+                className="block outline-none whitespace-no-wrap p-1"
+                to="/blog"
+                activeClassName="font-bold"
+              >
+                blog
+              </TransitionLink>
+              <TransitionLink
+                entry={entryAnim}
+                exit={exitAnim}
+                trigger={transitionTrigger}
+                className="block outline-none whitespace-no-wrap p-1"
+                to="/maps"
+                activeClassName="font-bold"
+              >
+                maps
+              </TransitionLink>
+              <TransitionLink
+                entry={entryAnim}
+                exit={exitAnim}
+                trigger={transitionTrigger}
+                className="block outline-none whitespace-no-wrap p-1"
+                to="/contact"
+                activeClassName="font-bold"
+              >
+                contact
+              </TransitionLink>
+            </div>
+          </div>
+        </div>
 
         <div className="relative flex h-full flex-col">
           <div
-            className="content p-2 rounded-lg"
+            className="page-content p-2 rounded-lg"
             ref={contentRef}
             style={{
               width: props.contentWidth,
@@ -62,16 +182,19 @@ const PageLayout = (props) => {
             style={{ top: "100%" }}
           >
             ¡{" "}
-            <Link
-              to="/gratitude"
+            <TransitionLink
+              entry={entryAnim}
+              exit={exitAnim}
+              trigger={transitionTrigger}
               css={css`
                 &:hover {
                   text-decoration: underline;
                 }
               `}
+              to="/gratitude"
             >
               viva la open source
-            </Link>{" "}
+            </TransitionLink>{" "}
             !
           </div>
         </div>
@@ -82,6 +205,7 @@ const PageLayout = (props) => {
 
 PageLayout.defaultProps = {
   contentWidth: 420,
+  transitionDuration: 2,
 };
 
 export default PageLayout;
