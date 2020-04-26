@@ -5,7 +5,7 @@ import SEO from "../components/seo";
 
 function Home(props) {
   return (
-    <PageLayout>
+    <PageLayout {...props}>
       <SEO title="home" />
 
       <div className="font-badscript">skoobuufff</div>

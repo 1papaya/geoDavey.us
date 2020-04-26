@@ -1,17 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { css, Global } from "@emotion/core";
 import { Link } from "gatsby";
 
 import Loader from "react-loader-spinner";
-import { TransitionState } from "gatsby-plugin-transition-link";
 
 import Nav from "../nav";
 
 const PageLayout = (props) => {
   const contentRef = useRef(null);
+  
   const [contentStyle, setContentStyle] = useState(null);
-
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
