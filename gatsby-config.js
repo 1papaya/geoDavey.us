@@ -25,6 +25,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/blogs`,
+        name: `blogs`,
+      },
+    },
+    {
       resolve: `gatsby-source-cloudinary`,
       options: {
         cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -61,5 +68,6 @@ module.exports = {
         postCssPlugins: [require("tailwindcss")],
       },
     },
+    `gatsby-transformer-remark`,
   ],
 };

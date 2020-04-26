@@ -8,7 +8,7 @@ import { graphql } from "gatsby";
 
 function Contact(props) {
   return (
-    <PageLayout contentWidth={420} {...props}>
+    <PageLayout contentWidth={480} {...props}>
       <SEO title="contact" />
 
       <div style={{ width: "100%" }}>
