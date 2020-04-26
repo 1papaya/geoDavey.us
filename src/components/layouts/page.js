@@ -3,11 +3,16 @@ import ReactDOM from "react-dom";
 import { css, Global } from "@emotion/core";
 import { Link } from "gatsby";
 
+import Loader from "react-loader-spinner";
+import { TransitionState } from "gatsby-plugin-transition-link";
+
 import Nav from "../nav";
 
 const PageLayout = (props) => {
   const contentRef = useRef(null);
   const [contentStyle, setContentStyle] = useState(null);
+
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setContentStyle(
@@ -20,15 +25,23 @@ const PageLayout = (props) => {
         `}
       />
     );
-
     contentRef.current.classList.add("transition");
   }, []);
 
+  useEffect(() => {
+    setIsLoaded(props.transitionStatus === "entered" && props.mount)
+  }, [props.transitionStatus]);
+
   return (
-    <div className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center"
-    style={{
-      background: "#f5f3f0"
-    }}>
+    <div
+      className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center"
+      style={{
+        background: "#f5f3f0",
+      }}
+    >
+      {!isLoaded && (
+        <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
+      )}
       <div className="flex h-full rounded-lg m-8">
         <Nav />
 

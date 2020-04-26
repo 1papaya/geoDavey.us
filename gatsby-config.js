@@ -52,12 +52,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
-    {
-      resolve: "gatsby-plugin-transition-link",
-      options: {
-        injectPageProps: false,
-      },
-    },
+    `gatsby-plugin-transition-link`,
     `gatsby-transformer-json`,
     `gatsby-transformer-csv`,
     {
