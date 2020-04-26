@@ -26,7 +26,8 @@ const PageLayout = (props) => {
 
   // isLoading state
   useEffect(() => {
-    setIsLoaded(props.transitionStatus === "entered" && props.mount);
+    if (!("mount" in props)) setIsLoaded(true); // if page is loaded not via transition
+    else setIsLoaded(props.transitionStatus === "entered" && props.mount)
   }, [props.transitionStatus]);
 
   //
