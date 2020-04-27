@@ -21,31 +21,17 @@ const PageLayout = (props) => {
   `);
 
   const contentRef = useRef(null);
-
-  const [contentStyle, setContentStyle] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // back path: props.location.state.prevPath
 
   // isLoading state
   useEffect(() => {
-    if (!("mount" in props)) setIsLoaded(true); // if page is loaded not via transition
-    else setIsLoaded(props.transitionStatus === "entered" && props.mount)
+    // if page is loaded not via transition
+    if (!("mount" in props)) setIsLoaded(true);
+    // if page is loaded by transition, set isLoaded=true when loading finished
+    else setIsLoaded(props.transitionStatus === "entered" && props.mount);
   }, [props.transitionStatus]);
-
-  // set page content to have "transition" class with its actual height/width, for transition
-  useEffect(() => {
-    setContentStyle(
-      <Global
-        styles={css`
-          .transition {
-            width: ${contentRef.current.offsetWidth}px !important;
-            height: ${contentRef.current.offsetHeight}px !important;
-          }
-        `}
-      />
-    );
-    contentRef.current.classList.add("transition");
-  }, []);
-
 
   return (
     <div
@@ -66,9 +52,7 @@ const PageLayout = (props) => {
           }}
         >
           <div>
-            <PageTransitionLink
-              to="/home"
-            >
+            <PageTransitionLink to="/home">
               <img
                 alt="geoDavey logo"
                 src={data.gD_lite256.childImageSharp.fixed.src}
@@ -127,7 +111,6 @@ const PageLayout = (props) => {
               transition: "all 2s",
             }}
           >
-            {contentStyle}
             {props.children}
           </div>
 
@@ -159,47 +142,48 @@ PageLayout.defaultProps = {
   transitionDuration: 2,
 };
 
-
 const PageTransitionLink = (props) => {
-  const entryAnim = {
-    length: props.duration,
-    appearAfter: props.duration,
-  };
-
-  const exitAnim = { length: props.duration };
-
-  const transitionTrigger = async (pages) => {
-    const exit = await pages.exit;
-    const entry = await pages.entry;
-
-    const entryContent = entry.node.getElementsByClassName("page-content")[0];
-    const exitContent = exit.node.getElementsByClassName("page-content")[0];
-
-    exitContent.innerHTML = ""; // clear content from old page
-
-    // overwrite "transition" class with width/height of new content
-    // once it has been added, add to transition class to element
-    ReactDOM.render(
-      <Global
-        styles={css`
-          .transition {
-            width: ${entryContent.offsetWidth}px !important;
-            height: ${entryContent.offsetHeightt}px !important;
-          }
-        `}
-      />,
-      exitContent,
-      () => {
-        exitContent.classList.add("transition");
-      }
-    );
-  };
-
   return (
     <TransitionLink
-      entry={entryAnim}
-      exit={exitAnim}
-      trigger={transitionTrigger}
+      state={{ prevPath: document.location.pathname }}
+      entry={{
+        length: props.duration,
+        appearAfter: props.duration,
+      }}
+      exit={{
+        length: props.duration,
+      }}
+      trigger={async (pages) => {
+        // wait for both entry and exit pages to load
+        const { node: exit } = await pages.exit;
+        const { node: entry } = await pages.entry;
+
+        // get page content div from entry / exit
+        const entryC = entry.getElementsByClassName("page-content")[0];
+        const exitC = exit.getElementsByClassName("page-content")[0];
+
+        // set explicit height/width for exit page content (for transition)
+        exitC.style.setProperty("width", `${exitC.offsetWidth}px`);
+        exitC.style.setProperty("height", `${exitC.offsetHeight}px`);
+        exitC.innerHTML = "";
+
+        // add global style 'page-transition' with width/height of entry content
+        // then apply that style to the exit content, triggering transition to entry size
+        ReactDOM.render(
+          <Global
+            styles={css`
+              .page-transition {
+                width: ${entryC.offsetWidth}px !important;
+                height: ${entryC.offsetHeight}px !important;
+              }
+            `}
+          />,
+          exitC,
+          () => {
+            exitC.classList.add("page-transition");
+          }
+        );
+      }}
       {...props}
     />
   );
@@ -207,7 +191,9 @@ const PageTransitionLink = (props) => {
 
 PageTransitionLink.defaultProps = {
   duration: 2,
-}
+};
+
+const BackButton = (props) => {};
 
 export default PageLayout;
-export {PageTransitionLink};
+export { PageTransitionLink };
