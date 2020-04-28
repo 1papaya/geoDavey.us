@@ -101,7 +101,20 @@ const D3Globe = (props) => {
           props.silhouetteScale
         })`
       )
-      .style("fill", "black");
+      .style("fill", props.colors.silhouette);
+
+    // bandana
+
+    let bandana = svg
+      .append("path")
+      .attr("d", silData.bandana)
+      .attr(
+        "transform",
+        `translate(${width / 2 - silW / 2} ${width - silH}) scale(${
+          props.silhouetteScale
+        })`
+      )
+      .style("fill", props.colors.bandana);
 
     // globe rotation
     const rotation = timer((elapsed) => {
@@ -131,7 +144,8 @@ D3Globe.defaultProps = {
     land: "#c0dc74",
     water: "#8ebfe5",
     graticule: "#ccc",
-    bandana: "",
+    silhouette: "#000",
+    bandana: "#ce78c5",
   },
 };
 
