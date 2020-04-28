@@ -25,7 +25,6 @@ const PageLayout = (props) => {
 
   // back path: props.location.state.prevPath
 
-  // isLoading state
   useEffect(() => {
     // if page is loaded not via transition
     if (!("mount" in props)) setIsLoaded(true);
@@ -58,7 +57,7 @@ const PageLayout = (props) => {
                 src={data.gD_lite160.childImageSharp.fixed.src}
                 style={{
                   maxWidth: 80,
-                  width: 80
+                  width: 80,
                 }}
               />
             </PageTransitionLink>
@@ -74,6 +73,13 @@ const PageLayout = (props) => {
                 }
               `}
             >
+              <PageTransitionLink
+                className="block outline-none whitespace-no-wrap p-1"
+                to="/blog"
+                activeClassName="font-bold"
+              >
+                blog
+              </PageTransitionLink>
               <PageTransitionLink
                 className="block outline-none whitespace-no-wrap p-1"
                 to="/blog"
@@ -141,9 +147,15 @@ PageLayout.defaultProps = {
 };
 
 const PageTransitionLink = (props) => {
+  let [prevPath, setPrevPath] = useState(null);
+
+  useEffect(() => {
+    setPrevPath(document.location.pathname);
+  }, []);
+
   return (
     <TransitionLink
-      state={{ prevPath: document.location.pathname }}
+      state={{ prevPath }}
       entry={{
         length: props.duration,
         appearAfter: props.duration,
@@ -160,7 +172,8 @@ const PageTransitionLink = (props) => {
         const entryC = entry.getElementsByClassName("page-content")[0];
         const exitC = exit.getElementsByClassName("page-content")[0];
 
-        // set explicit height/width for exit page content (for transition)
+        // set explicit height/width for exit page content
+        // needed for CSS transition
         exitC.style.setProperty("width", `${exitC.offsetWidth}px`);
         exitC.style.setProperty("height", `${exitC.offsetHeight}px`);
         exitC.innerHTML = "";
