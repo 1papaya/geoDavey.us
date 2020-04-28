@@ -134,24 +134,9 @@ const D3Globe = (props) => {
   }, []);
 
   return (
-    <div style={{ width: 500, height: 500, position: "relative" }}>
-      <div
-        className="ol-globe-ring hidden"
-        style={{
-          backgroundImage: `url(/assets/img/globe-ring.png)`,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundSize: "100% 100%",
-          zIndex: 1337,
-        }}
-      ></div>
       <svg ref={svgRef} style={{ width: props.width, height: props.width }}>
         <g ref={waypointsRef}></g>
       </svg>
-    </div>
   );
 };
 
