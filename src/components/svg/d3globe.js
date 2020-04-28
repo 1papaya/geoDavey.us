@@ -90,31 +90,33 @@ const D3Globe = (props) => {
     let silW = silData.viewbox[0] * props.silhouetteScale;
     let silH = silData.viewbox[1] * props.silhouetteScale;
 
+    let silTransform = `translate(${width / 2 - silW / 2} ${
+      width - silH
+    }) scale(${props.silhouetteScale})`;
+
     let silhouette = svg
       .append("g")
       .attr("clip-path", "url(#outerClip)")
       .append("path")
       .attr("d", silData.silhouette)
-      .attr(
-        "transform",
-        `translate(${width / 2 - silW / 2} ${width - silH}) scale(${
-          props.silhouetteScale
-        })`
-      )
+      .attr("transform", silTransform)
       .style("fill", props.colors.silhouette);
 
     // bandana
-
     let bandana = svg
       .append("path")
       .attr("d", silData.bandana)
-      .attr(
-        "transform",
-        `translate(${width / 2 - silW / 2} ${width - silH}) scale(${
-          props.silhouetteScale
-        })`
-      )
+      .attr("transform", silTransform)
       .style("fill", props.colors.bandana);
+
+    // text
+    let text = svg
+      .append("text")
+      .attr("transform", ` ${silTransform} matrix(${silData.text.matrix})`)
+      .style("font-family", "BadScript")
+      .style("font-size", `${silData.text.size}px`)
+      .style("fill", "#fff")
+      .html("geoDavey");
 
     // globe rotation
     const rotation = timer((elapsed) => {
