@@ -6,6 +6,10 @@ import Loader from "react-loader-spinner";
 
 import "../styles/index.scss";
 
+const D3Globe = loadable(() => import("../components/svg/d3globe"), {
+  fallback: null
+});
+
 const OLGlobe = loadable(() => import("../components/olglobe"), {
   fallback: null,
 });
@@ -15,7 +19,7 @@ class Index extends React.Component {
     super(props);
 
     this.state = {
-      isGlobeLoaded: false,
+      isGlobeLoaded: true,
     };
   }
   render() {
@@ -54,16 +58,19 @@ class Index extends React.Component {
               className="globe"
               style={{
                 position: "relative",
+                width: "100%",
+                maxWidth: 420
               }}
             >
-              <OLGlobe
+              <D3Globe width="100%" />
+              {/* <OLGlobe
                 places={this.props.data.allWaypointsCsv.edges}
                 duration={31000}
                 maxWidth={maxWidth}
                 onLoad={() => {
                   this.setState({ isGlobeLoaded: true });
                 }}
-              />
+              /> */}
             </div>
           </div>
         </div>

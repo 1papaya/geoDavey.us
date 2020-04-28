@@ -10,9 +10,9 @@ import Loader from "react-loader-spinner";
 const PageLayout = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      gD_lite256: file(relativePath: { eq: "img/gD_lite.png" }) {
+      gD_lite160: file(relativePath: { eq: "img/gD_lite.png" }) {
         childImageSharp {
-          fixed(width: 256, height: 256) {
+          fixed(width: 160, height: 160) {
             src
           }
         }
@@ -55,8 +55,11 @@ const PageLayout = (props) => {
             <PageTransitionLink to="/home">
               <img
                 alt="geoDavey logo"
-                src={data.gD_lite256.childImageSharp.fixed.src}
-                style={{ maxWidth: "5rem" }}
+                src={data.gD_lite160.childImageSharp.fixed.src}
+                style={{
+                  maxWidth: 80,
+                  width: 80
+                }}
               />
             </PageTransitionLink>
             <div
@@ -67,12 +70,7 @@ const PageLayout = (props) => {
                   content: "\\00a0\\00BB";
                 }
                 a:hover {
-                  background: rgba(255, 255, 255, 0.075);
                   text-decoration: underline;
-                }
-
-                a {
-                  display: block;
                 }
               `}
             >
@@ -106,7 +104,7 @@ const PageLayout = (props) => {
             className="page-content p-2 rounded-lg"
             ref={contentRef}
             style={{
-              width: props.contentWidth,
+              width: props.width,
               background: "rgba(0,0,0,0.075)",
               transition: "all 2s",
             }}
@@ -138,7 +136,7 @@ const PageLayout = (props) => {
 };
 
 PageLayout.defaultProps = {
-  contentWidth: 420,
+  width: 420,
   transitionDuration: 2,
 };
 

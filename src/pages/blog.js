@@ -6,7 +6,7 @@ import { graphql } from "gatsby";
 
 function Blog(props) {
   return (
-    <PageLayout contentWidth={500} {...props}>
+    <PageLayout width={500} {...props}>
       <SEO title="blog" />
 
       <div className="text-2xl leading-6">This is pretty very cool, no?</div>

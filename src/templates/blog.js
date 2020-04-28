@@ -9,8 +9,9 @@ export default ({ data }) => {
   const html = data.markdownRemark.html;
 
   return (
-    <PageLayout contentWidth={500}>
-      <div className="">{meta.title}</div>
+    <PageLayout width={480}>
+      <div className="text-3xl text-bold">{meta.title}</div>
+      <div dangerouslySetInnerHTML={{__html: html}}></div>
     </PageLayout>
   );
 };

@@ -6,15 +6,20 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
 function Maps(props) {
-
   return (
-    <PageLayout {...props}>
+    <PageLayout width={600}>
       <SEO title="maps" />
-      {props.data.allMapsCsv.nodes.map((m) => {
-        return <div key={m.slug}>
-          {m.slug}
-          </div>;
-      })}
+
+      <div className="flex flex-wrap">
+        {props.data.allMapsCsv.nodes.map((m) => {
+          return (
+            <div key={m.slug}>
+              Sko Buffs
+              <img src={`/assets/img/${m.slug}.png`} />
+            </div>
+          );
+        })}
+      </div>
     </PageLayout>
   );
 }
