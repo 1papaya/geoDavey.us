@@ -13,19 +13,16 @@ const D3Globe = (props) => {
 
   // initial
   useEffect(() => {
-    let ringWidth = 10;
-
     let svg = select(svgRef.current)
       .attr("width", width)
       .attr("height", width)
       .attr("viewBox", `0 0 ${width} ${width}`);
 
     let proj = geoOrthographic()
-      .scale(width / 2 - ringWidth * 2)
+      .scale(width / 2 - props.ringWidth * 2)
       .translate([width / 2, width / 2]);
 
     let path = geoPath().projection(proj);
-
 
     // add rings
     let outerRing = svg
@@ -33,25 +30,25 @@ const D3Globe = (props) => {
       .attr("cx", width / 2)
       .attr("cy", width / 2)
       .attr("r", width / 2)
-      .style("fill", "#ef3147")
-      .style("opacity", ".9");
+      .style("fill", props.colors.outerRing)
+      .style("opacity", "1");
 
     let innerRing = svg
       .append("circle")
       .attr("cx", width / 2)
       .attr("cy", width / 2)
-      .attr("r", width / 2 - ringWidth)
-      .style("fill", "#ff7a37")
-      .style("opacity", ".9");
+      .attr("r", width / 2 - props.ringWidth)
+      .style("fill", props.colors.innerRing)
+      .style("opacity", "1");
 
     // add bg
     let bg = svg
       .append("circle")
       .attr("cx", width / 2)
       .attr("cy", width / 2)
-      .attr("r", width / 2 - ringWidth * 2)
-      .style("fill", "#8ebfe5")
-      .style("opacity", ".9");
+      .attr("r", width / 2 - props.ringWidth * 2)
+      .style("fill", props.colors.water)
+      .style("opacity", "1");
 
     // add land topojson
     let landFt = feature(landTopo, landTopo.objects.land).features;
@@ -64,8 +61,8 @@ const D3Globe = (props) => {
       .attr("d", path)
       .style("stroke", "transparent")
       .style("stroke-width", "1px")
-      .style("fill", (d, i) => "#c0dc74")
-      .style("opacity", ".9");
+      .style("fill", props.colors.land)
+      .style("opacity", "1");
 
     // add graticule lines
     let graticule = svg
@@ -74,23 +71,22 @@ const D3Globe = (props) => {
       .attr("class", "graticule rotate")
       .attr("d", path)
       .style("fill", "transparent")
-      .style("stroke", "#ccc")
+      .style("stroke", props.colors.graticule)
       .style("opacity", "0");
 
     // silhouette clip path
     svg
-    .append("defs")
-    .append("clipPath")
-    .attr("id", "outerClip")
-    .append("circle")
-    .attr("cx", width / 2)
-    .attr("cy", width / 2)
-    .attr("r", width / 2);
+      .append("defs")
+      .append("clipPath")
+      .attr("id", "outerClip")
+      .append("circle")
+      .attr("cx", width / 2)
+      .attr("cy", width / 2)
+      .attr("r", width / 2);
 
     // silhouette
-    let silScale = 0.4;
-    let silW = 453.4 * silScale;
-    let silH = 715.4 * silScale;
+    let silW = 453.4 * props.silhouetteScale;
+    let silH = 715.4 * props.silhouetteScale;
 
     let silhouette = svg
       .append("g")
@@ -120,7 +116,7 @@ const D3Globe = (props) => {
       )
       .attr(
         "transform",
-        `translate(${width / 2 - silW / 2} ${width - silH}) scale(${silScale})`
+        `translate(${width / 2 - silW / 2} ${width - silH}) scale(${props.silhouetteScale})`
       )
       .style("fill", "black");
 
@@ -134,16 +130,26 @@ const D3Globe = (props) => {
   }, []);
 
   return (
-      <svg ref={svgRef} style={{ width: props.width, height: props.width }}>
-        <g ref={waypointsRef}></g>
-      </svg>
+    <svg ref={svgRef} style={{ width: props.width, height: props.width }}>
+      <g ref={waypointsRef}></g>
+    </svg>
   );
 };
 
 D3Globe.defaultProps = {
-  speed: 0.005,
-  vTilt: -24,
+  speed: 0.01,
+  vTilt: -10,
   hTilt: 0,
+  ringWidth: 10,
+  silhouetteScale: 0.25,
+  colors: {
+    outerRing: "#ef3147",
+    innerRing: "#ff7a37",
+    land: "#c0dc74",
+    water: "#8ebfe5",
+    graticule: "#ccc",
+    bandana: "",
+  },
 };
 
 export default D3Globe;
