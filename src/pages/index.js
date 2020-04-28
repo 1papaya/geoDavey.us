@@ -62,7 +62,7 @@ class Index extends React.Component {
                 maxWidth: 420
               }}
             >
-              <D3Globe width="100%" />
+              <D3Globe width={500} />
               {/* <OLGlobe
                 places={this.props.data.allWaypointsCsv.edges}
                 duration={31000}

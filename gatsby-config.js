@@ -61,6 +61,14 @@ module.exports = {
     `gatsby-plugin-emotion`,
     `gatsby-plugin-transition-link`,
     `gatsby-transformer-json`,
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/
+        }
+      }
+    },
     `gatsby-transformer-csv`,
     {
       resolve: `gatsby-plugin-sass`,

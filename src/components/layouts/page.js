@@ -149,6 +149,7 @@ PageLayout.defaultProps = {
 const PageTransitionLink = (props) => {
   let [prevPath, setPrevPath] = useState(null);
 
+  // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
   }, []);
