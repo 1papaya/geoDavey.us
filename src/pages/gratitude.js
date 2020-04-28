@@ -7,7 +7,7 @@ function Gratitude(props) {
   return (
     <PageLayout {...props}>
       <SEO title="gratitude" />
-      gratitude
+      2pac RIP
     </PageLayout>
   );
 }

@@ -75,10 +75,10 @@ const PageLayout = (props) => {
             >
               <PageTransitionLink
                 className="block outline-none whitespace-no-wrap p-1"
-                to="/blog"
+                to="/home"
                 activeClassName="font-bold"
               >
-                blog
+                home
               </PageTransitionLink>
               <PageTransitionLink
                 className="block outline-none whitespace-no-wrap p-1"
