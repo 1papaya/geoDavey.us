@@ -1,11 +1,14 @@
-import React, { useRef, useEffect, useState, forwardRef } from "react";
-import { css, Global } from "@emotion/core";
-import ReactDOM from "react-dom";
-import { Link, useStaticQuery, graphql } from "gatsby";
+import React, { useRef, useEffect, useState } from "react";
+import { css } from "@emotion/core";
+import { useStaticQuery, graphql } from "gatsby";
 
 import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
+
+import loadable from '@loadable/component'
+
+//const D3Globe = loadable(() => import("../svg/d3globe"))
 
 const PageLayout = (props) => {
   const data = useStaticQuery(graphql`
@@ -21,8 +24,8 @@ const PageLayout = (props) => {
   `);
 
   const containerRef = useRef(null);
-  const globeRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // back path: props.location.state.prevPath
 

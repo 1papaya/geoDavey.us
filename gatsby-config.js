@@ -82,5 +82,13 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    { 
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: true,
+        tailwind: true,
+        whitelist: ["transitioning", "tl-edges", "tl-wrapper"]
+      }
+    }
   ],
 };

@@ -55,6 +55,7 @@
     "commander": "^5.0.0",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
+    "gatsby-plugin-purgecss": "^5.0.0",
     "jimp": "^0.10.2",
     "piexifjs": "^1.0.4",
     "prompt": "^1.0.0",

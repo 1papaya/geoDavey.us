@@ -67,17 +67,13 @@ body {
   display: inline-block;
 }
 
-
+/* purgecss start ignore */
 .transitioning {
   .tl-wrapper:not(.tl-wrapper-status--entered) {
     display: none;
   }
 }
-.tl-wrapper {
-  &:not(.tl-wrapper-status--entered) {
-    //display: none
-  }
-}
+/* purgecss end ignore */
 
 .tl-edges {
   overflow-x: initial !important;

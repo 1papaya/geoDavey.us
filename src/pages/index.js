@@ -2,6 +2,7 @@ import React from "react";
 
 import { PageContent } from "../components/layouts/page";
 import SEO from "../components/seo";
+import { graphql } from "gatsby";
 
 import D3Globe from "../components/svg/d3globe";
 
