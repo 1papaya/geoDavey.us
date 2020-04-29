@@ -1,14 +1,14 @@
 import React from "react";
 
-import PageLayout from "../components/layouts/page";
+import {PageContent} from "../components/layouts/page";
 import SEO from "../components/seo";
 
 function Gratitude(props) {
   return (
-    <PageLayout {...props}>
+    <PageContent width={360}>
       <SEO title="gratitude" />
       2pac RIP
-    </PageLayout>
+    </PageContent>
   );
 }
 
