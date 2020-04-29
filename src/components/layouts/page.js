@@ -93,15 +93,33 @@ const PageLayout = (props) => {
           </div>
         </div>
 
-        <div className="relative flex flex-col">
+        <div className="flex flex-col">
           <div
             ref={containerRef}
-            className="page-container p-2 rounded-lg box-content"
+            className="page-container relative p-2 rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
             }}
           >
             {props.children}
+
+            <div
+              className="fine-print absolute right-0 text-right text-gray-500 text-sm"
+              style={{ top: "100%" }}
+            >
+              ¡{" "}
+              <PageTransitionLink
+                css={css`
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                `}
+                to="/gratitude"
+              >
+                viva la open source
+              </PageTransitionLink>{" "}
+              !
+            </div>
           </div>
         </div>
       </div>
@@ -160,8 +178,8 @@ const PageTransitionLink = (props) => {
         });
 
         setTimeout(() => {
-          container.classList.remove("transitioning")
-        }, props.duration * 1000)
+          container.classList.remove("transitioning");
+        }, props.duration * 1000);
       }}
       {...props}
     />
