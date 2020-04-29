@@ -1,5 +1,4 @@
 import React from "react";
-
 import PageLayout from "../components/layouts/page";
 
 import { graphql } from "gatsby";

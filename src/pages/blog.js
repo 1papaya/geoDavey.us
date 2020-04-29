@@ -1,41 +1,16 @@
 import React from "react";
 
-import PageLayout from "../components/layouts/page";
+import { PageContent } from "../components/layouts/page";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
 function Blog(props) {
   return (
-    <PageLayout width={500} {...props}>
+    <PageContent width={600}>
       <SEO title="blog" />
 
       <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
-    </PageLayout>
+    </PageContent>
   );
 }
 

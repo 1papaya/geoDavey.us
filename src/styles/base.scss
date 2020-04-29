@@ -67,13 +67,20 @@ body {
   display: inline-block;
 }
 
-.tl-edges {
-  overflow-x: inherit !important; // this is for scrolling issue
-  height: 100%; // full page height issue *sigh
 
-  .tl-wrapper {
-    height: 100%; // this is for full page height issue
+.transitioning {
+  .tl-wrapper:not(.tl-wrapper-status--entered) {
+    display: none;
   }
+}
+.tl-wrapper {
+  &:not(.tl-wrapper-status--entered) {
+    //display: none
+  }
+}
+
+.tl-edges {
+  overflow-x: initial !important;
 }
 
 .gdv-loader {

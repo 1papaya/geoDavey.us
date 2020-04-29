@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, forwardRef } from "react";
 import { css, Global } from "@emotion/core";
 import ReactDOM from "react-dom";
 import { Link, useStaticQuery, graphql } from "gatsby";
 
 import TransitionLink from "gatsby-plugin-transition-link";
-
+import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
 const PageLayout = (props) => {
@@ -20,11 +20,13 @@ const PageLayout = (props) => {
     }
   `);
 
-  const contentRef = useRef(null);
+  const containerRef = useRef(null);
+  const globeRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // back path: props.location.state.prevPath
 
+  // isLoaded state
   useEffect(() => {
     // if page is loaded not via transition
     if (!("mount" in props)) setIsLoaded(true);
@@ -51,15 +53,8 @@ const PageLayout = (props) => {
           }}
         >
           <div>
-            <PageTransitionLink to="/home">
-              <img
-                alt="geoDavey logo"
-                src={data.gD_lite160.childImageSharp.fixed.src}
-                style={{
-                  maxWidth: 80,
-                  width: 80,
-                }}
-              />
+            <PageTransitionLink to="/">
+              <D3Globe width="80px" silhouetteScale={0.47} />
             </PageTransitionLink>
             <div
               className="text-sm mt-2 select-none text-right font-palanquin"
@@ -73,13 +68,6 @@ const PageLayout = (props) => {
                 }
               `}
             >
-              <PageTransitionLink
-                className="block outline-none whitespace-no-wrap p-1"
-                to="/home"
-                activeClassName="font-bold"
-              >
-                home
-              </PageTransitionLink>
               <PageTransitionLink
                 className="block outline-none whitespace-no-wrap p-1"
                 to="/blog"
@@ -105,35 +93,15 @@ const PageLayout = (props) => {
           </div>
         </div>
 
-        <div className="relative flex h-full flex-col">
+        <div className="relative flex flex-col">
           <div
-            className="page-content p-2 rounded-lg"
-            ref={contentRef}
+            ref={containerRef}
+            className="page-container p-2 rounded-lg box-content"
             style={{
-              width: props.width,
               background: "rgba(0,0,0,0.075)",
-              transition: "all 2s",
             }}
           >
             {props.children}
-          </div>
-
-          <div
-            className="fine-print absolute right-0 text-right text-gray-500 text-sm"
-            style={{ top: "100%" }}
-          >
-            ¡{" "}
-            <PageTransitionLink
-              css={css`
-                &:hover {
-                  text-decoration: underline;
-                }
-              `}
-              to="/gratitude"
-            >
-              viva la open source
-            </PageTransitionLink>{" "}
-            !
           </div>
         </div>
       </div>
@@ -141,9 +109,12 @@ const PageLayout = (props) => {
   );
 };
 
-PageLayout.defaultProps = {
-  width: 420,
-  transitionDuration: 2,
+const PageContent = (props) => {
+  return (
+    <div className="page-content" style={{ width: props.width }}>
+      {props.children}
+    </div>
+  );
 };
 
 const PageTransitionLink = (props) => {
@@ -156,7 +127,7 @@ const PageTransitionLink = (props) => {
 
   return (
     <TransitionLink
-      state={{ prevPath }}
+      state={{ prevPath, globe: props.globe }}
       entry={{
         length: props.duration,
         appearAfter: props.duration,
@@ -169,32 +140,28 @@ const PageTransitionLink = (props) => {
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
 
-        // get page content div from entry / exit
-        const entryC = entry.getElementsByClassName("page-content")[0];
+        // get parent page content div
+        const container = entry.parentNode.parentNode;
         const exitC = exit.getElementsByClassName("page-content")[0];
+        const entryC = entry.getElementsByClassName("page-content")[0];
 
-        // set explicit height/width for exit page content
-        // needed for CSS transition
-        exitC.style.setProperty("width", `${exitC.offsetWidth}px`);
-        exitC.style.setProperty("height", `${exitC.offsetHeight}px`);
-        exitC.innerHTML = "";
+        // measure widths and heights
+        const [oldWidth, oldHeight] = [exitC.offsetWidth, exitC.offsetHeight];
+        const [newWidth, newHeight] = [entryC.offsetWidth, entryC.offsetHeight];
 
-        // add global style 'page-transition' with width/height of entry content
-        // then apply that style to the exit content, triggering transition to entry size
-        ReactDOM.render(
-          <Global
-            styles={css`
-              .page-transition {
-                width: ${entryC.offsetWidth}px !important;
-                height: ${entryC.offsetHeight}px !important;
-              }
-            `}
-          />,
-          exitC,
-          () => {
-            exitC.classList.add("page-transition");
-          }
-        );
+        container.classList.add("transitioning");
+        container.style.setProperty("width", `${oldWidth}px`);
+        container.style.setProperty("height", `${oldHeight}px`);
+        container.style.setProperty("transition", `all ${props.duration}s`);
+
+        requestAnimationFrame(() => {
+          container.style.setProperty("width", `${newWidth}px`);
+          container.style.setProperty("height", `${newHeight}px`);
+        });
+
+        setTimeout(() => {
+          container.classList.remove("transitioning")
+        }, props.duration * 1000)
       }}
       {...props}
     />
@@ -205,7 +172,6 @@ PageTransitionLink.defaultProps = {
   duration: 2,
 };
 
-const BackButton = (props) => {};
-
 export default PageLayout;
 export { PageTransitionLink };
+export { PageContent };

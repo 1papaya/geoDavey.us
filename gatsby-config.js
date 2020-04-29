@@ -59,7 +59,12 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-transition-link`,
+    {
+       resolve: "gatsby-plugin-transition-link",
+       options: {
+           layout: require.resolve(`./src/components/layouts/page.js`)
+         }
+    },
     `gatsby-transformer-json`,
     {
       resolve: 'gatsby-plugin-react-svg',

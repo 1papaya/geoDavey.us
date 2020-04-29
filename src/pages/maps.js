@@ -1,13 +1,13 @@
 import React from "react";
 
-import PageLayout from "../components/layouts/page";
+import { PageContent } from "../components/layouts/page";
 import SEO from "../components/seo";
 
 import { graphql } from "gatsby";
 
 function Maps(props) {
   return (
-    <PageLayout width={600}>
+    <PageContent width={600}>
       <SEO title="maps" />
 
       <div className="flex flex-wrap">
@@ -20,7 +20,7 @@ function Maps(props) {
           );
         })}
       </div>
-    </PageLayout>
+      </PageContent>
   );
 }
 
