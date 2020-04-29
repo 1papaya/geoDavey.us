@@ -6,7 +6,7 @@ import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
-import loadable from '@loadable/component'
+import loadable from "@loadable/component";
 
 //const D3Globe = loadable(() => import("../svg/d3globe"))
 
@@ -39,7 +39,7 @@ const PageLayout = (props) => {
 
   return (
     <div
-      className="w-full md:min-h-screen flex justify-center sm:items-start md:items-center"
+      className="flex w-full justify-center items-center min-h-screen "
       style={{
         background: "#f5f3f0",
       }}
@@ -47,62 +47,53 @@ const PageLayout = (props) => {
       {!isLoaded && (
         <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
       )}
-      <div className="flex h-full rounded-lg m-8">
+      <div className="flex flex-col w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
         <div
-          className="nav max-h-screen justify-center top-0 flex flex-col sticky pr-4"
+          className="flex mb-2 md:m-0 sticky md:static z-10 top-0 max-h-screen select-none text-right font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
           style={{
-            maxHeight: "calc(100vh - 4rem)",
-            top: "2rem",
+            maxHeight: "calc(100vh - 4rem)"
           }}
         >
-          <div>
-            <PageTransitionLink to="/">
-              <D3Globe width="80px" silhouetteScale={0.47} />
-            </PageTransitionLink>
-            <div
-              className="text-sm mt-2 select-none text-right font-palanquin"
-              css={css`
-                a::after {
-                  display: inline-block;
-                  content: "\\00a0\\00BB";
-                }
-                a:hover {
-                  text-decoration: underline;
-                }
-              `}
-            >
-              <PageTransitionLink
-                className="block outline-none whitespace-no-wrap p-1"
-                to="/blog"
-                activeClassName="font-bold"
-              >
-                blog
-              </PageTransitionLink>
-              <PageTransitionLink
-                className="block outline-none whitespace-no-wrap p-1"
-                to="/maps"
-                activeClassName="font-bold"
-              >
-                maps
-              </PageTransitionLink>
-              <PageTransitionLink
-                className="block outline-none whitespace-no-wrap p-1"
-                to="/contact"
-                activeClassName="font-bold"
-              >
-                contact
-              </PageTransitionLink>
-            </div>
-          </div>
+          <PageTransitionLink to="/">
+            <D3Globe width="48px" className="sm:w-32 md:w-auto" silhouetteScale={0.47} />
+          </PageTransitionLink>
+          <PageTransitionLink
+            className="flex items-center outline-none whitespace-no-wrap p-1 md:pt-2"
+            to="/blog"
+            activeClassName="font-bold"
+          >
+            blog
+          </PageTransitionLink>
+          <PageTransitionLink
+            className="flex items-center outline-none whitespace-no-wrap p-1"
+            to="/maps"
+            activeClassName="font-bold"
+          >
+            maps
+          </PageTransitionLink>
+          <PageTransitionLink
+            className="flex items-center outline-none whitespace-no-wrap p-1"
+            to="/contact"
+            activeClassName="font-bold"
+          >
+            contact
+          </PageTransitionLink>
         </div>
 
         <div className="flex flex-col">
           <div
             ref={containerRef}
-            className="page-container relative p-2 rounded-lg box-content"
+            className="page-container sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
             }}
+            css={css`
+              &.transitioning {
+                .tl-wrapper {
+                  display: none;
+                }
+              }
+            `}
           >
             {props.children}
 
@@ -132,10 +123,14 @@ const PageLayout = (props) => {
 
 const PageContent = (props) => {
   return (
-    <div className="page-content" style={{ width: props.width }}>
+    <div className="page-content sm:w-full-important md:w-auto" style={{ width: props.width }}>
       {props.children}
     </div>
   );
+};
+
+PageContent.defaultProps = {
+  width: 420,
 };
 
 const PageTransitionLink = (props) => {
@@ -166,22 +161,30 @@ const PageTransitionLink = (props) => {
         const exitC = exit.getElementsByClassName("page-content")[0];
         const entryC = entry.getElementsByClassName("page-content")[0];
 
-        // measure widths and heights
+        // measure size of entry and exit content
         const [oldWidth, oldHeight] = [exitC.offsetWidth, exitC.offsetHeight];
         const [newWidth, newHeight] = [entryC.offsetWidth, entryC.offsetHeight];
 
-        container.classList.add("transitioning");
+        // set explicit w/h of container, necessary for CSS transition
         container.style.setProperty("width", `${oldWidth}px`);
         container.style.setProperty("height", `${oldHeight}px`);
         container.style.setProperty("transition", `all ${props.duration}s`);
 
+        // transitioning class hides all .tl-wrapper for performance
+        container.classList.add("transitioning");
+
+        // after the styles above have been applied, transition to new w/h
         requestAnimationFrame(() => {
           container.style.setProperty("width", `${newWidth}px`);
           container.style.setProperty("height", `${newHeight}px`);
         });
 
+        // remove transitioning class after animation complete
+        // and set let container size be dynamic again in case of resize
         setTimeout(() => {
           container.classList.remove("transitioning");
+          container.style.setProperty("width", `auto`);
+          container.style.setProperty("height", `auto`);
         }, props.duration * 1000);
       }}
       {...props}

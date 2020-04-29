@@ -19,6 +19,21 @@ function Maps(props) {
             </div>
           );
         })}
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
+        Sko buffs<br/>
       </div>
       </PageContent>
   );

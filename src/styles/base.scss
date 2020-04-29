@@ -67,13 +67,14 @@ body {
   display: inline-block;
 }
 
-/* purgecss start ignore */
-.transitioning {
-  .tl-wrapper:not(.tl-wrapper-status--entered) {
-    display: none;
+@media (max-width: 768px) {
+  .sm\:w-full-minus-important {
+    width: calc(100% - 1rem) !important;
+  }
+  .sm\:w-full-important {
+    width: 100% !important;
   }
 }
-/* purgecss end ignore */
 
 .tl-edges {
   overflow-x: initial !important;

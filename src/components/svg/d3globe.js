@@ -136,13 +136,15 @@ const D3Globe = (props) => {
   }, []);
 
   return (
-    <svg ref={svgRef} style={{ width: props.width, height: props.width }}>
+    <svg ref={svgRef} className={props.className} style={{ width: props.width, height: props.width }}>
       <g ref={waypointsRef}></g>
     </svg>
   );
 };
 
 D3Globe.defaultProps = {
+  style: {},
+  className: "",
   speed: 0.01,
   vTilt: -10,
   hTilt: 0,
