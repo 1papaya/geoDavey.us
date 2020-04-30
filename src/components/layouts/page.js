@@ -34,8 +34,8 @@ const PageLayout = (props) => {
     const logo = logoRef.current;
     const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4;
-    const animLength = 3;
+    const pausLength = 3;
+    const animLength = 4;
 
     logo.style.setProperty("width", "320px");
     logo.style.setProperty("height", "320px");
@@ -78,8 +78,11 @@ const PageLayout = (props) => {
           opacity: 1;
           transition: all 3s;
         }
-        &.preloading .fade-in {
-          opacity: 0;
+        &.preloading {
+          overflow: hidden;
+          .fade-in {
+            opacity: 0;
+          }
         }
       `}
     >
