@@ -49,13 +49,13 @@ const PageLayout = (props) => {
       )}
       <div className="flex flex-col w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
         <div
-          className="flex mb-2 text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none text-right font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
+          className="flex text-center md:text-right mb-2 text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
           style={{
             maxHeight: "calc(100vh - 4rem)",
           }}
         >
           <PageTransitionLink
-            className="flex justify-right items-center outline-none whitespace-no-wrap p-1 md:pt-2"
+            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
             to="/"
             activeClassName="font-bold"
           >
@@ -63,14 +63,14 @@ const PageLayout = (props) => {
           </PageTransitionLink>
 
           <PageTransitionLink
-            className="flex justify-right items-center outline-none whitespace-no-wrap p-1"
+            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/blog"
             activeClassName="font-bold"
           >
             <span>blog</span>
           </PageTransitionLink>
-          <PageTransitionLink className="flex md:order-first " to="/">
-            <div className="logo relative aspect-ratio-square w-10 md:w-20">
+          <PageTransitionLink className="flex md:order-first" to="/">
+            <div className="logo ml-2 mr-2 md:m-0 relative aspect-ratio-square w-10 md:w-20">
               <D3Globe
                 className="absolute w-full h-full"
                 silhouetteScale={0.47}
@@ -78,14 +78,14 @@ const PageLayout = (props) => {
             </div>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex items-center outline-none whitespace-no-wrap p-1"
+            className="flex justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/maps"
             activeClassName="font-bold"
           >
             <span>maps</span>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex items-center outline-none whitespace-no-wrap p-1"
+            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/contact"
             activeClassName="font-bold"
           >
