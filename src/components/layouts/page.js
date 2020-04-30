@@ -49,7 +49,7 @@ const PageLayout = (props) => {
       )}
       <div className="flex flex-col w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
         <div
-          className="flex text-center md:text-right mb-2 text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
+          className="flex text-center bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
           style={{
             maxHeight: "calc(100vh - 4rem)",
           }}
@@ -69,8 +69,8 @@ const PageLayout = (props) => {
           >
             <span>blog</span>
           </PageTransitionLink>
-          <PageTransitionLink className="flex md:order-first" to="/">
-            <div className="logo ml-2 mr-2 md:m-0 relative aspect-ratio-square w-10 md:w-20">
+          <PageTransitionLink className="flex w-2/12 mt-1 mb-1 justify-center md:w-auto md:justify-end md:order-first" to="/">
+            <div className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20">
               <D3Globe
                 className="absolute w-full h-full"
                 silhouetteScale={0.47}
