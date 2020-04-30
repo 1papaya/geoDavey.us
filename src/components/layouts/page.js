@@ -11,19 +11,9 @@ import loadable from "@loadable/component";
 //const D3Globe = loadable(() => import("../svg/d3globe"))
 
 const PageLayout = (props) => {
-  const data = useStaticQuery(graphql`
-    query {
-      gD_lite160: file(relativePath: { eq: "img/gD_lite.png" }) {
-        childImageSharp {
-          fixed(width: 160, height: 160) {
-            src
-          }
-        }
-      }
-    }
-  `);
-
-  const containerRef = useRef(null);
+  const contentRef = useRef(null);
+  const contentParentRef = useRef(null);
+  const [isPreloaded, setIsPreloaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -37,19 +27,57 @@ const PageLayout = (props) => {
     else setIsLoaded(props.transitionStatus === "entered" && props.mount);
   }, [props.transitionStatus]);
 
+  useEffect(() => {
+    // measure
+    const parent = contentParentRef.current;
+    const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
+
+    const pausLength = 3;
+    const animLength = 3;
+
+    parent.style.setProperty("width", "0px");
+    parent.style.setProperty("height", "0px");
+    parent.style.setProperty("overflow", "hidden");
+
+    parent.style.setProperty("transition", `all ${animLength}s`);
+
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        parent.style.setProperty("width", `${pWidth}px`);
+        parent.style.setProperty("height", `${pHeight}px`);
+      });
+
+      setTimeout(() => {
+        parent.style.setProperty("width", "auto");
+        parent.style.setProperty("height", "auto");
+        parent.style.setProperty("overflow", "visible");
+
+        setIsPreloaded(true);
+      }, animLength * 1000);
+    }, pausLength * 1000);
+  }, []);
+
   return (
     <div
-      className="flex w-full justify-center items-center min-h-screen "
-      style={{
-        background: "#f5f3f0",
-      }}
+      className={`flex w-full bg-standard justify-center items-center min-h-screen ${
+        isPreloaded ? "" : "preloading"
+      }`}
+      css={css`
+        .fade-in {
+          opacity: 1;
+          transition: all 3s;
+        }
+        &.preloading .fade-in {
+          opacity: 0;
+        }
+      `}
     >
       {!isLoaded && (
         <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
       )}
-      <div className="flex flex-col w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
+      <div className="flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
         <div
-          className="flex text-center bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
+          className="flex text-center bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky"
           style={{
             maxHeight: "calc(100vh - 4rem)",
           }}
@@ -59,7 +87,7 @@ const PageLayout = (props) => {
             to="/"
             activeClassName="font-bold"
           >
-            <span>home</span>
+            <span className="fade-in">home</span>
           </PageTransitionLink>
 
           <PageTransitionLink
@@ -67,9 +95,12 @@ const PageLayout = (props) => {
             to="/blog"
             activeClassName="font-bold"
           >
-            <span>blog</span>
+            <span className="fade-in">blog</span>
           </PageTransitionLink>
-          <PageTransitionLink className="flex w-2/12 mt-1 mb-1 justify-center md:w-auto md:justify-end md:order-first" to="/">
+          <PageTransitionLink
+            className="flex w-2/12 mt-1 mb-1 justify-center md:w-auto md:justify-end"
+            to="/"
+          >
             <div className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20">
               <D3Globe
                 className="absolute w-full h-full"
@@ -82,21 +113,24 @@ const PageLayout = (props) => {
             to="/maps"
             activeClassName="font-bold"
           >
-            <span>maps</span>
+            <span className="fade-in">maps</span>
           </PageTransitionLink>
           <PageTransitionLink
             className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/contact"
             activeClassName="font-bold"
           >
-            <span>contact</span>
+            <span className="fade-in">contact</span>
           </PageTransitionLink>
         </div>
 
-        <div className="flex flex-col">
+        <div
+          ref={contentParentRef}
+          className="flex fade-in flex-col justify-center"
+        >
           <div
-            ref={containerRef}
-            className="page-container sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
+            ref={contentRef}
+            className="page-container md:ml-4 sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
             }}

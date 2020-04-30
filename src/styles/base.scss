@@ -68,7 +68,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .sm\:w-full-minus-important {
+  .sm\:w-full-minus-important:not(.preloading) {
     width: calc(100% - 1rem) !important;
   }
   .sm\:w-full-important {
