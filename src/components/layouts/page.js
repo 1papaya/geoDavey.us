@@ -12,6 +12,7 @@ import loadable from "@loadable/component";
 
 const PageLayout = (props) => {
   const contentRef = useRef(null);
+  const logoRef = useRef(null);
   const contentParentRef = useRef(null);
   const [isPreloaded, setIsPreloaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,10 +31,14 @@ const PageLayout = (props) => {
   useEffect(() => {
     // measure
     const parent = contentParentRef.current;
+    const logo = logoRef.current;
     const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 3;
+    const pausLength = 4;
     const animLength = 3;
+
+    logo.style.setProperty("width", "320px");
+    logo.style.setProperty("height", "320px");
 
     parent.style.setProperty("width", "0px");
     parent.style.setProperty("height", "0px");
@@ -43,8 +48,14 @@ const PageLayout = (props) => {
 
     setTimeout(() => {
       requestAnimationFrame(() => {
+        logo.style.setProperty("transition", `all ${animLength}s`);
         parent.style.setProperty("width", `${pWidth}px`);
         parent.style.setProperty("height", `${pHeight}px`);
+
+        requestAnimationFrame(() => {
+          logo.style.removeProperty("height");
+          logo.style.removeProperty("width");
+        });
       });
 
       setTimeout(() => {
@@ -83,25 +94,28 @@ const PageLayout = (props) => {
           }}
         >
           <PageTransitionLink
-            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
+            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
             to="/"
             activeClassName="font-bold"
           >
-            <span className="fade-in">home</span>
+            <span>home</span>
           </PageTransitionLink>
 
           <PageTransitionLink
-            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/blog"
             activeClassName="font-bold"
           >
-            <span className="fade-in">blog</span>
+            <span>blog</span>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex w-2/12 mt-1 mb-1 justify-center md:w-auto md:justify-end"
+            className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end"
             to="/"
           >
-            <div className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20">
+            <div
+              ref={logoRef}
+              className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
+            >
               <D3Globe
                 className="absolute w-full h-full"
                 silhouetteScale={0.47}
@@ -109,18 +123,18 @@ const PageLayout = (props) => {
             </div>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/maps"
             activeClassName="font-bold"
           >
-            <span className="fade-in">maps</span>
+            <span>maps</span>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/contact"
             activeClassName="font-bold"
           >
-            <span className="fade-in">contact</span>
+            <span>contact</span>
           </PageTransitionLink>
         </div>
 
