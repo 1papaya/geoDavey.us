@@ -11,10 +11,7 @@ import silData from "../../data/silhouette.json";
 // start animation on random place on the globe
 // animate rotation for a few seconds
 // start to shrink globe, while growing silhouette
-// shrink to 80px / 60px for mobile
 // stop animation
-// use static svg as page prop, if no page prop then start animation
-// and pass to all pagetransitionlink links
 
 const D3Globe = (props) => {
   const waypointsRef = useRef();

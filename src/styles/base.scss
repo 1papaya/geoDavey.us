@@ -90,3 +90,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.aspect-ratio-none {
+  padding-bottom: 0;
+}
+.aspect-ratio-square {
+  padding-bottom: 100%;
+}
+.aspect-ratio-16\/9 {
+  padding-bottom: 56.25%;
+}
+.aspect-ratio-4\/3 {
+  padding-bottom: 75%;
+}
+.aspect-ratio-21\/9 {
+  padding-bottom: 42.86%;
+}

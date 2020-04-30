@@ -49,34 +49,47 @@ const PageLayout = (props) => {
       )}
       <div className="flex flex-col w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
         <div
-          className="flex mb-2 md:m-0 sticky md:static z-10 top-0 max-h-screen select-none text-right font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
+          className="flex mb-2 text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none text-right font-palanquin justify-center md:top-4 md:flex-col sticky md:pr-4"
           style={{
-            maxHeight: "calc(100vh - 4rem)"
+            maxHeight: "calc(100vh - 4rem)",
           }}
         >
-          <PageTransitionLink to="/">
-            <D3Globe width="48px" className="sm:w-32 md:w-auto" silhouetteScale={0.47} />
-          </PageTransitionLink>
           <PageTransitionLink
-            className="flex items-center outline-none whitespace-no-wrap p-1 md:pt-2"
+            className="flex justify-right items-center outline-none whitespace-no-wrap p-1 md:pt-2"
+            to="/"
+            activeClassName="font-bold"
+          >
+            <span>home</span>
+          </PageTransitionLink>
+
+          <PageTransitionLink
+            className="flex justify-right items-center outline-none whitespace-no-wrap p-1"
             to="/blog"
             activeClassName="font-bold"
           >
-            blog
+            <span>blog</span>
+          </PageTransitionLink>
+          <PageTransitionLink className="flex md:order-first " to="/">
+            <div className="logo relative aspect-ratio-square w-10 md:w-20">
+              <D3Globe
+                className="absolute w-full h-full"
+                silhouetteScale={0.47}
+              />
+            </div>
           </PageTransitionLink>
           <PageTransitionLink
             className="flex items-center outline-none whitespace-no-wrap p-1"
             to="/maps"
             activeClassName="font-bold"
           >
-            maps
+            <span>maps</span>
           </PageTransitionLink>
           <PageTransitionLink
             className="flex items-center outline-none whitespace-no-wrap p-1"
             to="/contact"
             activeClassName="font-bold"
           >
-            contact
+            <span>contact</span>
           </PageTransitionLink>
         </div>
 
@@ -87,13 +100,6 @@ const PageLayout = (props) => {
             style={{
               background: "rgba(0,0,0,0.075)",
             }}
-            css={css`
-              &.transitioning {
-                .tl-wrapper {
-                  display: none;
-                }
-              }
-            `}
           >
             {props.children}
 
@@ -123,7 +129,10 @@ const PageLayout = (props) => {
 
 const PageContent = (props) => {
   return (
-    <div className="page-content sm:w-full-important md:w-auto" style={{ width: props.width }}>
+    <div
+      className="page-content sm:w-full-important md:w-auto"
+      style={{ width: props.width }}
+    >
       {props.children}
     </div>
   );
@@ -157,6 +166,7 @@ const PageTransitionLink = (props) => {
         const { node: entry } = await pages.entry;
 
         // get parent page content div
+        const tlEdges = entry.parentNode;
         const container = entry.parentNode.parentNode;
         const exitC = exit.getElementsByClassName("page-content")[0];
         const entryC = entry.getElementsByClassName("page-content")[0];
@@ -171,7 +181,7 @@ const PageTransitionLink = (props) => {
         container.style.setProperty("transition", `all ${props.duration}s`);
 
         // transitioning class hides all .tl-wrapper for performance
-        container.classList.add("transitioning");
+        tlEdges.style.setProperty("display", "none");
 
         // after the styles above have been applied, transition to new w/h
         requestAnimationFrame(() => {
@@ -182,7 +192,7 @@ const PageTransitionLink = (props) => {
         // remove transitioning class after animation complete
         // and set let container size be dynamic again in case of resize
         setTimeout(() => {
-          container.classList.remove("transitioning");
+          tlEdges.style.setProperty("display", "initial");
           container.style.setProperty("width", `auto`);
           container.style.setProperty("height", `auto`);
         }, props.duration * 1000);
