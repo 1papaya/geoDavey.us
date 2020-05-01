@@ -30,12 +30,11 @@ const PageLayout = (props) => {
 
   // splash animation
   useEffect(() => {
-    // measure
     const parent = contentParentRef.current;
     const logo = logoRef.current;
     const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 3;
+    const pausLength = 4.3;
     const animLength = 1.5;
 
     // set 
@@ -108,7 +107,7 @@ const PageLayout = (props) => {
 
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/blog"
+            to="/blog/"
             activeClassName="font-bold"
           >
             <span>blog</span>
@@ -128,14 +127,14 @@ const PageLayout = (props) => {
           </div>
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/maps"
+            to="/maps/"
             activeClassName="font-bold"
           >
             <span>maps</span>
           </PageTransitionLink>
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/contact"
+            to="/contact/"
             activeClassName="font-bold"
           >
             <span>contact</span>
@@ -166,7 +165,7 @@ const PageLayout = (props) => {
                     text-decoration: underline;
                   }
                 `}
-                to="/gratitude"
+                to="/gratitude/"
               >
                 viva la open source
               </PageTransitionLink>{" "}
