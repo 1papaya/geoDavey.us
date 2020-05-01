@@ -9,7 +9,35 @@ function Blog(props) {
     <PageContent width={600}>
       <SEO title="blog" />
 
-      <div className="text-2xl leading-6">This is pretty very cool, no?</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
+      <div className="text-2xl leading-6">Test Blog Content</div>
     </PageContent>
   );
 }

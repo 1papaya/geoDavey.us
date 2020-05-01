@@ -11,7 +11,17 @@ function Home(props) {
     <PageContent width={400}>
       <SEO title="home" />
 
-      home<br/>home<br/>hoommee
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
+      <div className="text-3xl leading-6">Test Home Content</div>
 
     </PageContent>
   );

@@ -10,31 +10,26 @@ function Maps(props) {
     <PageContent width={600}>
       <SEO title="maps" />
 
-      <div className="flex flex-wrap">
-        {props.data.allMapsCsv.nodes.map((m) => {
-          return (
-            <div key={m.slug}>
-              Sko Buffs
-              <img src={`/assets/img/${m.slug}.png`} />
-            </div>
-          );
-        })}
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-        Sko buffs<br/>
-      </div>
+
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
+      <div className="text-xl leading-6">Test Maps Content</div>
       </PageContent>
   );
 }

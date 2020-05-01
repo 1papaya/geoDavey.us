@@ -28,6 +28,7 @@ const PageLayout = (props) => {
     else setIsLoaded(props.transitionStatus === "entered" && props.mount);
   }, [props.transitionStatus]);
 
+  // splash animation
   useEffect(() => {
     // measure
     const parent = contentParentRef.current;
@@ -35,8 +36,9 @@ const PageLayout = (props) => {
     const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
     const pausLength = 3;
-    const animLength = 4;
+    const animLength = 1.5;
 
+    // set 
     logo.style.setProperty("width", "320px");
     logo.style.setProperty("height", "320px");
 
@@ -76,7 +78,7 @@ const PageLayout = (props) => {
       css={css`
         .fade-in {
           opacity: 1;
-          transition: all 3s;
+          transition: all 1.5s;
         }
         &.preloading {
           overflow: hidden;
@@ -111,9 +113,8 @@ const PageLayout = (props) => {
           >
             <span>blog</span>
           </PageTransitionLink>
-          <PageTransitionLink
+          <div
             className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end"
-            to="/"
           >
             <div
               ref={logoRef}
@@ -124,7 +125,7 @@ const PageLayout = (props) => {
                 silhouetteScale={0.47}
               />
             </div>
-          </PageTransitionLink>
+          </div>
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/maps"
