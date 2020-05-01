@@ -30,14 +30,18 @@ const PageLayout = (props) => {
 
   // splash animation
   useEffect(() => {
+    const headerHeight = 48;
     const parent = contentParentRef.current;
     const logo = logoRef.current;
-    const [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
+    let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
+
+    if (pHeight < window.innerHeight - headerHeight)
+      pHeight = window.innerHeight - headerHeight;
 
     const pausLength = 4.3;
     const animLength = 1.5;
 
-    // set 
+    // set
     logo.style.setProperty("width", "320px");
     logo.style.setProperty("height", "320px");
 
@@ -90,13 +94,8 @@ const PageLayout = (props) => {
       {!isLoaded && (
         <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
       )}
-      <div className="flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg md:m-8">
-        <div
-          className="flex text-center bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky"
-          style={{
-            maxHeight: "calc(100vh - 4rem)",
-          }}
-        >
+      <div className="flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+        <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
             to="/"
@@ -112,9 +111,7 @@ const PageLayout = (props) => {
           >
             <span>blog</span>
           </PageTransitionLink>
-          <div
-            className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end"
-          >
+          <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
             <div
               ref={logoRef}
               className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
@@ -137,17 +134,17 @@ const PageLayout = (props) => {
             to="/contact/"
             activeClassName="font-bold"
           >
-            <span>contact</span>
+            <span>about</span>
           </PageTransitionLink>
         </div>
 
         <div
           ref={contentParentRef}
-          className="flex fade-in flex-col justify-center"
+          className="flex fade-in flex-col md:justify-center"
         >
           <div
             ref={contentRef}
-            className="page-container md:ml-4 sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
+            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
             }}
