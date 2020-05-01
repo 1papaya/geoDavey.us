@@ -74,6 +74,9 @@ body {
   .sm\:w-full-important {
     width: 100% !important;
   }
+  .min-h-screen-fix {
+    min-height: -webkit-fill-available;
+  }
 }
 
 .tl-edges {

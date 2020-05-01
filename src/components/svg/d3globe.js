@@ -125,12 +125,14 @@ const D3Globe = (props) => {
 
     // globe rotation
     const rotation = timer((elapsed) => {
-      proj.rotate([-props.speed * elapsed, props.vTilt, props.hTilt]);
+      proj.rotate([-props.speed * elapsed + 102.5, props.vTilt, props.hTilt]);
       svg.select(".rotate").attr("d", path);
     });
 
     return () => clearInterval(rotation);
   }, []);
+
+
 
   return (
     <svg ref={svgRef} className={props.className} style={{ width: props.width, height: props.width }}>

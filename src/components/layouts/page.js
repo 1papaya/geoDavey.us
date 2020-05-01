@@ -35,7 +35,7 @@ const PageLayout = (props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4.3;
+    const pausLength = 5.3;
     const animLength = 1.5;
 
     // set 
@@ -72,7 +72,7 @@ const PageLayout = (props) => {
 
   return (
     <div
-      className={`flex w-full bg-standard justify-center items-center min-h-screen ${
+      className={`container flex w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
         isPreloaded ? "" : "preloading"
       }`}
       css={css`
@@ -88,10 +88,7 @@ const PageLayout = (props) => {
         }
       `}
     >
-      {!isLoaded && (
-        <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
-      )}
-      <div className="flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+      <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         <div
           className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky"
         >
