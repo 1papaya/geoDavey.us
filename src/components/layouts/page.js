@@ -35,13 +35,10 @@ const PageLayout = (props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    if (pHeight < window.innerHeight - headerHeight)
-      pHeight = window.innerHeight - headerHeight;
-
     const pausLength = 4.3;
     const animLength = 1.5;
 
-    // set
+    // set 
     logo.style.setProperty("width", "320px");
     logo.style.setProperty("height", "320px");
 
@@ -95,7 +92,9 @@ const PageLayout = (props) => {
         <Loader className="gdv-loader" type="TailSpin" color="#ccc" />
       )}
       <div className="flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
-        <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
+        <div
+          className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky"
+        >
           <PageTransitionLink
             className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
             to="/"
@@ -111,7 +110,9 @@ const PageLayout = (props) => {
           >
             <span>blog</span>
           </PageTransitionLink>
-          <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
+          <div
+            className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end"
+          >
             <div
               ref={logoRef}
               className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
