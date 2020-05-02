@@ -35,7 +35,7 @@ const PageLayout = (props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 5.3;
+    const pausLength = 4.3;
     const animLength = 1.5;
 
     // set 
@@ -72,7 +72,7 @@ const PageLayout = (props) => {
 
   return (
     <div
-      className={`container flex w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
+      className={`container flex mx-auto w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
         isPreloaded ? "" : "preloading"
       }`}
       css={css`
@@ -150,7 +150,7 @@ const PageLayout = (props) => {
             {props.children}
 
             <div
-              className="fine-print absolute right-0 text-right text-gray-500 text-sm"
+              className="fine-print hidden absolute right-0 text-right text-gray-500 text-sm"
               style={{ top: "100%" }}
             >
               ¡{" "}
