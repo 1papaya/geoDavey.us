@@ -12,7 +12,6 @@ function Blog(props) {
 
       <div className="container md:flex">
         <div className="blogs">
-          <div className="">recent blogs</div>
           {props.data.blogPosts.nodes.map((p, idx) => {
             const f = p.frontmatter;
             const imgFloat = idx % 2 === 0 ? "float-right" : "float-left";
