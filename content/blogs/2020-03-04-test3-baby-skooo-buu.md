@@ -1,7 +1,7 @@
 ---
 title: Test #3
 slug: test-3
-image: /tst.jpg
+image: img/los-leones.jpg
 date: 2020-03-04
 tags: ["test", "buf"]
 

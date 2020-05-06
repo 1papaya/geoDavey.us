@@ -66,8 +66,6 @@ const D3Globe = (props) => {
       .append("path")
       .attr("class", "land rotate")
       .attr("d", path)
-      .style("stroke", "transparent")
-      .style("stroke-width", "1px")
       .style("fill", props.colors.land)
       .style("opacity", "1");
 
@@ -125,9 +123,9 @@ const D3Globe = (props) => {
 
     // globe rotation
     const rotation = timer((elapsed) => {
-      proj.rotate([-props.speed * elapsed + 94, props.vTilt, props.hTilt]);
+      proj.rotate([-props.speed * elapsed + props.xOffset, props.vTilt, props.hTilt]);
       svg.select(".rotate").attr("d", path);
-    });
+    }, 1000/props.fps);
 
     return () => clearInterval(rotation);
   }, []);
@@ -148,6 +146,8 @@ D3Globe.defaultProps = {
   vTilt: -10,
   hTilt: 0,
   ringWidth: 10,
+  xOffset: 70,
+  fps: 30,
   silhouetteScale: 0.25,
   colors: {
     outerRing: "#ef3147",

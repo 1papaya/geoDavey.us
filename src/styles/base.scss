@@ -58,6 +58,10 @@ body {
   height: 100%;
 }
 
+a {
+  color: #3273dc;
+}
+
 .on-top {
   z-index: 999999;
 }
@@ -67,10 +71,7 @@ body {
   display: inline-block;
 }
 
-@media (max-width: 768px) {
-  .sm\:w-full-minus-important:not(.preloading) {
-    width: calc(100% - 1rem) !important;
-  }
+@media (max-width: 767px) {
   .sm\:w-full-important {
     width: 100% !important;
   }

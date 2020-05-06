@@ -4,14 +4,9 @@ import { PageContent } from "../components/layouts/page";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-import Img from "gatsby-image"
-
-import { PageTransitionLink } from "../components/layouts/page";
-
-import D3Globe from "../components/svg/d3globe";
+import Img from "gatsby-image";
 
 function Home(props) {
-  console.log(props.data);
   return (
     <PageContent width={500}>
       <SEO title="home" />

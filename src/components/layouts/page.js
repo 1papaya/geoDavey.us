@@ -38,36 +38,44 @@ const PageLayout = (props) => {
     const pausLength = 4.3;
     const animLength = 1.5;
 
-    // set 
-    logo.style.setProperty("width", "320px");
-    logo.style.setProperty("height", "320px");
+    // set logo initial
+    logo.style.setProperty("width", "310px");
+    logo.style.setProperty("height", "310px");
 
+    // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
     parent.style.setProperty("height", "0px");
     parent.style.setProperty("overflow", "hidden");
-
     parent.style.setProperty("transition", `all ${animLength}s`);
 
-    setTimeout(() => {
-      requestAnimationFrame(() => {
+    // commit style changes
+    requestAnimationFrame(() => {
+
+      // (1) pause...
+      setTimeout(() => {
+
+        // (2) trigger logo and content transition
         logo.style.setProperty("transition", `all ${animLength}s`);
         parent.style.setProperty("width", `${pWidth}px`);
         parent.style.setProperty("height", `${pHeight}px`);
 
+        // (3) commit style changes, release logo w/h changes
         requestAnimationFrame(() => {
           logo.style.removeProperty("height");
           logo.style.removeProperty("width");
         });
-      });
 
-      setTimeout(() => {
-        parent.style.setProperty("width", "auto");
-        parent.style.setProperty("height", "auto");
-        parent.style.setProperty("overflow", "visible");
+        // (4) on animation finish release content style changes
+        setTimeout(() => {
+          parent.style.setProperty("width", "auto");
+          parent.style.setProperty("height", "auto");
+          parent.style.setProperty("overflow", "visible");
 
-        setIsPreloaded(true);
-      }, animLength * 1000);
-    }, pausLength * 1000);
+          setIsPreloaded(true);
+        }, animLength * 1000);
+
+      }, pausLength * 1000);
+    });
   }, []);
 
   return (
@@ -89,11 +97,9 @@ const PageLayout = (props) => {
       `}
     >
       <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
-        <div
-          className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky"
-        >
+        <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
           <PageTransitionLink
-            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
+            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
             to="/"
             activeClassName="font-bold"
           >
@@ -101,15 +107,13 @@ const PageLayout = (props) => {
           </PageTransitionLink>
 
           <PageTransitionLink
-            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/blog/"
             activeClassName="font-bold"
           >
             <span>blog</span>
           </PageTransitionLink>
-          <div
-            className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end"
-          >
+          <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
             <div
               ref={logoRef}
               className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
@@ -121,14 +125,14 @@ const PageLayout = (props) => {
             </div>
           </div>
           <PageTransitionLink
-            className="flex overflow-hidden fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/maps/"
             activeClassName="font-bold"
           >
             <span>maps</span>
           </PageTransitionLink>
           <PageTransitionLink
-            className="flex overflow-hidden fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
             to="/contact/"
             activeClassName="font-bold"
           >
@@ -142,7 +146,7 @@ const PageLayout = (props) => {
         >
           <div
             ref={contentRef}
-            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative p-2 md:rounded-lg box-content"
+            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
             }}
@@ -176,7 +180,7 @@ const PageLayout = (props) => {
 const PageContent = (props) => {
   return (
     <div
-      className="page-content sm:w-full-important md:w-auto"
+      className={`page-content sm:w-full-important md:w-auto ${props.className}`}
       style={{ width: props.width }}
     >
       {props.children}
@@ -186,6 +190,7 @@ const PageContent = (props) => {
 
 PageContent.defaultProps = {
   width: 420,
+  className: "p-2"
 };
 
 const PageTransitionLink = (props) => {
@@ -229,7 +234,7 @@ const PageTransitionLink = (props) => {
         // transitioning class hides all .tl-wrapper for performance
         tlEdges.style.setProperty("display", "none");
 
-        // after the styles above have been applied, transition to new w/h
+        // commit style changes. transition to new w/h
         requestAnimationFrame(() => {
           container.style.setProperty("width", `${newWidth}px`);
           container.style.setProperty("height", `${newHeight}px`);

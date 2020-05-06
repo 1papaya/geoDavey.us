@@ -10,12 +10,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         edges {
           node {
             frontmatter {
-              blurb
-              date
-              image
-              tags
               slug
-              title
             }
             html
           }

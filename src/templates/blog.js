@@ -1,5 +1,5 @@
 import React from "react";
-import PageLayout from "../components/layouts/page";
+import { PageContent } from "../components/layouts/page";
 
 import { graphql } from "gatsby";
 
@@ -8,10 +8,10 @@ export default ({ data }) => {
   const html = data.markdownRemark.html;
 
   return (
-    <PageLayout width={480}>
+    <PageContent width={480}>
       <div className="text-3xl text-bold">{meta.title}</div>
-      <div dangerouslySetInnerHTML={{__html: html}}></div>
-    </PageLayout>
+      <div dangerouslySetInnerHTML={{ __html: html }}></div>
+    </PageContent>
   );
 };
 
@@ -21,7 +21,13 @@ export const pageQuery = graphql`
       frontmatter {
         blurb
         date
-        image
+        image {
+          childImageSharp {
+            fluid(maxWidth: 768) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         tags
         slug
         title
