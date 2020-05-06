@@ -7,11 +7,11 @@ import Img from "gatsby-image";
 
 function Blog(props) {
   return (
-    <PageContent width={768} className="p-0 md:p-2">
+    <PageContent width={400} className="p-0 md:p-2">
       <SEO title="blog" />
 
       <div className="container md:flex">
-        <div className="blogs md:w-5/12">
+        <div className="blogs">
           <div className="">recent blogs</div>
           {props.data.blogPosts.nodes.map((p, idx) => {
             const f = p.frontmatter;
@@ -25,13 +25,13 @@ function Blog(props) {
                 key={f.slug}
                 className={`post bg-white ${bgOpacity} p-2 rounded-sm clear-both`}
               >
-                {f.image && 
+                {f.image &&
                 <Img
                   className={`${imgFloat} ${imgMargin} w-1/5 `}
                   fluid={f.image.childImageSharp.fluid}
                 />}
                 <div
-                  className={`title ${textAlign} leading-tight font-badscript text-lg`}
+                  className={`title ${textAlign} font-bold leading-tight font-badscript text-lg`}
                 >
                   <PageTransitionLink to={`/blog/${f.slug}/`}>
                     {f.title}
@@ -46,8 +46,6 @@ function Blog(props) {
             );
           })}
         </div>
-
-        <div className="projects clear-both">test</div>
       </div>
     </PageContent>
   );

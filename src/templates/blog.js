@@ -2,6 +2,7 @@ import React from "react";
 import { PageContent } from "../components/layouts/page";
 
 import { graphql } from "gatsby";
+import Img from "gatsby-image";
 
 export default ({ data }) => {
   const meta = data.markdownRemark.frontmatter;
@@ -9,6 +10,7 @@ export default ({ data }) => {
 
   return (
     <PageContent width={480}>
+      <Img fluid={data.markdownRemark.image.childImageSharp.fluid} />
       <div className="text-3xl text-bold">{meta.title}</div>
       <div dangerouslySetInnerHTML={{ __html: html }}></div>
     </PageContent>

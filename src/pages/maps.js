@@ -29,8 +29,7 @@ function Maps(props) {
 
           return (
             <div key={m.slug} className="map relative flex">
-              <div className="w-full">
-                <Img key={m.slug} fluid={img.childImageSharp.fluid} />
+              <div className="w-full" style={{height: "400px"}}>
               </div>
               <div className="w-full absolute bottom-0">{m.name}</div>
             </div>
