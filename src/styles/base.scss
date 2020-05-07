@@ -41,6 +41,32 @@ $bg-color: #f5f3f0;
   font-family: "Palanquin";
 }
 
+/* roboto-condensed-regular - latin */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
+       url('./fonts/roboto-condensed-v18-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+.font-roboto {
+  font-family: "Roboto Condensed";
+}
+
+/* barlow-condensed-regular - latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Barlow Condensed Regular'), local('BarlowCondensed-Regular'),
+       url('./fonts/barlow-condensed-v4-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+.font-barlow {
+  font-family: "Barlow Condensed";
+}
+
 //
 // Global
 //

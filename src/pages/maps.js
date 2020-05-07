@@ -8,7 +8,6 @@ import Img from "gatsby-image";
 import { graphql } from "gatsby";
 
 function Maps(props) {
-  console.log(props.data);
 
   return (
     <PageContent width={600}>

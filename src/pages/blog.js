@@ -7,11 +7,11 @@ import Img from "gatsby-image";
 
 function Blog(props) {
   return (
-    <PageContent width={400} className="p-0 md:p-2">
+    <PageContent width={940} className="p-0 md:p-2">
       <SEO title="blog" />
 
-      <div className="container md:flex">
-        <div className="blogs">
+      <div className="container md:flex md:rounded-lg md:overflow-hidden">
+        <div className="posts w-1/2">
           {props.data.blogPosts.nodes.map((p, idx) => {
             const f = p.frontmatter;
             const imgFloat = idx % 2 === 0 ? "float-right" : "float-left";
@@ -30,7 +30,7 @@ function Blog(props) {
                   fluid={f.image.childImageSharp.fluid}
                 />}
                 <div
-                  className={`title ${textAlign} font-bold leading-tight font-badscript text-lg`}
+                  className={`title ${textAlign} leading-tight font-barlow text-2xl`}
                 >
                   <PageTransitionLink to={`/blog/${f.slug}/`}>
                     {f.title}
@@ -44,6 +44,9 @@ function Blog(props) {
               </div>
             );
           })}
+        </div>
+        <div className="projects w-1/2">
+
         </div>
       </div>
     </PageContent>

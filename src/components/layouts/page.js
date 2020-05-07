@@ -1,22 +1,23 @@
 import React, { useRef, useEffect, useState } from "react";
 import { css } from "@emotion/core";
-import { useStaticQuery, graphql } from "gatsby";
 
 import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
-import loadable from "@loadable/component";
+import { connect } from "react-redux";
 
-//const D3Globe = loadable(() => import("../svg/d3globe"))
+const mapStateToProps = ({ isTransitioning }) => {
+  return { isTransitioning };
+};
 
-const PageLayout = (props) => {
+const PageLayout = connect(mapStateToProps)((props) => {
   const contentRef = useRef(null);
   const logoRef = useRef(null);
   const contentParentRef = useRef(null);
+
   const [isPreloaded, setIsPreloaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // back path: props.location.state.prevPath
 
@@ -30,12 +31,11 @@ const PageLayout = (props) => {
 
   // splash animation
   useEffect(() => {
-    const headerHeight = 48;
     const parent = contentParentRef.current;
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4.3; // 4.3
+    const pausLength = 4.3;
     const animLength = 1.5;
 
     // set logo initial
@@ -93,6 +93,15 @@ const PageLayout = (props) => {
         }
       `}
     >
+      {props.isTransitioning && (
+        <Loader
+          type="TailSpin"
+          color="#ccc"
+          height={80}
+          width={80}
+          className="fixed z-50 bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
+        />
+      )}
       <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
           <PageTransitionLink
@@ -172,7 +181,7 @@ const PageLayout = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const PageContent = (props) => {
   return (
@@ -190,7 +199,7 @@ PageContent.defaultProps = {
   className: "p-2",
 };
 
-const PageTransitionLink = (props) => {
+const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
   let [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -214,6 +223,8 @@ const PageTransitionLink = (props) => {
         if (props.to !== document.location.pathname) setIsTransitioning(true);
       }}
       trigger={async (pages) => {
+        props.dispatch({ type: "TRANSITION_START" });
+
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
@@ -233,7 +244,7 @@ const PageTransitionLink = (props) => {
         container.style.setProperty("height", `${oldHeight}px`);
         container.style.setProperty("transition", `all ${props.duration}s`);
 
-        // transitioning class hides all .tl-wrapper for performance
+        // hide the content during animation, for performance
         tlEdges.style.setProperty("display", "none");
 
         // commit style changes. transition to new w/h
@@ -249,24 +260,15 @@ const PageTransitionLink = (props) => {
           container.style.setProperty("width", `auto`);
           container.style.setProperty("height", `auto`);
 
-          setIsTransitioning(false);
+          props.dispatch({ type: "TRANSITION_END" });
         }, props.duration * 1000);
       }}
       {...props}
     >
       {props.children}
-      {isTransitioning && (
-        <Loader
-          type="TailSpin"
-          color="#ccc"
-          height={80}
-          width={80}
-          className="fixed bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
-        />
-      )}
     </TransitionLink>
   );
-};
+});
 
 PageTransitionLink.defaultProps = {
   duration: 2,
