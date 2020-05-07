@@ -7,11 +7,10 @@ import Img from "gatsby-image";
 
 function Blog(props) {
   return (
-    <PageContent width={940} className="p-0 md:p-2">
+    <PageContent width={500} className="p-0 md:p-2">
       <SEO title="blog" />
 
-      <div className="container md:flex md:rounded-lg md:overflow-hidden">
-        <div className="posts w-1/2">
+      <div className="posts container md:rounded-lg md:overflow-hidden">
           {props.data.blogPosts.nodes.map((p, idx) => {
             const f = p.frontmatter;
             const imgFloat = idx % 2 === 0 ? "float-right" : "float-left";
@@ -26,7 +25,7 @@ function Blog(props) {
               >
                 {f.image &&
                 <Img
-                  className={`${imgFloat} ${imgMargin} w-1/5 `}
+                  className={`${imgFloat} ${imgMargin} w-1/4 `}
                   fluid={f.image.childImageSharp.fluid}
                 />}
                 <div
@@ -45,10 +44,6 @@ function Blog(props) {
             );
           })}
         </div>
-        <div className="projects w-1/2">
-
-        </div>
-      </div>
     </PageContent>
   );
 }

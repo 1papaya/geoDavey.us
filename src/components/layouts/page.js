@@ -108,7 +108,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             to="/blog/"
             activeClassName="font-bold"
           >
-            <span>blog</span>
+            <span>journal</span>
           </PageTransitionLink>
           <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
             <div
@@ -126,7 +126,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             to="/maps/"
             activeClassName="font-bold"
           >
-            <span>maps</span>
+            <span>projects</span>
           </PageTransitionLink>
           <PageTransitionLink
             className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
