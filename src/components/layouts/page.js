@@ -35,7 +35,7 @@ const PageLayout = (props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4.3;
+    const pausLength = 4.3; // 4.3
     const animLength = 1.5;
 
     // set logo initial
@@ -50,10 +50,8 @@ const PageLayout = (props) => {
 
     // commit style changes
     requestAnimationFrame(() => {
-
       // (1) pause...
       setTimeout(() => {
-
         // (2) trigger logo and content transition
         logo.style.setProperty("transition", `all ${animLength}s`);
         parent.style.setProperty("width", `${pWidth}px`);
@@ -73,14 +71,13 @@ const PageLayout = (props) => {
 
           setIsPreloaded(true);
         }, animLength * 1000);
-
       }, pausLength * 1000);
     });
   }, []);
 
   return (
     <div
-      className={`container flex mx-auto w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
+      className={`flex mx-auto w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
         isPreloaded ? "" : "preloading"
       }`}
       css={css`
@@ -190,11 +187,12 @@ const PageContent = (props) => {
 
 PageContent.defaultProps = {
   width: 420,
-  className: "p-2"
+  className: "p-2",
 };
 
 const PageTransitionLink = (props) => {
   let [prevPath, setPrevPath] = useState(null);
+  let [isTransitioning, setIsTransitioning] = useState(false);
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -210,6 +208,10 @@ const PageTransitionLink = (props) => {
       }}
       exit={{
         length: props.duration,
+      }}
+      onClick={() => {
+        // no transition spinner if link goes to current page
+        if (props.to !== document.location.pathname) setIsTransitioning(true);
       }}
       trigger={async (pages) => {
         // wait for both entry and exit pages to load
@@ -246,10 +248,23 @@ const PageTransitionLink = (props) => {
           tlEdges.style.setProperty("display", "initial");
           container.style.setProperty("width", `auto`);
           container.style.setProperty("height", `auto`);
+
+          setIsTransitioning(false);
         }, props.duration * 1000);
       }}
       {...props}
-    />
+    >
+      {props.children}
+      {isTransitioning && (
+        <Loader
+          type="TailSpin"
+          color="#ccc"
+          height={80}
+          width={80}
+          className="fixed bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
+        />
+      )}
+    </TransitionLink>
   );
 };
 
