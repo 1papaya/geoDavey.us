@@ -17,17 +17,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const contentParentRef = useRef(null);
 
   const [isPreloaded, setIsPreloaded] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   // back path: props.location.state.prevPath
-
-  // isLoaded state
-  useEffect(() => {
-    // if page is loaded not via transition
-    if (!("mount" in props)) setIsLoaded(true);
-    // if page is loaded by transition, set isLoaded=true when loading finished
-    else setIsLoaded(props.transitionStatus === "entered" && props.mount);
-  }, [props.transitionStatus]);
 
   // splash animation
   useEffect(() => {
@@ -201,7 +192,6 @@ PageContent.defaultProps = {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
-  let [isTransitioning, setIsTransitioning] = useState(false);
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -218,12 +208,10 @@ const PageTransitionLink = connect()((props) => {
       exit={{
         length: props.duration,
       }}
-      onClick={() => {
-        // no transition spinner if link goes to current page
-        if (props.to !== document.location.pathname) setIsTransitioning(true);
-      }}
       trigger={async (pages) => {
-        props.dispatch({ type: "TRANSITION_START" });
+        // no transition spinner if link goes to current page
+        if (props.to !== document.location.pathname)
+          props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
