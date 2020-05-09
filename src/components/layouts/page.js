@@ -29,6 +29,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const pausLength = 4.3;
     const animLength = 1.5;
 
+    props.dispatch({ type: "TRANSITION_START" });
+
     // set logo initial
     logo.style.setProperty("width", "310px");
     logo.style.setProperty("height", "310px");
@@ -61,7 +63,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
           parent.style.setProperty("overflow", "visible");
 
           setIsPreloaded(true);
+          
         }, animLength * 1000);
+        props.dispatch({ type: "TRANSITION_END" });
       }, pausLength * 1000);
     });
   }, []);
@@ -105,10 +109,10 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
           <PageTransitionLink
             className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/blog/"
+            to="/maps/"
             activeClassName="font-bold"
           >
-            <span>journal</span>
+            <span>maps</span>
           </PageTransitionLink>
           <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
             <div
@@ -123,7 +127,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
           </div>
           <PageTransitionLink
             className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/maps/"
+            to="/projects/"
             activeClassName="font-bold"
           >
             <span>projects</span>

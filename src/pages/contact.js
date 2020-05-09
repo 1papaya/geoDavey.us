@@ -21,7 +21,7 @@ export default Contact;
 
 export const pageQuery = graphql`
   query {
-    postcardBg: file(relativePath: { eq: "img/autumn.jpg" }) {
+    postcardBg: file(relativePath: { regex: ".+/autumn.jpg$/" }) {
       publicURL
     }
   }

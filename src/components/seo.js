@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-const SEO = ({ description, lang, meta, title }) => {
-  const { site, favicon32, favicon64 } = useStaticQuery(
+const SEO = ({ description, meta, title }) => {
+  const { site, favicon } = useStaticQuery(
     graphql`
       query {
         site {
@@ -13,15 +13,13 @@ const SEO = ({ description, lang, meta, title }) => {
             description
           }
         }
-        favicon32: file(relativePath: { eq: "img/favicon.png" }) {
-          childImageSharp {
+        favicon: file(relativePath: { regex: "/.+/favicon.png$/" }) {
+          favicon32: childImageSharp {
             fixed(width: 32, height: 32) {
               src
             }
           }
-        }
-        favicon64: file(relativePath: { eq: "img/favicon.png" }) {
-          childImageSharp {
+          favicon64: childImageSharp {
             fixed(width: 64, height: 64) {
               src
             }
@@ -47,14 +45,14 @@ const SEO = ({ description, lang, meta, title }) => {
           rel: "icon",
           type: "image/png",
           sizes: "32x32",
-          href: favicon32.childImageSharp.fixed.src
+          href: favicon.favicon32.fixed.src,
         },
         {
           rel: "icon",
           type: "image/png",
           sizes: "64x64",
-          href: favicon64.childImageSharp.fixed.src
-        }
+          href: favicon.favicon64.fixed.src,
+        },
       ]}
       meta={[
         {
