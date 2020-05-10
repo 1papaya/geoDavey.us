@@ -9,16 +9,17 @@ import { graphql } from "gatsby";
 
 function Projects(props) {
   return (
-    <PageContent width={900} className="p-1">
+    <PageContent width={800} className="p-1">
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
-        {props.data.projectPosts.posts.map((p) => {
-          let md = p.markdown;
-          let meta = p.markdown.frontmatter;
+        {props.data.allFile.nodes.map((p) => {
+          let md = p.childMarkdownRemark;
+          let meta = md.frontmatter;
 
+          console.log(p);
           return (
-            <div key={meta.slug} className="post w-full p-1 md:w-1/3">
+            <div key={meta.slug} className="post w-full p-1 md:w-1/2">
               <div
                 className="relative w-full"
                 style={{ paddingBottom: "66.67%" }}
@@ -46,18 +47,19 @@ export default Projects;
 
 export const pageQuery = graphql`
   query {
-    projectPosts: allFile(
-      sort: { order: ASC, fields: relativePath }
-      filter: { relativePath: { regex: ".+/projects/(.+).md/" } }
+    allFile(
+      filter: { sourceInstanceName: { eq: "maps_md" }, ext: { eq: ".md" } }
     ) {
-      posts: nodes {
-        markdown: childMarkdownRemark {
+      nodes {
+        name
+        childMarkdownRemark {
           frontmatter {
             blurb
             date(formatString: "DD MMMM YYYY")
             slug
             tags
             title
+            url
             image {
               childImageSharp {
                 fluid {

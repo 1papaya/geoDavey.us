@@ -10,7 +10,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     query {
-      allProjects: allFile(filter: {sourceInstanceName: {eq: "projects"}, ext: {eq: ".md"}}) {
+      allProjects: allFile(
+        filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
+      ) {
         nodes {
           childMarkdownRemark {
             frontmatter {
@@ -40,7 +42,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   });
 
   //
-  // JJ
+  // MAPS
   //
-  
+
+  const maps = await graphql(`
+    query {
+      allFile(
+        filter: { sourceInstanceName: { eq: "maps_js" }, ext: { eq: ".js" } }
+      ) {
+        nodes {
+          absolutePath
+          name
+        }
+      }
+    }
+  `);
+
+  // make route for maps on top level (ex. gdv.us/map-name)
+  maps.data.allFile.nodes.forEach((node) => {
+    createPage({
+      path: `${node.name}`,
+      component: node.absolutePath,
+    });
+  });
 };

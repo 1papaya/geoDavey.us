@@ -27,8 +27,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        path: `${__dirname}/src/maps`,
+        name: `maps_js`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         path: `${__dirname}/content/maps`,
-        name: `maps`,
+        name: `maps_md`,
       },
     },
     {
