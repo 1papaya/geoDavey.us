@@ -65,6 +65,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
           setIsPreloaded(true);
           
         }, animLength * 1000);
+
         props.dispatch({ type: "TRANSITION_END" });
       }, pausLength * 1000);
     });
@@ -214,8 +215,8 @@ const PageTransitionLink = connect()((props) => {
       }}
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
-        if (props.to !== document.location.pathname)
-          props.dispatch({ type: "TRANSITION_START" });
+        //if (props.to !== document.location.pathname)
+        //  props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
@@ -252,7 +253,7 @@ const PageTransitionLink = connect()((props) => {
           container.style.setProperty("width", `auto`);
           container.style.setProperty("height", `auto`);
 
-          props.dispatch({ type: "TRANSITION_END" });
+          // props.dispatch({ type: "TRANSITION_END" });
         }, props.duration * 1000);
       }}
       {...props}
