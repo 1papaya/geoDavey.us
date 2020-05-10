@@ -17,7 +17,7 @@ function Projects(props) {
           <div className="md:p-2">
             <div
               className="text-sm relative h-full md:min-h-auto"
-              style={{ minHeight: 340 }}
+              style={{ minHeight: 320 }}
             >
               <BackgroundSlider
                 className="absolute w-full h-full"

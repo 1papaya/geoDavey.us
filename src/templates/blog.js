@@ -23,7 +23,7 @@ export default ({ data }) => {
           <div className="flex-grow">tags: <span className="text-gray-700">{meta.tags.join(" ")}</span></div>
           <div className="flex-grow text-right">{meta.date}</div>
         </div>
-        <div className="text-sm border-t border-white pt-1" dangerouslySetInnerHTML={{ __html: html }}></div>
+        <div className="text-sm border-t border-white" dangerouslySetInnerHTML={{ __html: html }}></div>
       </div>
     </PageContent>
   );

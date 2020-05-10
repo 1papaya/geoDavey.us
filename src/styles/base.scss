@@ -1,8 +1,4 @@
-@charset "utf-8";
-
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 //
 // Variables
@@ -11,48 +7,7 @@
 $bg-color: #f5f3f0;
 
 @import "~react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
-//
-// Fonts
-//
-
-@font-face {
-  font-family: "BadScript";
-  font-style: normal;
-  font-weight: 400;
-  src: local("BadScript Web Regular"), local("BadScriptWeb-Regular"),
-    url(./fonts/badscript-web.woff2) format("woff2");
-}
-
-.font-badscript {
-  font-family: "BadScript";
-}
-
-/* palanquin-regular - latin */
-@font-face {
-  font-family: "Palanquin";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Palanquin Regular"), local("Palanquin-Regular"),
-    url("./fonts/palanquin-v5-web.woff2") format("woff2"); /* Super Modern Browsers */
-}
-
-.font-palanquin {
-  font-family: "Palanquin";
-}
-
-/* barlow-condensed-regular - latin */
-@font-face {
-  font-family: 'Barlow Condensed';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Barlow Condensed Regular'), local('BarlowCondensed-Regular'),
-       url('./fonts/barlow-condensed-v4-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-}
-
-.font-barlow {
-  font-family: "Barlow Condensed";
-}
+@import "./fonts.scss";
 
 //
 // Global
@@ -73,6 +28,33 @@ body {
 
 a {
   color: #3273dc;
+}
+
+
+h1, h2, h3 {
+  @apply font-barlow;
+  @apply font-bold;
+}
+h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+ol {
+  @apply list-decimal;
+  @apply ml-5;
+}
+
+p {
+  @apply mt-2;
+  @apply mb-2;
 }
 
 .on-top {
@@ -97,33 +79,30 @@ a {
   overflow-x: initial !important;
 }
 
-.gdv-loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.aspect-ratio-none {
-  padding-bottom: 0;
-}
-.aspect-ratio-square {
-  padding-bottom: 100%;
-}
-.aspect-ratio-16\/9 {
-  padding-bottom: 56.25%;
-}
-.aspect-ratio-4\/3 {
-  padding-bottom: 75%;
-}
-.aspect-ratio-21\/9 {
-  padding-bottom: 42.86%;
-}
-
 .bg-standard {
   background: $bg-color;
 }
+
+//
+// syntax highlighting
+
+@import "~prismjs/themes/prism-solarizedlight.css";
+
+pre[class*="language-"] {
+  padding: 0.5rem;
+  border-radius: 0;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+
+  font-size: 0.7rem !important;
+  background: rgba(255,255,255,0.4);
+}
+
+@screen md {
+  pre[class*="language-"] {
+    font-size: 0.8rem !important;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
