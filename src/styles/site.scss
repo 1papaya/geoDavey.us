@@ -124,7 +124,7 @@ p {
 }
 
 //
-// syntax highlighting
+// syntax highlighting overrides
 //
 
 pre[class*="language-"] {
@@ -134,7 +134,7 @@ pre[class*="language-"] {
   margin-left: -0.5rem !important;
 
   font-size: 0.7rem !important;
-  //background: rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.2) !important;
 }
 
 @screen md {

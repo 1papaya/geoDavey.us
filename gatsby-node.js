@@ -2,6 +2,10 @@ const path = require("path");
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
+
+  //
+  // PROJECTS
+  //
   const projTemplate = path.resolve(`src/templates/project.js`);
 
   const result = await graphql(`
@@ -34,4 +38,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       },
     });
   });
+
+  //
+  // JJ
+  //
+  
 };
