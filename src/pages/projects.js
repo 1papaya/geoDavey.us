@@ -3,7 +3,6 @@ import React from "react";
 import { PageContent, PageTransitionLink } from "../components/layouts/page";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
-import { css } from "@emotion/core";
 import Img from "gatsby-image";
 import BackgroundSlider from "gatsby-image-background-slider";
 

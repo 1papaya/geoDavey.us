@@ -26,14 +26,16 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4.3;
-    const animLength = 1.5;
+    const pausLength = 3.2;
+    const animLength = 2;
 
-    props.dispatch({ type: "TRANSITION_START" });
+    //props.dispatch({ type: "TRANSITION_START" });
 
     // set logo initial
     logo.style.setProperty("width", "310px");
     logo.style.setProperty("height", "310px");
+    logo.style.setProperty("opacity", "1", "important");
+    logo.style.setProperty("transition", `all ${animLength}s`);
 
     // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
@@ -43,6 +45,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
     // commit style changes
     requestAnimationFrame(() => {
+
       // (1) pause...
       setTimeout(() => {
         // (2) trigger logo and content transition
@@ -66,7 +69,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
           
         }, animLength * 1000);
 
-        props.dispatch({ type: "TRANSITION_END" });
+
+        //props.dispatch({ type: "TRANSITION_END" });
       }, pausLength * 1000);
     });
   }, []);
