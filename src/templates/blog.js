@@ -7,7 +7,6 @@ import Img from "gatsby-image";
 import "prismjs/themes/prism-solarizedlight.css";
 
 export default ({ data }) => {
-  console.log(data);
   const meta = data.markdownRemark.frontmatter;
   const html = data.markdownRemark.html;
 
