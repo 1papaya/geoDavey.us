@@ -10,8 +10,9 @@ export default ({ data }) => {
 
   return (
     <PageContent width={480}>
-      {data.markdownRemark.image && 
-      <Img fluid={data.markdownRemark.image.childImageSharp.fluid} />}
+      {data.markdownRemark.image && (
+        <Img fluid={data.markdownRemark.image.childImageSharp.fluid} />
+      )}
       <div className="text-3xl text-bold">{meta.title}</div>
       <div dangerouslySetInnerHTML={{ __html: html }}></div>
     </PageContent>

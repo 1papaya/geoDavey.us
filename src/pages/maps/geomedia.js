@@ -73,22 +73,5 @@ function cloudinaryURL(id, transformations = "q_auto,f_auto") {
 
 export default GeomediaMap;
 
-export const pageQuery = graphql`
-  query {
-    allCloudinaryMedia(filter: { public_id: { glob: "geomedias/*" } }) {
-      nodes {
-        secure_url
-        public_id
-        tags
-        type
-        context {
-          custom {
-            alt
-            caption
-            latlon
-          }
-        }
-      }
-    }
-  }
+export const pageQuery = `
 `;

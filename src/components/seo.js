@@ -13,7 +13,7 @@ const SEO = ({ description, meta, title }) => {
             description
           }
         }
-        favicon: file(relativePath: { regex: "/.+/favicon.png$/" }) {
+        favicon: file(relativePath: { regex: "/gD_lite.png$/" }) {
           favicon32: childImageSharp {
             fixed(width: 32, height: 32) {
               src

@@ -13,8 +13,29 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/`,
-        name: `content`,
+        path: `${__dirname}/content/img`,
+        name: `img`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/projects`,
+        name: `projects`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/maps`,
+        name: `maps`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/battlestations`,
+        name: `battlestations`,
       },
     },
     {
@@ -24,48 +45,24 @@ module.exports = {
         name: `data`,
       },
     },
-    {
-      resolve: `gatsby-source-cloudinary`,
-      options: {
-        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-        apiKey: process.env.CLOUDINARY_API_KEY,
-        apiSecret: process.env.CLOUDINARY_API_SECRET,
-        resourceType: `image`,
-        maxResults: 500,
-        context: true,
-        tags: true,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-cloudinary`,
-      options: {
-        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-        apiKey: process.env.CLOUDINARY_API_KEY,
-        apiSecret: process.env.CLOUDINARY_API_SECRET,
-        resourceType: `image`,
-        maxResults: 500,
-        context: true,
-        tags: true,
-      },
-    },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     {
-       resolve: "gatsby-plugin-transition-link",
-       options: {
-           layout: require.resolve(`./src/components/layouts/page.js`)
-         }
+      resolve: "gatsby-plugin-transition-link",
+      options: {
+        layout: require.resolve(`./src/components/layouts/page.js`),
+      },
     },
     `gatsby-transformer-json`,
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/
-        }
-      }
+          include: /assets/,
+        },
+      },
     },
     `gatsby-transformer-csv`,
     {
@@ -75,13 +72,40 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
-    { 
+    {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
         tailwind: true,
-        whitelist: ["transitioning", "tl-edges", "tl-wrapper"]
-      }
-    }
+        whitelist: ["transitioning", "tl-edges", "tl-wrapper"],
+      },
+    },
   ],
 };
+
+const cloudinary = [
+  {
+    resolve: `gatsby-source-cloudinary`,
+    options: {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      apiSecret: process.env.CLOUDINARY_API_SECRET,
+      resourceType: `image`,
+      maxResults: 500,
+      context: true,
+      tags: true,
+    },
+  },
+  {
+    resolve: `gatsby-transformer-cloudinary`,
+    options: {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      apiSecret: process.env.CLOUDINARY_API_SECRET,
+      resourceType: `image`,
+      maxResults: 500,
+      context: true,
+      tags: true,
+    },
+  },
+];

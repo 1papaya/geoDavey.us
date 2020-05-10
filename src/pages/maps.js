@@ -12,22 +12,25 @@ function Projects(props) {
     <PageContent width={900} className="p-1">
       <SEO title="maps" />
 
-      <div
-        className="maps flex flex-col md:flex-row md:flex-wrap"
-      >
+      <div className="maps flex flex-col md:flex-row md:flex-wrap">
         {props.data.projectPosts.posts.map((p) => {
           let md = p.markdown;
           let meta = p.markdown.frontmatter;
 
           return (
             <div key={meta.slug} className="post w-full p-1 md:w-1/3">
-              <div className="relative w-full" style={{paddingBottom: "66.67%"}}>
+              <div
+                className="relative w-full"
+                style={{ paddingBottom: "66.67%" }}
+              >
                 <Img
                   className="absolute w-full h-full"
                   fluid={meta.image.childImageSharp.fluid}
-                  style={{position: "absolute"}}
+                  style={{ position: "absolute" }}
                 />
-                <div className="title absolute bottom-0 w-full text-white text-center font-barlow text-xl bg-black bg-opacity-50">{meta.title}</div>
+                <div className="title absolute bottom-0 w-full text-white text-center font-barlow text-xl bg-black bg-opacity-50">
+                  {meta.title}
+                </div>
               </div>
 
               <div className="text-sm">{meta.blurb}</div>
@@ -44,6 +47,7 @@ export default Projects;
 export const pageQuery = graphql`
   query {
     projectPosts: allFile(
+      sort: { order: ASC, fields: relativePath }
       filter: { relativePath: { regex: ".+/projects/(.+).md/" } }
     ) {
       posts: nodes {
