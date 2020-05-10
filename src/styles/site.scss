@@ -7,7 +7,47 @@
 $bg-color: #f5f3f0;
 
 @import "~react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-@import "./fonts.scss";
+
+//
+// Fonts
+//
+
+/*! purgecss start ignore */
+@font-face {
+  font-family: "BadScript";
+  font-style: normal;
+  font-weight: 400;
+  src: local("BadScript Web Regular"), local("BadScriptWeb-Regular"),
+    url(./fonts/badscript-web.woff2) format("woff2");
+}
+
+.font-badscript {
+  font-family: "BadScript";
+}
+
+@font-face {
+  font-family: "Palanquin";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Palanquin Regular"), local("Palanquin-Regular"),
+    url("./fonts/palanquin-v5-web.woff2") format("woff2");
+}
+
+.font-palanquin {
+  font-family: "Palanquin";
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Barlow Condensed Regular'), local('BarlowCondensed-Regular'),
+       url('./fonts/barlow-condensed-v4-latin-regular.woff2') format('woff2'), 
+}
+
+.font-barlow {
+  font-family: "Barlow Condensed";
+}
 
 //
 // Global
@@ -85,17 +125,16 @@ p {
 
 //
 // syntax highlighting
-
-@import "~prismjs/themes/prism-solarizedlight.css";
+//
 
 pre[class*="language-"] {
-  padding: 0.5rem;
-  border-radius: 0;
-  margin-right: -0.5rem;
-  margin-left: -0.5rem;
+  padding: 0.5rem !important;
+  border-radius: 0 !important;
+  margin-right: -0.5rem !important;
+  margin-left: -0.5rem !important;
 
   font-size: 0.7rem !important;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.4) !important;
 }
 
 @screen md {
@@ -103,6 +142,7 @@ pre[class*="language-"] {
     font-size: 0.8rem !important;
   }
 }
+/*! purgecss end ignore */
 
 @tailwind components;
 @tailwind utilities;

@@ -106,7 +106,7 @@ module.exports = {
       options: {
         printRejected: true,
         tailwind: true,
-        whitelist: ["transitioning", "tl-edges", "tl-wrapper"],
+        ignore: ["src/styles/base.scss", "prismjs/"]
       },
     },
   ],

@@ -4,6 +4,8 @@ import { PageContent } from "../components/layouts/page";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 
+import "prismjs/themes/prism-solarizedlight.css";
+
 export default ({ data }) => {
   console.log(data);
   const meta = data.markdownRemark.frontmatter;
