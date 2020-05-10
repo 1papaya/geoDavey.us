@@ -24,7 +24,7 @@ function Projects(props) {
                 initDelay={12}
                 query={props.data}
                 duration={8}
-              />
+              ></BackgroundSlider>
             </div>
           </div>
         </div>

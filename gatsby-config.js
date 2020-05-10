@@ -106,7 +106,7 @@ module.exports = {
       options: {
         printRejected: true,
         tailwind: true,
-        ignore: ["src/styles/base.scss", "prismjs/"]
+        ignore: ["src/styles/base.scss", "gatsby-plugin-transition-link/", "prismjs/"]
       },
     },
   ],
