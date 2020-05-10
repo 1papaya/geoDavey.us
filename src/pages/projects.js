@@ -28,8 +28,9 @@ function Projects(props) {
             </div>
           </div>
         </div>
-        {props.data.blogPosts.nodes.map((p, idx) => {
-          const f = p.frontmatter;
+        {props.data.allProjects.nodes.map((p, idx) => {
+          const md = p.childMarkdownRemark;
+          const meta = md.frontmatter;
 
           // mobile
           let imgMargin = idx % 2 === 0 ? "ml-2" : "mr-2";
@@ -47,15 +48,15 @@ function Projects(props) {
 
           return (
             <div
-              key={f.slug}
+              key={meta.slug}
               className={`post bg-white ${bgOpacity} p-2 rounded-sm`}
             >
               <div className={`${imgFloat} ${imgMargin} w-1/3 md:w-1/3`}>
-                {f.image && (
-                  <PageTransitionLink to={`/blog/${f.slug}/`}>
+                {meta.image && (
+                  <PageTransitionLink to={meta.url}>
                     <Img
                       className={`w-full`}
-                      fluid={f.image.childImageSharp.fluid}
+                      fluid={meta.image.childImageSharp.fluid}
                     />
                   </PageTransitionLink>
                 )}
@@ -63,14 +64,12 @@ function Projects(props) {
               <div
                 className={`title ${textAlign} leading-tight font-barlow text-xl md:text-2xl`}
               >
-                <PageTransitionLink to={`/blog/${f.slug}/`}>
-                  {f.title}
-                </PageTransitionLink>
+                <PageTransitionLink to={meta.url}>{meta.title}</PageTransitionLink>
               </div>
               <div className={`meta ${textAlign} text-gray-700 mb-1 text-xs`}>
-                {f.tags.join(" ")}
+                {meta.tags.join(" ")}
               </div>
-              <div className="blurb leading-snug text-sm">{f.blurb}</div>
+              <div className="blurb leading-snug text-sm">{meta.blurb}</div>
               <div className="clear-both"></div>
             </div>
           );
@@ -98,23 +97,26 @@ export const pageQuery = graphql`
       }
     }
 
-    blogPosts: allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
+    allProjects: allFile(
+      filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
     ) {
       nodes {
-        frontmatter {
-          blurb
-          image {
-            childImageSharp {
-              fluid(maxWidth: 512, maxHeight: 512) {
-                ...GatsbyImageSharpFluid
+        childMarkdownRemark {
+          frontmatter {
+            blurb
+            image {
+              childImageSharp {
+                fluid(maxWidth: 512, maxHeight: 512) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
+            date(formatString: "DD MMM YYYY")
+            slug
+            title
+            tags
+            url
           }
-          slug
-          tags
-          title
-          date(formatString: "DD MMM YYYY")
         }
       }
     }

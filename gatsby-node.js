@@ -2,29 +2,35 @@ const path = require("path");
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  const blogTemplate = path.resolve(`src/templates/blog.js`);
+  const projTemplate = path.resolve(`src/templates/project.js`);
 
   const result = await graphql(`
-    {
-      allMarkdownRemark {
-        edges {
-          node {
+    query {
+      allProjects: allFile(filter: {sourceInstanceName: {eq: "projects"}, ext: {eq: ".md"}}) {
+        nodes {
+          childMarkdownRemark {
             frontmatter {
+              blurb
+              date
               slug
+              title
+              tags
+              url
             }
-            html
           }
         }
       }
     }
   `);
 
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  result.data.allProjects.nodes.forEach((node) => {
+    let md = node.childMarkdownRemark;
+
     createPage({
-      path: `/blog/${node.frontmatter.slug}`,
-      component: blogTemplate,
+      path: `${md.frontmatter.url}`,
+      component: projTemplate,
       context: {
-        slug: node.frontmatter.slug,
+        slug: md.frontmatter.slug,
       },
     });
   });

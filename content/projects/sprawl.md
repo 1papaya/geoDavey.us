@@ -1,6 +1,7 @@
 ---
 title: Dubai Sprawl
 slug: sprawl
+url: /proj/dubai-sprawl/
 image: ./img/sprawl.jpg
 date: 2019-07-01
 tags: ["grass", "gdal", "landsat", "bash"]
