@@ -8,12 +8,15 @@ import Img from "gatsby-image";
 import { graphql } from "gatsby";
 
 function Projects(props) {
+
+  let tst = props.data.allFile.nodes.concat(props.data.allFile.nodes).concat(props.data.allFile.nodes);
+
   return (
     <PageContent width={800} className="md:p-1">
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
-        {props.data.allFile.nodes.map((p) => {
+      {tst.map((p) => {
           let md = p.childMdx;
           let meta = md.frontmatter;
 

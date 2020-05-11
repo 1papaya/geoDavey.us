@@ -7,6 +7,9 @@ import Img from "gatsby-image";
 import BackgroundSlider from "gatsby-image-background-slider";
 
 function Projects(props) {
+  let tst = props.data.allProjects.nodes
+    .concat(props.data.allProjects.nodes)
+    .concat(props.data.allProjects.nodes);
   return (
     <PageContent width={900} className="p-0">
       <SEO title="blog" />
@@ -27,7 +30,7 @@ function Projects(props) {
             </div>
           </div>
         </div>
-        {props.data.allProjects.nodes.map((p, idx) => {
+        {tst.map((p, idx) => {
           const md = p.childMdx;
           const meta = md.frontmatter;
 
@@ -64,7 +67,9 @@ function Projects(props) {
                   {meta.title}
                 </PageTransitionLink>
               </div>
-              <div className={`meta ${textAlign} text-gray-700 mb-1 text-xs`}>
+              <div
+                className={`meta ${textAlign} md:text-left text-gray-700 mb-1 text-xs`}
+              >
                 {meta.tags.join(" ")}
               </div>
               <div className="blurb leading-snug text-sm">{meta.blurb}</div>
