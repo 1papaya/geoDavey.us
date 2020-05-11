@@ -59,6 +59,7 @@ export const pageQuery = graphql`
   query {
     allFile(
       filter: { sourceInstanceName: { eq: "maps_md" }, ext: { eq: ".md" } }
+      sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
     ) {
       nodes {
         name

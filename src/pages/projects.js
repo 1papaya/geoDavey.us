@@ -63,7 +63,9 @@ function Projects(props) {
               <div
                 className={`title ${textAlign} leading-tight font-barlow text-xl md:text-2xl`}
               >
-                <PageTransitionLink to={meta.url}>{meta.title}</PageTransitionLink>
+                <PageTransitionLink to={meta.url}>
+                  {meta.title}
+                </PageTransitionLink>
               </div>
               <div className={`meta ${textAlign} text-gray-700 mb-1 text-xs`}>
                 {meta.tags.join(" ")}
@@ -98,6 +100,7 @@ export const pageQuery = graphql`
 
     allProjects: allFile(
       filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
+      sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
     ) {
       nodes {
         childMarkdownRemark {
