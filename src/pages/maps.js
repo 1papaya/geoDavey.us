@@ -31,24 +31,26 @@ function Projects(props) {
                   </div>
                 </div>
               </div>
-              <div className="flex bg-white text-xs p-1 font-gray-800">
-                <div className="flex-grow">{meta.tags.join(" ")}</div>
-                <div className="flex-grow text-right">
-                  <a href={`https://github.com/${meta.github}`}>
-                    view source code
+              <div className="flex bg-white p-1">
+                <div className="flex items-center text-xs text-gray-800">{meta.tags.join(" ")}</div>
+                <div className="flex-grow text-xs text-right">
+                  <a
+                    className="inline-block text-white bg-red-700 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
+                    href={`https://github.com/${meta.github}`}
+                    target="_blank"
+                  >
+                    view source
                   </a>{" "}
-                  /{" "}
-                  <PageTransitionLink to={meta.url}>
+                  <PageTransitionLink
+                    className="inline-block text-white bg-green-700 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
+                    to={meta.url}
+                  >
                     open map
                   </PageTransitionLink>
                 </div>
               </div>
 
-              <div className="text-xs p-1">
-                <MDXContent>
-            {md.body}
-                </MDXContent>
-                </div>
+              <div className="text-sm hidden pl-1 pr-1 text-justify">{meta.blurb}</div>
             </div>
           );
         })}
