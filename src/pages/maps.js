@@ -2,7 +2,7 @@ import React from "react";
 
 import { PageContent, PageTransitionLink } from "../components/layouts/page";
 import SEO from "../components/seo";
-import { css } from "@emotion/core";
+import MDXContent from "../components/mdx";
 
 import Img from "gatsby-image";
 import { graphql } from "gatsby";
@@ -14,7 +14,7 @@ function Projects(props) {
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
         {props.data.allFile.nodes.map((p) => {
-          let md = p.childMarkdownRemark;
+          let md = p.childMdx;
           let meta = md.frontmatter;
 
           return (
@@ -44,7 +44,11 @@ function Projects(props) {
                 </div>
               </div>
 
-              <div className="text-xs p-1">{meta.blurb}</div>
+              <div className="text-xs p-1">
+                <MDXContent>
+            {md.body}
+                </MDXContent>
+                </div>
             </div>
           );
         })}
@@ -59,11 +63,12 @@ export const pageQuery = graphql`
   query {
     allFile(
       filter: { sourceInstanceName: { eq: "maps_md" }, ext: { eq: ".md" } }
-      sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
+      sort: { fields: childMdx___frontmatter___date, order: DESC }
     ) {
       nodes {
         name
-        childMarkdownRemark {
+        childMdx {
+          body
           frontmatter {
             blurb
             date(formatString: "DD MMMM YYYY")

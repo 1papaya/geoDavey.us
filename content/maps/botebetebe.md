@@ -8,6 +8,6 @@ github: 1papaya/ol-botebetebe
 
 date: 2019-09-01
 tags: ["openlayers", "react", "maptiler"]
-
-blurb: Go Heavy
 ---
+
+Whazz Good in the Hood

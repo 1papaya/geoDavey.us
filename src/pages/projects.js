@@ -28,7 +28,7 @@ function Projects(props) {
           </div>
         </div>
         {props.data.allProjects.nodes.map((p, idx) => {
-          const md = p.childMarkdownRemark;
+          const md = p.childMdx;
           const meta = md.frontmatter;
 
           let imgMargin = idx % 2 === 0 ? "ml-2" : "mr-2";

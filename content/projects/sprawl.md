@@ -6,7 +6,7 @@ image: ./img/sprawl.jpg
 date: 2019-07-01
 tags: ["grass", "gdal", "landsat", "bash"]
 
-blurb: Dawg who thought those artificial islands were a good idea??
+blurb: Skoo Buff
 ---
 
 Freely available satellite imagery is a fabulous resource for use in geospatial analysis, including land cover classification. GRASS GIS -- a free, powerful suite of open source tools -- provides various methods to classify source imagery which can be used to perform land cover classification.

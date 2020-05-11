@@ -40,7 +40,8 @@ const Code = (props) => {
 const components = {
   code: (props) => <Code {...props} />,
   a: (props) => {
-    if (props.href.indexOf("//") !== -1)
+    console.log(props);
+    if (props.href.indexOf("//") === -1)
       return (
         <PageTransitionLink to={props.href}>
           {props.children}
@@ -48,6 +49,7 @@ const components = {
       );
     else return <a {...props} />;
   },
+  PageTransitionLink
 };
 
 export default (props) => (
