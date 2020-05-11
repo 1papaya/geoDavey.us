@@ -9,7 +9,7 @@ import { graphql } from "gatsby";
 
 function Projects(props) {
   return (
-    <PageContent width={800} className="p-1">
+    <PageContent width={800} className="md:p-1">
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
@@ -19,7 +19,7 @@ function Projects(props) {
 
           console.log(p);
           return (
-            <div key={meta.slug} className="post w-full p-1 md:w-1/2">
+            <div key={meta.slug} className="post w-full md:p-1 md:w-1/2">
               <div
                 className="relative w-full"
                 style={{ paddingBottom: "66.67%" }}
