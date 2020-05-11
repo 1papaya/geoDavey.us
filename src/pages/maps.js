@@ -29,7 +29,7 @@ function Projects(props) {
                   fluid={meta.image.childImageSharp.fluid}
                   style={{ position: "absolute" }}
                 />
-                <div className="title absolute bottom-0 w-full text-white text-center font-barlow text-xl bg-black bg-opacity-50">
+                <div className="title absolute bottom-0 w-full text-white text-center font-barlow text-2xl bg-black bg-opacity-50">
                   {meta.title}
                 </div>
               </div>
