@@ -122,26 +122,6 @@ p {
 .bg-standard {
   background: $bg-color;
 }
-
-//
-// syntax highlighting overrides
-//
-
-pre[class*="language-"] {
-  padding: 0.5rem !important;
-  border-radius: 0 !important;
-  margin-right: -0.5rem !important;
-  margin-left: -0.5rem !important;
-
-  font-size: 0.7rem !important;
-  background: rgba(255,255,255,0.2) !important;
-}
-
-@screen md {
-  pre[class*="language-"] {
-    font-size: 0.8rem !important;
-  }
-}
 /*! purgecss end ignore */
 
 @tailwind components;

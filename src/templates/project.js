@@ -1,21 +1,20 @@
 import React from "react";
 import { PageContent } from "../components/layouts/page";
+import MDXContent from "../components/mdx";
 
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 
-import "prismjs/themes/prism-solarizedlight.css";
-
 export default ({ data }) => {
-  const meta = data.markdownRemark.frontmatter;
-  const html = data.markdownRemark.html;
+  const meta = data.mdx.frontmatter;
+  const body = data.mdx.body;
 
   return (
     <PageContent width={570} className="p-0 md:p-2">
-      {data.markdownRemark.frontmatter.image && (
+      {meta.image && (
         <Img
           className="w-full"
-          fluid={data.markdownRemark.frontmatter.image.childImageSharp.fluid}
+          fluid={meta.image.childImageSharp.fluid}
         />
       )}
       <div className="p-1 md:p-0">
@@ -24,7 +23,9 @@ export default ({ data }) => {
           <div className="flex-grow">tags: <span className="text-gray-700">{meta.tags.join(" ")}</span></div>
           <div className="flex-grow text-right">{meta.date}</div>
         </div>
-        <div className="text-sm  border-t border-white" dangerouslySetInnerHTML={{ __html: html }}></div>
+        <div className="text-sm  border-t border-white">
+          <MDXContent>{body}</MDXContent>
+        </div>
       </div>
     </PageContent>
   );
@@ -32,7 +33,7 @@ export default ({ data }) => {
 
 export const pageQuery = graphql`
   query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
         blurb
         date(formatString: "DD MMMM YYYY")
@@ -47,7 +48,7 @@ export const pageQuery = graphql`
         slug
         title
       }
-      html
+      body
     }
   }
 `;

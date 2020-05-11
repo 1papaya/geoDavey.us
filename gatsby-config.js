@@ -77,43 +77,32 @@ module.exports = {
       options: {
         postCssPlugins: [require("tailwindcss")],
       },
-    },{
-      resolve: `gatsby-transformer-remark`,
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-prismjs`,
+            resolve: `gatsby-remark-images`,
             options: {
-              classPrefix: "language-",
-              // This is used to allow setting a language for inline code
-              // (i.e. single backticks) by creating a separator.
-              // This separator is a string and will do no white-space
-              // stripping.
-              // A suggested value for English speakers is the non-ascii
-              // character '›'.
-              inlineCodeMarker: null,
-              // This toggles the display of line numbers globally alongside the code.
-              // To use it, add the following line in gatsby-browser.js
-              // right after importing the prism color scheme:
-              //  require("prismjs/plugins/line-numbers/prism-line-numbers.css")
-              // Defaults to false.
-              // If you wish to only show line numbers on certain code blocks,
-              // leave false and use the {numberLines: true} syntax below
-              showLineNumbers: false,
-              // If setting this to true, the parser won't handle and highlight inline
-              // code used in markdown i.e. single backtick code like `this`.
-              noInlineHighlight: true
+              maxWidth: 590,
             },
           },
         ],
       },
     },
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
         tailwind: true,
-        ignore: ["src/styles/base.scss", "gatsby-plugin-transition-link/", "prismjs/"]
+        ignore: [
+          "src/styles/base.scss",
+          "gatsby-plugin-transition-link/",
+          "prismjs/",
+        ],
       },
     },
   ],

@@ -31,26 +31,23 @@ function Projects(props) {
           const md = p.childMarkdownRemark;
           const meta = md.frontmatter;
 
-          // mobile
           let imgMargin = idx % 2 === 0 ? "ml-2" : "mr-2";
           let textAlign = idx % 2 === 0 ? "text-right" : "text-left";
           let imgFloat = idx % 2 === 0 ? "float-right" : "float-left";
           let bgOpacity = idx % 2 === 0 ? "bg-opacity-25" : "bg-opacity-75";
 
-          // desktop
-          textAlign += " md:text-left";
-          imgMargin += " md:ml-0 md:mr-2";
-          imgFloat += " md:float-left";
-          bgOpacity +=
-            (idx + 1) % 4 in [0, 1] ? " md:bg-opacity-50" : " md:bg-opacity-75";
+          let mdBgOpacity =
+            (idx + 1) % 4 in [0, 1] ? "md:bg-opacity-50" : "md:bg-opacity-75";
           //bg opacity
 
           return (
             <div
               key={meta.slug}
-              className={`post bg-white ${bgOpacity} p-2 rounded-sm`}
+              className={`post bg-white ${bgOpacity} ${mdBgOpacity} p-2 rounded-sm`}
             >
-              <div className={`${imgFloat} ${imgMargin} w-1/3 md:w-1/3`}>
+              <div
+                className={`${imgFloat} ${imgMargin} md:float-left md:ml-0 md:mr-2 w-1/3 md:w-1/3`}
+              >
                 {meta.image && (
                   <PageTransitionLink to={meta.url}>
                     <Img
@@ -61,7 +58,7 @@ function Projects(props) {
                 )}
               </div>
               <div
-                className={`title ${textAlign} leading-tight font-barlow text-xl md:text-2xl`}
+                className={`title ${textAlign} md:text-left leading-tight font-barlow text-xl md:text-2xl`}
               >
                 <PageTransitionLink to={meta.url}>
                   {meta.title}
@@ -103,7 +100,7 @@ export const pageQuery = graphql`
       sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
     ) {
       nodes {
-        childMarkdownRemark {
+        childMdx {
           frontmatter {
             blurb
             image {

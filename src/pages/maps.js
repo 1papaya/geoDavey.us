@@ -44,7 +44,7 @@ function Projects(props) {
                 </div>
               </div>
 
-              <div className="text-sm">{meta.blurb}</div>
+              <div className="text-xs p-1">{meta.blurb}</div>
             </div>
           );
         })}
