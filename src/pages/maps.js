@@ -32,7 +32,9 @@ function Projects(props) {
                 </div>
               </div>
               <div className="flex bg-white p-1">
-                <div className="flex items-center text-xs text-gray-800">{meta.tags.join(" ")}</div>
+                <div className="flex items-center text-xs text-gray-800">
+                  {meta.tags.join(" ")}
+                </div>
                 <div className="flex-grow text-xs text-right">
                   <a
                     className="inline-block text-white bg-red-700 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
@@ -50,7 +52,7 @@ function Projects(props) {
                 </div>
               </div>
 
-              <div className="text-sm hidden pl-1 pr-1 text-justify">{meta.blurb}</div>
+              <div className="text-sm bg-white border-t pb-1 pr-1 pl-1">{meta.blurb}</div>
             </div>
           );
         })}

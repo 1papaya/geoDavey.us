@@ -1,7 +1,7 @@
 ---
 title: Malolotja National Park, Swaziland
 slug: malolotja
-url: /malolotja
+url: /malolotja/
 image: ./img/malolotja.jpg
 
 github: 1papaya/ol-malolotja
