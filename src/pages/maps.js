@@ -7,16 +7,15 @@ import MDXContent from "../components/mdx";
 import Img from "gatsby-image";
 import { graphql } from "gatsby";
 
-function Projects(props) {
-
-  let tst = props.data.allFile.nodes.concat(props.data.allFile.nodes).concat(props.data.allFile.nodes);
+export default (props) => {
+  let mapNodes = props.data.maps.nodes;
 
   return (
     <PageContent width={800} className="md:p-1">
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
-      {tst.map((p) => {
+      {mapNodes.map((p) => {
           let md = p.childMdx;
           let meta = md.frontmatter;
 
@@ -64,11 +63,9 @@ function Projects(props) {
   );
 }
 
-export default Projects;
-
 export const pageQuery = graphql`
   query {
-    allFile(
+    maps: allFile(
       filter: { sourceInstanceName: { eq: "maps_md" }, ext: { eq: ".md" } }
       sort: { fields: childMdx___frontmatter___date, order: DESC }
     ) {

@@ -216,8 +216,8 @@ const PageTransitionLink = connect()((props) => {
       }}
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
-        //if (props.to !== document.location.pathname)
-        props.dispatch({ type: "TRANSITION_START" });
+        if (props.to !== document.location.pathname)
+          props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;

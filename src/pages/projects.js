@@ -6,10 +6,9 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import BackgroundSlider from "gatsby-image-background-slider";
 
-function Projects(props) {
-  let tst = props.data.allProjects.nodes
-    .concat(props.data.allProjects.nodes)
-    .concat(props.data.allProjects.nodes);
+export default (props) => {
+  let projects = props.data.projects.nodes;
+
   return (
     <PageContent width={900} className="p-0">
       <SEO title="blog" />
@@ -30,7 +29,7 @@ function Projects(props) {
             </div>
           </div>
         </div>
-        {tst.map((p, idx) => {
+        {projects.map((p, idx) => {
           const md = p.childMdx;
           const meta = md.frontmatter;
 
@@ -82,8 +81,6 @@ function Projects(props) {
   );
 }
 
-export default Projects;
-
 export const pageQuery = graphql`
   query {
     backgrounds: allFile(
@@ -100,7 +97,7 @@ export const pageQuery = graphql`
       }
     }
 
-    allProjects: allFile(
+    projects: allFile(
       filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
       sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
     ) {
