@@ -2,8 +2,10 @@ const Telegraf = require("telegraf");
 const Stage = require("telegraf/stage");
 const Markup = require("telegraf/markup");
 const session = require("telegraf/session");
+const faunadb = require("faunadb"),
+  q = faunadb.query;
 const WizardScene = require("telegraf/scenes/wizard");
-
+const db = new faunadb.Client({ secret: process.env.FAUNA_SECRET_KEY });
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
 bot.start((ctx) => {
@@ -23,7 +25,7 @@ const updateLoc = new WizardScene(
       parseInt(ctx.message.chat.id) ===
       parseInt(process.env.TELEGRAM_ADMIN_CHATID)
     ) {
-      ctx.reply("Where are you?");
+      ctx.reply("Where ya at?");
       return ctx.wizard.next();
     } else {
       ctx.reply("Sorry bud, admins only!");
@@ -47,7 +49,7 @@ const updateLoc = new WizardScene(
   },
   // Validate location name
   (ctx) => {
-    ctx.wizard.state.name = ctx.message.text.trim();
+    ctx.wizard.state.loc_name = ctx.message.text.trim();
 
     ctx.wizard.next();
     return ctx.wizard.steps[ctx.wizard.cursor](ctx);
@@ -69,9 +71,25 @@ const updateLoc = new WizardScene(
   },
   // Handle full form response
   (ctx) => {
-    let state = ctx.wizard.state;
+    let state = ctx.wizard.state; // { longitude, latitude, loc_name }
 
     if (ctx.message.text == "Yes") {
+
+      // Add to FaunaDB
+      try {
+        let resp = await db.query(
+          q.Create(
+            q.Collection('now'),
+            { data: state }
+          )
+        );
+      } catch (err) {
+        ctx.reply("Error! Sorry, bud");
+        return ctx.scene.leave();
+      }
+
+      // Trigger rebuild
+      
       ctx.reply("Saved!");
       console.log(state);
     } else {
