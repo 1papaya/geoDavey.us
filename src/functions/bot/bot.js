@@ -55,6 +55,8 @@ const updateLoc = new WizardScene(
         Markup.callbackButton("No", "discard_loc"),
       ]).extra()
     );
+
+    return ctx.wizard.next();
   },
   (ctx) => {
     return ctx.scene.leave();
