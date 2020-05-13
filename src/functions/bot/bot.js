@@ -75,7 +75,7 @@ const updateLoc = new WizardScene(
 
     if (ctx.message.text == "Yes") {
       // Add to FaunaDB
-      db.query(q.Collection("now"), { data: state })
+      db.query(q.Create(q.Collection("now"), { data: state }))
         .then((resp) => {
           console.log(resp);
           console.dir(resp);
