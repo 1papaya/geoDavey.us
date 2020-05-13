@@ -7,9 +7,9 @@ bot.start((ctx) => {
   console.dir(ctx);
 });
 
-bot.chat_id((ctx) => {
+bot.command("chat_id", (ctx) => {
     ctx.reply(`Chat ID: ${ctx.update.message.chat.id}`)
-})
+});
 
 exports.handler = async (event, context, callback) => {
   try {
