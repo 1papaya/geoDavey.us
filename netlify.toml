@@ -1,8 +1,7 @@
 [build]
   base = "/"
   publish = "/public/"
-  functions = "src/functions/"
-  command = "npm run build && netlify-lambda install"
+  command = "npm run build"
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
