@@ -14,10 +14,6 @@ bot.start((ctx) => {
 // update Loc
 //
 
-bot.command("update_loc", (ctx) => {
-  ctx.scene.enter("update_loc");
-});
-
 const updateLoc = new WizardScene(
   "update_loc",
   // Ask for location
@@ -77,7 +73,11 @@ const stage = new Stage([updateLoc]);
 bot.use(session());
 bot.use(stage.middleware());
 
-// Reply with Chat ID
+// Commands
+bot.command("update_loc", (ctx) => {
+  ctx.scene.enter("update_loc");
+});
+
 bot.command("chat_id", (ctx) => {
   ctx.reply(`Chat ID: ${ctx.update.message.chat.id}`);
 });
