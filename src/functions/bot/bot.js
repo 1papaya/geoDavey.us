@@ -25,7 +25,10 @@ const updateLoc = new WizardScene(
   },
   (ctx) => {
     // validation
-    if (typeof ctx.message.location === "undefined") return ctx.wizard.back();
+    if (typeof ctx.message.location === "undefined") {
+        ctx.wizard.back();
+        return ctx.wizard.steps[ctx.wizard.cursor](ctx);
+    }
 
     ctx.wizard.state.location = ctx.message.location;
 
@@ -42,7 +45,7 @@ const updateLoc = new WizardScene(
     ctx.reply(
       "Location: ${state.location.longitude}, ${state.location.latitude}\nName: ${state.loc_name}"
     );
-    
+
     return ctx.scene.leave();
   }
 );
