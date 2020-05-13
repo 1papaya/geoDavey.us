@@ -19,17 +19,16 @@ const updateLoc = new WizardScene(
   // Ask for location
   (ctx) => {
     // Only allow to be updated from admin chat
-    if (parseInt(ctx.message.chat.id) === parseInt(process.env.TELEGRAM_ADMIN_CHATID))
-    {
+    if (
+      parseInt(ctx.message.chat.id) ===
+      parseInt(process.env.TELEGRAM_ADMIN_CHATID)
+    ) {
       ctx.reply("Where are you?");
       return ctx.wizard.next();
-    }
-    else
-    {
+    } else {
       ctx.reply("Sorry bud, admins only!");
       return ctx.scene.leave();
     }
-
   },
   // Validate location
   (ctx) => {
@@ -61,9 +60,9 @@ const updateLoc = new WizardScene(
       `Is this OK?\n` +
         `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
         `NAM: ${state.loc_name}`,
-      Markup.keyboard([
-        [Markup.button("Yes"), Markup.button("No")],
-      ]).oneTime().extra()
+      Markup.keyboard([Markup.button("Yes"), Markup.button("No")])
+        .oneTime()
+        .extra()
     );
 
     return ctx.wizard.next();
@@ -73,11 +72,10 @@ const updateLoc = new WizardScene(
     let state = ctx.wizard.state;
 
     if (ctx.message.text == "Yes") {
-        ctx.reply("Saved!");
-        console.log(state);
-    }
-    else {
-        ctx.reply("(discarded)");
+      ctx.reply("Saved!");
+      console.log(state);
+    } else {
+      ctx.reply("(discarded)");
     }
 
     return ctx.scene.leave();
@@ -90,7 +88,7 @@ const stage = new Stage([updateLoc]);
 bot.use(session());
 bot.use(stage.middleware());
 
-// Commands
+// Add commands
 bot.command("update_loc", (ctx) => {
   ctx.scene.enter("update_loc");
 });
