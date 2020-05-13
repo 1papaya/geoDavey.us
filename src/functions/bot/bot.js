@@ -55,6 +55,9 @@ const updateLoc = new WizardScene(
         Markup.callbackButton("No", "discard_loc"),
       ])
     );
+  },
+  (ctx) => {
+    return ctx.scene.leave();
   }
 );
 
@@ -62,12 +65,10 @@ bot.action("submit_loc", (ctx) => {
   ctx.reply("Saved!");
   let state = ctx.wizard.state;
   console.log(state);
-  return ctx.scene.leave();
 });
 
 bot.action("discard_loc", (ctx) => {
   ctx.reply("(discarded)");
-  return ctx.scene.leave();
 });
 
 // Initialize bot with session & stage middleware
