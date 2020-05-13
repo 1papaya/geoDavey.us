@@ -40,14 +40,15 @@ const updateLoc = new WizardScene(
   },
   // Ask for location name
   (ctx) => {
-    ctx.wizard.state.location = ctx.message.location;
+    ctx.wizard.state.longitude = ctx.message.location.longitude;
+    ctx.wizard.state.latitude = ctx.message.location.latitude;
 
     ctx.reply("What is the location name?");
     return ctx.wizard.next();
   },
   // Validate location name
   (ctx) => {
-    ctx.wizard.state.loc_name = ctx.message.text.trim();
+    ctx.wizard.state.name = ctx.message.text.trim();
 
     ctx.wizard.next();
     return ctx.wizard.steps[ctx.wizard.cursor](ctx);
@@ -61,8 +62,7 @@ const updateLoc = new WizardScene(
         `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
         `NAM: ${state.loc_name}`,
       Markup.keyboard([
-        Markup.button("Yes"),
-        Markup.button("No"),
+        [Markup.button("Yes"), Markup.button("No")],
       ]).oneTime().extra()
     );
 
