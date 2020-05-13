@@ -51,30 +51,31 @@ const updateLoc = new WizardScene(
         `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
         `NAM: ${state.loc_name}`,
       Markup.inlineKeyboard([
-        Markup.callbackButton("Yes", "submit_loc"),
-        Markup.callbackButton("No", "discard_loc"),
-      ]).extra()
+        Markup.button("Yes"),
+        Markup.button("No"),
+      ]).oneTime().extra()
     );
 
     return ctx.wizard.next();
   },
   // Handle full form response
   (ctx) => {
+    let state = ctx.wizard.state;
+
+    if (ctx.message.text == "Yes") {
+        ctx.reply("Saved!");
+        console.log(state);
+    }
+    else {
+        ctx.reply("(discarded)");
+    }
+
     return ctx.scene.leave();
   }
 );
 
 // Initialize bot with session & stage middleware
 const stage = new Stage([updateLoc]);
-
-stage.action("submit_loc", ctx => {
-    console.log("state", ctx.wizard.state);
-    ctx.reply(`Saved! ${ctx.wizard.state.loc_name}`);
-})
-
-stage.action("discard_loc", ctx => {
-    ctx.reply("Discarded!");
-})
 
 bot.use(session());
 bot.use(stage.middleware());
