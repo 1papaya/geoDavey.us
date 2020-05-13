@@ -32,15 +32,6 @@ export default Home;
 
 export const pageQuery = graphql`
   query {
-    allWaypointsCsv {
-      edges {
-        node {
-          address
-          x
-          y
-        }
-      }
-    }
     sundowner: imageSharp(fluid: {originalName: {eq: "sundowner.jpg"}}) {
       fluid(maxWidth: 500) {
         ...GatsbyImageSharpFluid

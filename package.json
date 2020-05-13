@@ -28,6 +28,7 @@
     "gatsby-plugin-transition-link": "^1.18.0",
     "gatsby-remark-images": "^3.3.2",
     "gatsby-remark-prismjs": "^3.5.1",
+    "gatsby-source-faunadb": "^1.0.0",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-csv": "^2.2.4",
     "gatsby-transformer-json": "^2.3.1",
