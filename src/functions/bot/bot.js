@@ -1,5 +1,6 @@
 const Telegraf = require("telegraf");
 const Stage = require("telegraf/stage");
+const Markup = require("telegraf/markup");
 const session = require("telegraf/session");
 const WizardScene = require("telegraf/scenes/wizard");
 
@@ -9,57 +10,79 @@ bot.start((ctx) => {
   ctx.reply(`Bienvenidos al geodaveyBot!`);
 });
 
-bot.command("chat_id", (ctx) => {
-  ctx.reply(`Chat ID: ${ctx.update.message.chat.id}`);
-});
-
 //
 // update Loc
 //
-
-const updateLoc = new WizardScene(
-  "update_loc",
-  (ctx) => {
-    ctx.reply("Where are you?");
-    return ctx.wizard.next();
-  },
-  (ctx) => {
-    // validation
-    if (typeof ctx.message.location === "undefined") {
-      ctx.wizard.back();
-      return ctx.wizard.steps[ctx.wizard.cursor](ctx);
-    }
-
-    ctx.wizard.state.location = ctx.message.location;
-
-    ctx.reply("What is the location name?");
-    return ctx.wizard.next();
-  },
-  (ctx) => {
-    ctx.wizard.state.loc_name = ctx.message.text.trim();
-    return ctx.wizard.next();
-  },
-  (ctx) => {
-    let state = ctx.wizard.state;
-
-    ctx.reply(
-      `Location: ${state.location.longitude}, ${state.location.latitude}\n` +
-        `Name: ${state.loc_name}`
-    );
-
-    return ctx.scene.leave();
-  }
-);
-
-const stage = new Stage([updateLoc]);
-
-bot.use(session());
-bot.use(stage.middleware());
 
 bot.command("update_loc", (ctx) => {
   ctx.scene.enter("update_loc");
 });
 
+const updateLoc = new WizardScene(
+  "update_loc",
+  // Ask for location
+  (ctx) => {
+    ctx.reply("Where are you?");
+    return ctx.wizard.next();
+  },
+  // Validate location
+  (ctx) => {
+    if (typeof ctx.message.location === "undefined") ctx.wizard.back();
+    else ctx.wizard.next();
+
+    return ctx.wizard.steps[ctx.wizard.cursor](ctx);
+  },
+  // Ask for location name
+  (ctx) => {
+    ctx.wizard.state.location = ctx.message.location;
+
+    ctx.reply("What is the location name?");
+    return ctx.wizard.next();
+  },
+  // Validate location name
+  (ctx) => {
+    ctx.wizard.state.loc_name = ctx.message.text.trim();
+    return ctx.wizard.next();
+  },
+  // Ask for verification
+  (ctx) => {
+    let state = ctx.wizard.state;
+
+    ctx.reply(
+      `Is this OK?\n` +
+        `ULOC: ${state.location.longitude}, ${state.location.latitude}\n` +
+        `UNAM: ${state.loc_name}`,
+      Markup.inlineKeyboard([
+        Markup.callbackButton("Yes", "submit_loc"),
+        Markup.callbackButton("No", "discard_loc"),
+      ])
+    );
+  }
+);
+
+bot.action("submit_loc", (ctx) => {
+  ctx.reply("Saved!");
+  let state = ctx.wizard.state;
+  console.log(state);
+  return ctx.scene.leave();
+});
+
+bot.action("discard_loc", (ctx) => {
+  ctx.reply("(discarded)");
+  return ctx.scene.leave();
+});
+
+// Initialize bot with session & stage middleware
+const stage = new Stage([updateLoc]);
+bot.use(session());
+bot.use(stage.middleware());
+
+// Reply with Chat ID
+bot.command("chat_id", (ctx) => {
+  ctx.reply(`Chat ID: ${ctx.update.message.chat.id}`);
+});
+
+// Netlify process webhook from Telegram API
 exports.handler = async (event, context, callback) => {
   try {
     let body = event.body == "" ? {} : JSON.parse(event.body);
