@@ -68,7 +68,8 @@ const updateLoc = new WizardScene(
 const stage = new Stage([updateLoc]);
 
 stage.action("submit_loc", ctx => {
-    ctx.reply("Saved!");
+    console.log("state", ctx.wizard.state);
+    ctx.reply(`Saved! ${ctx.wizard.state.loc_name}`);
 })
 
 stage.action("discard_loc", ctx => {
