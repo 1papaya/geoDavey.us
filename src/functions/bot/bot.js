@@ -9,6 +9,7 @@ bot.start((ctx) => {
 
 exports.handler = async (event, context, callback) => {
   try {
+      console.log("event", event);
     await bot.handleUpdate(JSON.parse(event.body));
     callback(null, {
       statusCode: 200,
