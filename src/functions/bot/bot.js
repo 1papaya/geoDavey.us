@@ -38,7 +38,9 @@ const updateLoc = new WizardScene(
   // Validate location name
   (ctx) => {
     ctx.wizard.state.loc_name = ctx.message.text.trim();
-    return ctx.wizard.next();
+
+    ctx.wizard.next();
+    return ctx.wizard.steps[ctx.wizard.cursor](ctx);
   },
   // Ask for verification
   (ctx) => {
