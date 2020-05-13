@@ -50,7 +50,7 @@ const updateLoc = new WizardScene(
       `Is this OK?\n` +
         `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
         `NAM: ${state.loc_name}`,
-      Markup.inlineKeyboard([
+      Markup.keyboard([
         Markup.button("Yes"),
         Markup.button("No"),
       ]).oneTime().extra()
