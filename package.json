@@ -51,6 +51,7 @@
     "react-resize-detector": "^4.2.3",
     "react-spinners": "^0.8.1",
     "react-typography": "^0.16.19",
+    "request": "^2.88.2",
     "tailwindcss": "^1.4.5",
     "telegraf": "^3.38.0",
     "topojson": "^3.0.2",

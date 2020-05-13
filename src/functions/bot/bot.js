@@ -18,8 +18,18 @@ const updateLoc = new WizardScene(
   "update_loc",
   // Ask for location
   (ctx) => {
-    ctx.reply("Where are you?");
-    return ctx.wizard.next();
+    // Only allow to be updated from admin chat
+    if (parseInt(ctx.message.chat.id) === parseInt(process.env.TELEGRAM_ADMIN_CHATID))
+    {
+      ctx.reply("Where are you?");
+      return ctx.wizard.next();
+    }
+    else
+    {
+      ctx.reply("Sorry bud, admins only!");
+      return ctx.scene.leave();
+    }
+
   },
   // Validate location
   (ctx) => {
@@ -79,8 +89,6 @@ const stage = new Stage([updateLoc]);
 
 bot.use(session());
 bot.use(stage.middleware());
-
-// Actions
 
 // Commands
 bot.command("update_loc", (ctx) => {

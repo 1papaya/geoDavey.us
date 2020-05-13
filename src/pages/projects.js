@@ -29,6 +29,7 @@ export default (props) => {
             </div>
           </div>
         </div>
+
         {projects.map((p, idx) => {
           const md = p.childMdx;
           const meta = md.frontmatter;
@@ -40,7 +41,6 @@ export default (props) => {
 
           let mdBgOpacity =
             (idx + 1) % 4 in [0, 1] ? "md:bg-opacity-50" : "md:bg-opacity-75";
-          //bg opacity
 
           return (
             <div
