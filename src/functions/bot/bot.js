@@ -48,8 +48,8 @@ const updateLoc = new WizardScene(
 
     ctx.reply(
       `Is this OK?\n` +
-        `ULOC: ${state.location.longitude}, ${state.location.latitude}\n` +
-        `UNAM: ${state.loc_name}`,
+        `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
+        `NAM: ${state.loc_name}`,
       Markup.inlineKeyboard([
         Markup.callbackButton("Yes", "submit_loc"),
         Markup.callbackButton("No", "discard_loc"),
@@ -60,24 +60,25 @@ const updateLoc = new WizardScene(
   },
   // Handle full form response
   (ctx) => {
-    let state = ctx.wizard.state;
-
-    if (ctx.message.text == "submit_loc") {
-        ctx.reply("Saved!");
-        console.log(state);
-    }
-    else {
-        ctx.reply("(discarded)");
-    }
-
     return ctx.scene.leave();
   }
 );
 
 // Initialize bot with session & stage middleware
 const stage = new Stage([updateLoc]);
+
+stage.action("submit_loc", ctx => {
+    ctx.reply("Saved!");
+})
+
+stage.action("discard_loc", ctx => {
+    ctx.reply("Discarded!");
+})
+
 bot.use(session());
 bot.use(stage.middleware());
+
+// Actions
 
 // Commands
 bot.command("update_loc", (ctx) => {
