@@ -30,21 +30,21 @@ const updateLoc = new WizardScene(
   },
   // Ask for location name
   (ctx) => {
-    ctx.session.state.location = ctx.message.location;
+    ctx.wizard.state.location = ctx.message.location;
 
     ctx.reply("What is the location name?");
     return ctx.wizard.next();
   },
   // Validate location name
   (ctx) => {
-    ctx.session.state.loc_name = ctx.message.text.trim();
+    ctx.wizard.state.loc_name = ctx.message.text.trim();
 
     ctx.wizard.next();
     return ctx.wizard.steps[ctx.wizard.cursor](ctx);
   },
   // Ask for verification
   (ctx) => {
-    let state = ctx.session.state;
+    let state = ctx.wizard.state;
 
     ctx.reply(
       `Is this OK?\n` +
@@ -58,21 +58,21 @@ const updateLoc = new WizardScene(
 
     return ctx.wizard.next();
   },
-  // process datt
+  // Handle full form response
   (ctx) => {
+    let state = ctx.wizard.state;
+
+    if (ctx.message.text == "submit_loc") {
+        ctx.reply("Saved!");
+        console.log(state);
+    }
+    else {
+        ctx.reply("(discarded)");
+    }
+
     return ctx.scene.leave();
   }
 );
-
-bot.action("submit_loc", (ctx) => {
-  ctx.reply("Saved!");
-  let state = ctx.session.state;
-  console.log(state);
-});
-
-bot.action("discard_loc", (ctx) => {
-  ctx.reply("(discarded)");
-});
 
 // Initialize bot with session & stage middleware
 const stage = new Stage([updateLoc]);
