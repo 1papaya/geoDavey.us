@@ -16,7 +16,7 @@ bot.command("chat_id", (ctx) => {
 // update Loc
 //
 
-const updateLoc = WizardScene(
+const updateLoc = new WizardScene(
     "update_loc",
     ctx => {
         ctx.reply("Where are you?");
