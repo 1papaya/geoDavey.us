@@ -25,10 +25,9 @@ const updateLoc = new WizardScene(
     },
     ctx => {
         ctx.wizard.state.location = ctx.message.location;
-        ctx.reply(`Location: ${ctx.message.location}`);
-        console.dir("message", ctx.message);
+        ctx.reply(`Location: (lat) ${ctx.message.location.latitude} (lon) ${ctx.message.location.longitude}`);
         console.log("location", ctx.message.location);
-        returnctx.scene.leave();
+        return ctx.scene.leave();
     }
 );
 
