@@ -53,7 +53,7 @@ const updateLoc = new WizardScene(
       Markup.inlineKeyboard([
         Markup.callbackButton("Yes", "submit_loc"),
         Markup.callbackButton("No", "discard_loc"),
-      ])
+      ]).extra()
     );
   },
   (ctx) => {
