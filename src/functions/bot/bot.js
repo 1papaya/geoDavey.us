@@ -74,22 +74,19 @@ const updateLoc = new WizardScene(
     let state = ctx.wizard.state; // { longitude, latitude, loc_name }
 
     if (ctx.message.text == "Yes") {
-
       // Add to FaunaDB
-      try {
-        let resp = await db.query(
-          q.Create(
-            q.Collection('now'),
-            { data: state }
-          )
-        );
-      } catch (err) {
-        ctx.reply("Error! Sorry, bud");
-        return ctx.scene.leave();
-      }
+      db.query(q.Collection("now"), { data: state })
+        .then((resp) => {
+          console.log(resp);
+          console.dir(resp);
+        })
+        .catch((err) => {
+          ctx.reply("Error! Sorry, bud");
+          return ctx.scene.leave();
+        });
 
       // Trigger rebuild
-      
+
       ctx.reply("Saved!");
       console.log(state);
     } else {
