@@ -58,7 +58,7 @@ const updateLoc = new WizardScene(
 
     ctx.reply(
       `Is this OK?\n` +
-        `LOC: ${state.location.longitude}, ${state.location.latitude}\n` +
+        `LOC: ${state.longitude}, ${state.latitude}\n` +
         `NAM: ${state.loc_name}`,
       Markup.keyboard([Markup.button("Yes"), Markup.button("No")])
         .oneTime()
