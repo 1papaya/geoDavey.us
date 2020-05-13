@@ -30,25 +30,26 @@ const updateLoc = new WizardScene(
   },
   // Ask for location name
   (ctx) => {
-    ctx.state.location = ctx.message.location;
+    ctx.session.state.location = ctx.message.location;
 
     ctx.reply("What is the location name?");
     return ctx.wizard.next();
   },
   // Validate location name
   (ctx) => {
-    ctx.state.loc_name = ctx.message.text.trim();
+    ctx.session.state.loc_name = ctx.message.text.trim();
 
     ctx.wizard.next();
     return ctx.wizard.steps[ctx.wizard.cursor](ctx);
   },
   // Ask for verification
   (ctx) => {
+    let state = ctx.session.state;
 
     ctx.reply(
       `Is this OK?\n` +
-        `ULOC: ${ctx.state.location.longitude}, ${ctx.state.location.latitude}\n` +
-        `UNAM: ${ctx.state.loc_name}`,
+        `ULOC: ${state.location.longitude}, ${state.location.latitude}\n` +
+        `UNAM: ${state.loc_name}`,
       Markup.inlineKeyboard([
         Markup.callbackButton("Yes", "submit_loc"),
         Markup.callbackButton("No", "discard_loc"),
@@ -57,7 +58,7 @@ const updateLoc = new WizardScene(
 
     return ctx.wizard.next();
   },
-  // Upload !
+  // process datt
   (ctx) => {
     return ctx.scene.leave();
   }
@@ -65,7 +66,8 @@ const updateLoc = new WizardScene(
 
 bot.action("submit_loc", (ctx) => {
   ctx.reply("Saved!");
-  console.log(ctx.state);
+  let state = ctx.session.state;
+  console.log(state);
 });
 
 bot.action("discard_loc", (ctx) => {
