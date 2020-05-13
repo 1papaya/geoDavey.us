@@ -1,5 +1,6 @@
 const Telegraf = require("telegraf");
 const Stage = require('telegraf/stage');
+const session = require('telegraf/session');
 const WizardScene = require("telegraf/scenes/wizard");
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
@@ -33,6 +34,7 @@ const updateLoc = new WizardScene(
 
 const stage = new Stage([updateLoc]);
 
+bot.use(session());
 bot.use(stage.middleware());
 
 bot.command("update_loc", ctx => {
