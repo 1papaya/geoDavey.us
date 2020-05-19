@@ -17,8 +17,8 @@ const Code = (props) => {
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className="text-xs p-2"
-          style={{ ...style, marginLeft: "-.5rem", marginRight: "-.5rem" }}
+          className="text-xs p-2 overflow-x-auto"
+          style={{ ...style }}
         >
           {tokens.map((line, i) => {
             if (i !== tokens.length - 1)
