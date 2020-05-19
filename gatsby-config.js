@@ -71,14 +71,6 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-source-faunadb`,
-      options: {
-        secret: process.env.FAUNA_SECRET_KEY,
-        index: `now`,
-        type: "now",
-      },
-    },
     `gatsby-transformer-csv`,
     {
       resolve: `gatsby-plugin-sass`,

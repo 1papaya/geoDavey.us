@@ -15,7 +15,7 @@ export default (props) => {
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
-      {mapNodes.map((p) => {
+        {mapNodes.map((p) => {
           let md = p.childMdx;
           let meta = md.frontmatter;
 
@@ -54,19 +54,25 @@ export default (props) => {
                 </div>
               </div>
 
-              <div className="text-sm bg-white border-t pb-1 pr-1 pl-1">{meta.blurb}</div>
+              <div className="text-sm bg-white border-t pb-1 pr-1 pl-1">
+                {meta.blurb}
+              </div>
             </div>
           );
         })}
       </div>
     </PageContent>
   );
-}
+};
 
 export const pageQuery = graphql`
   query {
     maps: allFile(
-      filter: { sourceInstanceName: { eq: "maps_md" }, ext: { eq: ".md" } }
+      filter: {
+        sourceInstanceName: { eq: "maps_md" }
+        ext: { eq: ".md" }
+        childMdx: { frontmatter: { display: { eq: true } } }
+      }
       sort: { fields: childMdx___frontmatter___date, order: DESC }
     ) {
       nodes {
