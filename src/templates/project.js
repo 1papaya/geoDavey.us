@@ -12,15 +12,19 @@ export default ({ data }) => {
   return (
     <PageContent width={570} className="p-0 md:p-2">
       {meta.image && (
-        <Img
-          className="w-full"
-          fluid={meta.image.childImageSharp.fluid}
-        />
+        <div className="w-full">
+          <Img className="w-full" fluid={meta.image.childImageSharp.fluid} />
+          <div className="text-sm text-center text-gray-700 italic">(pic: {meta.caption})</div>
+        </div>
       )}
       <div className="p-1 md:p-0">
-        <div className="text-2xl md:text-3xl font-barlow text-bold">{meta.title}</div>
+        <div className="text-2xl md:text-3xl font-barlow text-bold">
+          {meta.title}
+        </div>
         <div className="flex text-xs  mb-2">
-          <div className="flex-grow">tags: <span className="text-gray-700">{meta.tags.join(" ")}</span></div>
+          <div className="flex-grow">
+            tags: <span className="text-gray-700">{meta.tags.join(" ")}</span>
+          </div>
           <div className="flex-grow text-right">{meta.date}</div>
         </div>
         <div className="text-sm  border-t border-white">
@@ -44,6 +48,7 @@ export const pageQuery = graphql`
             }
           }
         }
+        caption
         tags
         slug
         title

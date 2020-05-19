@@ -79,7 +79,7 @@ export default (props) => {
       </div>
     </PageContent>
   );
-}
+};
 
 export const pageQuery = graphql`
   query {
@@ -112,6 +112,7 @@ export const pageQuery = graphql`
                 }
               }
             }
+            caption
             date(formatString: "DD MMM YYYY")
             slug
             title

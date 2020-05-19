@@ -3,6 +3,7 @@ title: Dubai Urban Sprawl
 slug: sprawl
 url: /proj/dubai-sprawl/
 image: ./img/sprawl.jpg
+caption: "Sko Buffs"
 date: 2016-01-01
 tags: ["grass", "gdal", "landsat", "bash"]
 

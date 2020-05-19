@@ -3,6 +3,7 @@ title: geoDavey.us v2.0
 slug: welcome-to-geoDavey-us-v2-0
 url: /proj/geodavey-us/
 image: img/los-leones.jpg
+caption: "Sko Buffs"
 date: 2020-04-29
 tags: ["javascript", "react", "gatsby", "tailwind"]
 

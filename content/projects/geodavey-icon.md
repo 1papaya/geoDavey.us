@@ -3,6 +3,7 @@ title: The Making of an Icon
 slug: geodavey-icon
 url: /proj/geodavey-icon/
 image: img/geodavey-icon.jpg
+caption: "Sko Buffs"
 date: 2020-04-29
 tags: ["javascript", "d3", "openlayers"]
 
