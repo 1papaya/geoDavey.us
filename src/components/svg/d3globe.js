@@ -8,11 +8,6 @@ import { timer } from "d3-timer";
 import landTopo from "../../data/land-110m.json";
 import silData from "../../data/silhouette.json";
 
-// start animation on random place on the globe
-// animate rotation for a few seconds
-// start to shrink globe, while growing silhouette
-// stop animation
-
 const D3Globe = (props) => {
   const waypointsRef = useRef();
   const svgRef = useRef();
@@ -27,7 +22,8 @@ const D3Globe = (props) => {
 
     let proj = geoOrthographic()
       .scale(width / 2 - props.ringWidth * 2)
-      .translate([width / 2, width / 2]);
+      .translate([width / 2, width / 2])
+      .rotate([props.xOffset, props.vTilt, props.hTilt]);
 
     let path = geoPath().projection(proj);
 
@@ -68,16 +64,6 @@ const D3Globe = (props) => {
       .attr("d", path)
       .style("fill", props.colors.land)
       .style("opacity", "1");
-
-    // add graticule lines
-    let graticule = svg
-      .append("path")
-      .datum(geoGraticule())
-      .attr("class", "graticule rotate")
-      .attr("d", path)
-      .style("fill", "transparent")
-      .style("stroke", props.colors.graticule)
-      .style("opacity", "0");
 
     // silhouette clip path
     svg
@@ -147,7 +133,7 @@ D3Globe.defaultProps = {
   hTilt: 0,
   ringWidth: 10,
   xOffset: 70,
-  fps: 30,
+  fps: 10,
   silhouetteScale: 0.25,
   colors: {
     outerRing: "#ef3147",
