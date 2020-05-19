@@ -26,7 +26,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 3.2;
+    const pausLength = 4.2;
     const animLength = 2;
 
     //props.dispatch({ type: "TRANSITION_START" });
@@ -74,7 +74,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
   return (
     <div
-      className={`flex mx-auto w-full bg-standard justify-center items-center min-h-screen ${
+      className={`flex mx-auto w-full bg-standard justify-center items-center h-screen min-h-screen-fix ${
         isPreloaded ? "" : "preloading"
       }`}
       css={css`
