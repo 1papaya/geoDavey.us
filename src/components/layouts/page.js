@@ -74,7 +74,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
   return (
     <div
-      className={`flex mx-auto w-full bg-standard justify-center items-center min-h-screen min-h-screen-fix ${
+      className={`flex mx-auto w-full bg-standard justify-center items-center min-h-screen ${
         isPreloaded ? "" : "preloading"
       }`}
       css={css`
