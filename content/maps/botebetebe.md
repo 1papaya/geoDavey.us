@@ -1,7 +1,7 @@
 ---
 title: Swazi Complete Footbridges
 slug: botebetebe
-url: /botebetebe
+url: /map/botebetebe
 image: ./img/botebetebe.jpg
 
 github: 1papaya/ol-botebetebe

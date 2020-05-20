@@ -17,10 +17,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const contentParentRef = useRef(null);
 
   const [isPreloaded, setIsPreloaded] = useState(false);
+  const isMap = props.location.pathname.indexOf("/map/") !== -1;
 
-  // back path: props.location.state.prevPath
-
-  // splash animation
+  // splash animation for regular page
   useEffect(() => {
     const parent = contentParentRef.current;
     const logo = logoRef.current;
@@ -99,83 +98,86 @@ const PageLayout = connect(mapStateToProps)((props) => {
           className="fixed z-50 bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
         />
       )}
-      <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
-        <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
-          <PageTransitionLink
-            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
-            to="/"
-            activeClassName="font-bold"
-          >
-            <span>home</span>
-          </PageTransitionLink>
-
-          <PageTransitionLink
-            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/maps/"
-            activeClassName="font-bold"
-          >
-            <span>maps</span>
-          </PageTransitionLink>
-          <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
-            <div
-              ref={logoRef}
-              className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
+      {isMap && <div ref={contentParentRef}><div ref={logoRef}></div>sko buffs</div>}
+      {!isMap && (
+        <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+          <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
+            <PageTransitionLink
+              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
+              to="/"
+              activeClassName="font-bold"
             >
-              <D3Globe
-                className="absolute w-full h-full"
-                silhouetteScale={0.47}
-              />
-            </div>
-          </div>
-          <PageTransitionLink
-            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/projects/"
-            activeClassName="font-bold"
-          >
-            <span>projects</span>
-          </PageTransitionLink>
-          <PageTransitionLink
-            className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-            to="/contact/"
-            activeClassName="font-bold"
-          >
-            <span>about</span>
-          </PageTransitionLink>
-        </div>
+              <span>home</span>
+            </PageTransitionLink>
 
-        <div
-          ref={contentParentRef}
-          className="flex fade-in flex-col md:justify-center"
-        >
-          <div
-            ref={contentRef}
-            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
-            style={{
-              background: "rgba(0,0,0,0.075)",
-            }}
-          >
-            {props.children}
-
-            <div
-              className="fine-print hidden absolute right-0 text-right text-gray-500 text-sm"
-              style={{ top: "100%" }}
+            <PageTransitionLink
+              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+              to="/maps/"
+              activeClassName="font-bold"
             >
-              ¡{" "}
-              <PageTransitionLink
-                css={css`
-                  &:hover {
-                    text-decoration: underline;
-                  }
-                `}
-                to="/gratitude/"
+              <span>maps</span>
+            </PageTransitionLink>
+            <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
+              <div
+                ref={logoRef}
+                className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
               >
-                viva la open source
-              </PageTransitionLink>{" "}
-              !
+                <D3Globe
+                  className="absolute w-full h-full"
+                  silhouetteScale={0.47}
+                />
+              </div>
+            </div>
+            <PageTransitionLink
+              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+              to="/projects/"
+              activeClassName="font-bold"
+            >
+              <span>projects</span>
+            </PageTransitionLink>
+            <PageTransitionLink
+              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
+              to="/contact/"
+              activeClassName="font-bold"
+            >
+              <span>about</span>
+            </PageTransitionLink>
+          </div>
+
+          <div
+            ref={contentParentRef}
+            className="flex fade-in flex-col md:justify-center"
+          >
+            <div
+              ref={contentRef}
+              className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
+              style={{
+                background: "rgba(0,0,0,0.075)",
+              }}
+            >
+              {props.children}
+
+              <div
+                className="fine-print hidden absolute right-0 text-right text-gray-500 text-sm"
+                style={{ top: "100%" }}
+              >
+                ¡{" "}
+                <PageTransitionLink
+                  css={css`
+                    &:hover {
+                      text-decoration: underline;
+                    }
+                  `}
+                  to="/gratitude/"
+                >
+                  viva la open source
+                </PageTransitionLink>{" "}
+                !
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 });

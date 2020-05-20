@@ -46,26 +46,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // MAPS
   //
 
-  const maps = await graphql(`
-    query {
-      allFile(
-        filter: { sourceInstanceName: { eq: "maps_js" }, ext: { eq: ".js" } }
-      ) {
-        nodes {
-          absolutePath
-          name
-        }
-      }
-    }
-  `);
+  //const maps = await graphql(`
+  //  query {
+  //    allFile(
+  //      filter: { sourceInstanceName: { eq: "maps_js" }, ext: { eq: ".js" } }
+  //    ) {
+  //      nodes {
+  //        absolutePath
+  //        name
+  //      }
+  //    }
+  //  }
+  //`);
 
   // make route for maps on top level (ex. gdv.us/map-name)
-  maps.data.allFile.nodes.forEach((node) => {
-    createPage({
-      path: `${node.name}`,
-      component: node.absolutePath,
-    });
-  });
+  //maps.data.allFile.nodes.forEach((node) => {
+  //  createPage({
+  //    path: `${node.name}`,
+  //    component: node.absolutePath,
+  //  });
+  //});
 };
 
 const options = {
