@@ -98,7 +98,11 @@ export const pageQuery = graphql`
     }
 
     projects: allFile(
-      filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
+      filter: {
+        sourceInstanceName: { eq: "projects" }
+        ext: { eq: ".md" }
+        childMdx: { frontmatter: { display: { eq: true } } }
+      }
       sort: { fields: childMarkdownRemark___frontmatter___date, order: DESC }
     ) {
       nodes {
@@ -107,7 +111,7 @@ export const pageQuery = graphql`
             blurb
             image {
               childImageSharp {
-                fluid(maxWidth: 512, maxHeight: 512) {
+                fluid(maxWidth: 512, maxHeight: 512, cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid
                 }
               }

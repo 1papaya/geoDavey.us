@@ -1,9 +1,12 @@
 ---
 title: eSwatini Footbridge Program
+subtitle: 1Love in the G Funk Era
 slug: eswatini-program
 url: /proj/eswatini-program/
-image: ./img/edlangeni.jpg
-caption: "Sko Buffs"
+image: ./img/matangheni.jpg
+caption: "Matangheni Footbridge Inauguration, July 2019"
+
+display: true
 
 date: 2016-01-01
 tags: ["initiative", "luck", "1love"]

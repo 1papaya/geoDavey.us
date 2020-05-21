@@ -11,7 +11,7 @@ export default (props) => {
   let mapNodes = props.data.maps.nodes;
 
   return (
-    <PageContent width={800} className="md:p-1">
+    <PageContent width={400} className="md:p-1">
       <SEO title="maps" />
 
       <div className="maps flex flex-col md:flex-row md:flex-wrap">
@@ -20,7 +20,7 @@ export default (props) => {
           let meta = md.frontmatter;
 
           return (
-            <div key={meta.slug} className="post w-full md:p-1 md:w-1/2">
+            <div key={meta.slug} className="post w-full md:p-1 md:w-full">
               <div className="relative w-full" style={{ paddingBottom: "75%" }}>
                 <Img
                   className="absolute w-full h-full"
@@ -34,10 +34,10 @@ export default (props) => {
                 </div>
               </div>
               <div className="flex bg-white p-1">
-                <div className="flex items-center text-xs text-gray-800">
+                <div className="flex flex-grow items-center text-xs text-gray-800">
                   {meta.tags.join(" ")}
                 </div>
-                <div className="flex-grow text-xs text-right">
+                <div className="flex items-center whitespace-no-wrap text-xs text-right">
                   <a
                     className="inline-block text-white bg-red-700 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
                     href={`https://github.com/${meta.github}`}
@@ -46,7 +46,7 @@ export default (props) => {
                     view source
                   </a>{" "}
                   <PageTransitionLink
-                    className="inline-block text-white bg-green-700 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
+                    className="inline-block text-white bg-green-700 ml-1 pt-1 pb-1 pl-2 pr-2 bg-opacity-75 rounded-md border-1"
                     to={meta.url}
                   >
                     open map

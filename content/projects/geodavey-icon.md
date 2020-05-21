@@ -3,10 +3,11 @@ title: The Making of an Icon
 slug: geodavey-icon
 url: /proj/geodavey-icon/
 image: img/geodavey-icon.jpg
-caption: "Sko Buffs"
+caption: "First rendition of geoDavey icon, with OpenLayers"
 date: 2020-04-29
 tags: ["javascript", "d3", "openlayers"]
 
+display: true
 blurb: 'Building the geoDavey animated globe icon: A journey from a massive granite mountaintop in Swaziland, through the lush forests of Adobe Illustrator and Photoshop, to the fertile land of OpenLayers and D3'
 ---
 

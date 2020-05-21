@@ -12,7 +12,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     query {
       allProjects: allFile(
-        filter: { sourceInstanceName: { eq: "projects" }, ext: { eq: ".md" } }
+        filter: {
+          sourceInstanceName: { eq: "projects" }
+          ext: { eq: ".md" }
+          childMarkdownRemark: { frontmatter: { display: { eq: true } } }
+        }
       ) {
         nodes {
           childMarkdownRemark {
@@ -71,7 +75,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 const options = {
   secret: process.env.FAUNA_SECRET_KEY,
   index: "now",
-  type: "now"
+  type: "now",
 };
 
 const faunadb = require("faunadb");
@@ -85,7 +89,7 @@ exports.sourceNodes = async (
   const { secret, type, index, arguments: args = [] } = {
     secret: process.env.FAUNA_SECRET_KEY,
     index: "now",
-    type: "now"
+    type: "now",
   };
 
   const client = new faunadb.Client({ secret });
@@ -103,10 +107,10 @@ exports.sourceNodes = async (
         )
       )
     );
-    
+
     console.log(documents);
 
-    documents.forEach(document => {
+    documents.forEach((document) => {
       const id = document.ref.id || document.ref["@ref"].id;
       if (document.data == null) {
         return;
@@ -122,8 +126,8 @@ exports.sourceNodes = async (
         internal: {
           type: type,
           content: JSON.stringify(document.data),
-          contentDigest: createContentDigest(document.data)
-        }
+          contentDigest: createContentDigest(document.data),
+        },
       });
     });
   } catch (err) {

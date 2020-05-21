@@ -7,5 +7,7 @@ caption: "Sko Buffs"
 date: 2019-09-01
 tags: ["python", "openstreetmap", "osrm"]
 
+display: true
+
 blurb: Ngiyathandza em sebendini :)
 ---

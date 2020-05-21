@@ -98,7 +98,11 @@ const PageLayout = connect(mapStateToProps)((props) => {
           className="fixed z-50 bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
         />
       )}
-      {isMap && <div ref={contentParentRef}><div ref={logoRef}></div>sko buffs</div>}
+      {isMap && (
+        <div ref={contentParentRef}>
+          <div ref={logoRef}></div>sko buffs
+        </div>
+      )}
       {!isMap && (
         <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
           <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
@@ -156,24 +160,6 @@ const PageLayout = connect(mapStateToProps)((props) => {
               }}
             >
               {props.children}
-
-              <div
-                className="fine-print hidden absolute right-0 text-right text-gray-500 text-sm"
-                style={{ top: "100%" }}
-              >
-                ¡{" "}
-                <PageTransitionLink
-                  css={css`
-                    &:hover {
-                      text-decoration: underline;
-                    }
-                  `}
-                  to="/gratitude/"
-                >
-                  viva la open source
-                </PageTransitionLink>{" "}
-                !
-              </div>
             </div>
           </div>
         </div>

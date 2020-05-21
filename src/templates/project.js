@@ -14,12 +14,13 @@ export default ({ data }) => {
       {meta.image && (
         <div className="w-full">
           <Img className="w-full" fluid={meta.image.childImageSharp.fluid} />
-          <div className="text-sm text-center text-gray-700 italic">(pic: {meta.caption})</div>
+          <div className="text-xs md:text-sm text-center text-gray-700">pic: {meta.caption}</div>
         </div>
       )}
       <div className="p-1 md:p-0">
-        <div className="text-2xl md:text-3xl font-barlow text-bold">
-          {meta.title}
+        <div className="">
+          <div className="font-barlow text-bold text-2xl md:text-3xl leading-none">{meta.title}</div>
+          <div className="md:text-md text-gray-900">{meta.subtitle}</div>          
         </div>
         <div className="flex text-xs  mb-2">
           <div className="flex-grow">
@@ -52,6 +53,7 @@ export const pageQuery = graphql`
         tags
         slug
         title
+        subtitle
       }
       body
     }
