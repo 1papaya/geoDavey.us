@@ -10,7 +10,7 @@ export default ({ data }) => {
   const body = data.mdx.body;
 
   return (
-    <PageContent width={570} className="p-0 md:p-2">
+    <PageContent width={520} className="p-0 md:p-2">
       {meta.image && (
         <div className="w-full">
           <Img className="w-full" fluid={meta.image.childImageSharp.fluid} />

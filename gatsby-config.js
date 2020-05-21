@@ -77,6 +77,24 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              width: 500,
+              ratio: 1.77,
+              related: false,
+              noIframeBorder: true,
+              urlOverrides: [
+                {
+                  id: "youtube",
+                  embedURL: (videoId) =>
+                    `https://www.youtube-nocookie.com/embed/${videoId}`,
+                },
+              ],
+              containerClass: "",
+            },
+          },
+          `gatsby-remark-responsive-iframe`,
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 590,
