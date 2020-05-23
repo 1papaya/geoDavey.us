@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-import { PageContent } from "../../components/layouts/page";
+import { MapContent } from "../../components/layouts/page";
 import SEO from "../../components/seo";
 
 import { graphql } from "gatsby";
 
 export default (props) => {
     return (
-      <PageContent>
+      <MapContent>
         <SEO title="pyrenees" />
         Skooo Bufff
-      </PageContent>
+      </MapContent>
     );
   };
 

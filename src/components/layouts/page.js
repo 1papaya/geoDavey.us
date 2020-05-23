@@ -28,8 +28,6 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const pausLength = 4.2;
     const animLength = 2;
 
-    //props.dispatch({ type: "TRANSITION_START" });
-
     // set logo initial
     logo.style.setProperty("width", "310px");
     logo.style.setProperty("height", "310px");
@@ -48,24 +46,36 @@ const PageLayout = connect(mapStateToProps)((props) => {
       setTimeout(() => {
         // (2) trigger logo and content transition
         logo.style.setProperty("transition", `all ${animLength}s`);
-        parent.style.setProperty("width", `${pWidth}px`);
-        parent.style.setProperty("height", `${pHeight}px`);
 
-        // (3) commit style changes, release logo w/h changes
-        requestAnimationFrame(() => {
-          logo.style.removeProperty("height");
-          logo.style.removeProperty("width");
-        });
+        if (!isMap) {
+          parent.style.setProperty("width", `${pWidth}px`);
+          parent.style.setProperty("height", `${pHeight}px`);
 
-        // (4) on animation finish release content style changes
-        setTimeout(() => {
-          parent.style.setProperty("width", "auto");
-          parent.style.setProperty("height", "auto");
-          parent.style.setProperty("overflow", "visible");
+          // (3) commit style changes, release logo w/h changes
+          requestAnimationFrame(() => {
+            logo.style.removeProperty("height");
+            logo.style.removeProperty("width");
+          });
 
-          setIsPreloaded(true);
-        }, animLength * 1000);
+          // (4) on animation finish release content style changes
+          setTimeout(() => {
+            parent.style.setProperty("width", "auto");
+            parent.style.setProperty("height", "auto");
+            parent.style.setProperty("overflow", "visible");
 
+            setIsPreloaded(true);
+          }, animLength * 1000);
+        } else {
+          requestAnimationFrame(() => {
+            logo.style.setProperty("opacity", "0");
+            logo.style.setProperty("width", "0px");
+            logo.style.setProperty("height", "0px");
+            
+            setTimeout(() => {  
+              setIsPreloaded(true);
+            }, animLength * 1000);
+          });
+        }
         //props.dispatch({ type: "TRANSITION_END" });
       }, pausLength * 1000);
     });
@@ -98,13 +108,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
           className="fixed z-50 bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
         />
       )}
-      {isMap && (
-        <div ref={contentParentRef}>
-          <div ref={logoRef}></div>sko buffs
-        </div>
-      )}
-      {!isMap && (
-        <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+
+      <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+        {(!isMap || !isPreloaded) && (
           <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
@@ -147,23 +153,23 @@ const PageLayout = connect(mapStateToProps)((props) => {
               <span>about</span>
             </PageTransitionLink>
           </div>
+        )}
 
+        <div
+          ref={contentParentRef}
+          className="flex fade-in flex-col md:justify-center"
+        >
           <div
-            ref={contentParentRef}
-            className="flex fade-in flex-col md:justify-center"
+            ref={contentRef}
+            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
+            style={{
+              background: "rgba(0,0,0,0.075)",
+            }}
           >
-            <div
-              ref={contentRef}
-              className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
-              style={{
-                background: "rgba(0,0,0,0.075)",
-              }}
-            >
-              {props.children}
-            </div>
+            {props.children}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 });
@@ -184,8 +190,20 @@ PageContent.defaultProps = {
   className: "p-2",
 };
 
+const MapContent = (props) => {
+  return (
+    <div
+      className={`page-content fixed top-0 left-0 w-full h-full`}
+      style={{ width: props.width }}
+    >
+      {props.children}
+    </div>
+  );
+};
+
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
+  let isMap = props.to.indexOf("/map/") !== -1;
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -229,21 +247,39 @@ const PageTransitionLink = connect()((props) => {
         // hide the content during animation, for performance
         tlEdges.style.setProperty("display", "none");
 
-        // commit style changes. transition to new w/h
-        requestAnimationFrame(() => {
-          container.style.setProperty("width", `${newWidth}px`);
-          container.style.setProperty("height", `${newHeight}px`);
-        });
+        if (!isMap) {
+          // commit style changes. transition to new w/h
+          requestAnimationFrame(() => {
+            container.style.setProperty("width", `${newWidth}px`);
+            container.style.setProperty("height", `${newHeight}px`);
+          });
 
-        // remove transitioning class after animation complete
-        // and set let container size be dynamic again in case of resize
-        setTimeout(() => {
-          tlEdges.style.setProperty("display", "initial");
-          container.style.setProperty("width", `auto`);
-          container.style.setProperty("height", `auto`);
+          // remove transitioning class after animation complete
+          // and set let container size be dynamic again in case of resize
+          setTimeout(() => {
+            tlEdges.style.setProperty("display", "initial");
+            container.style.setProperty("width", `auto`);
+            container.style.setProperty("height", `auto`);
 
-          props.dispatch({ type: "TRANSITION_END" });
-        }, props.duration * 1000);
+            props.dispatch({ type: "TRANSITION_END" });
+          }, props.duration * 1000);
+        } else {
+          container.style.setProperty("margin", "0", "important");
+
+          requestAnimationFrame(() => {
+            container.style.setProperty("width", `100vw`);
+            container.style.setProperty("height", `100vh`);
+          });
+
+          setTimeout(() => {
+            container.style.removeProperty("margin");
+            tlEdges.style.setProperty("display", "initial");
+            container.style.setProperty("width", `auto`);
+            container.style.setProperty("height", `auto`);
+
+            props.dispatch({ type: "TRANSITION_END" });
+          }, props.duration * 1000);
+        }
       }}
       {...props}
     >
@@ -258,4 +294,4 @@ PageTransitionLink.defaultProps = {
 
 export default PageLayout;
 export { PageTransitionLink };
-export { PageContent };
+export { PageContent, MapContent };

@@ -109,17 +109,26 @@ const D3Globe = (props) => {
 
     // globe rotation
     const rotation = timer((elapsed) => {
-      proj.rotate([-props.speed * elapsed + props.xOffset, props.vTilt, props.hTilt]);
+      proj.rotate([
+        -props.speed * elapsed + props.xOffset,
+        props.vTilt,
+        props.hTilt,
+      ]);
       svg.select(".rotate").attr("d", path);
-    }, 1000/props.fps);
+    }, 1000 / props.fps);
 
-    return () => clearInterval(rotation);
+    // stop rotation when component unmounted
+    return () => {
+      clearInterval(rotation);
+    };
   }, []);
 
-
-
   return (
-    <svg ref={svgRef} className={props.className} style={{ width: props.width, height: props.width }}>
+    <svg
+      ref={svgRef}
+      className={props.className}
+      style={{ width: props.width, height: props.width }}
+    >
       <g ref={waypointsRef}></g>
     </svg>
   );
