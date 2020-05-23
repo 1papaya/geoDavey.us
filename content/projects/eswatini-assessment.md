@@ -9,5 +9,5 @@ display: true
 date: 2019-07-01
 tags: ["opendatakit", "qgis", "osmand", "maptiler"]
 
-blurb: Yebo Akuhulu
+blurb: "Rootsy, community-based national footbridge needs assessment project conducted with the help of open source geo tools"
 ---

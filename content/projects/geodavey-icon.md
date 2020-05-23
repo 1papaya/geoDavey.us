@@ -8,7 +8,7 @@ date: 2020-04-29
 tags: ["javascript", "d3", "openlayers"]
 
 display: true
-blurb: 'Building the geoDavey animated globe icon: A journey from a massive granite mountaintop in Swaziland, through the lush forests of Adobe Illustrator and Photoshop, to the fertile land of OpenLayers and D3'
+blurb: 'Building the geoDavey animated globe icon: A journey from a massive granite mountaintop in Swaziland, through the lush forests of Adobe Illustrator and Photoshop, to the open shores of OpenLayers and D3'
 ---
 
 ## Testing 1, 2, 3

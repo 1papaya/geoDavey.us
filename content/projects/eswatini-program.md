@@ -1,5 +1,5 @@
 ---
-title: eSwatini Footbridge Program
+title: Swaziland Footbridge Program
 subtitle: 1Love in the G Funk Era
 slug: eswatini-program
 url: /proj/eswatini-program/
@@ -11,5 +11,5 @@ display: true
 date: 2016-01-01
 tags: ["initiative", "luck", "1love"]
 
-blurb: Yebo Akuhulu
+blurb: "An extraordinary intercontinental collaboration and triumph of the human spirit. Building bridges with luck, initiative, and a whole lot of love"
 ---

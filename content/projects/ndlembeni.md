@@ -9,5 +9,5 @@ display: true
 date: 2018-07-01
 tags: ["community", "pick-axe", "shovel", "1love"]
 
-blurb: Yebo Akuhulu
+blurb: "Our second footbridge project in Swaziland, wrought with many technical and social challenges, overcome with innovation & style."
 ---

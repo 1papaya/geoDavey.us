@@ -9,5 +9,5 @@ tags: ["python", "openstreetmap", "osrm"]
 
 display: true
 
-blurb: Ngiyathandza em sebendini :)
+blurb: "Python API to compile, serve, and compare routing scenarios with Open Source Routing Machine and OpenStreetMap data. Unlock accessibility and transportation insight with a full open source stack!" 
 ---

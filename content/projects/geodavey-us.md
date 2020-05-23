@@ -8,7 +8,7 @@ date: 2020-04-29
 tags: ["javascript", "react", "gatsby", "tailwind"]
 
 display: true
-blurb: 'Build a custom creative outlet to showcase and promote the development of open source geospatial projects, you say? Sounds like a dream.'
+blurb: 'Creative outlet for open source geo projects, built with mucho love on a new school tech stack. A dream come true. Viva la Open Source!'
 ---
 
 ## Testing 1, 2, 3
