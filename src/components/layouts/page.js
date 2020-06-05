@@ -215,7 +215,7 @@ const PageTransitionLink = connect()((props) => {
     setPrevPath(document.location.pathname);
   }, []);
 
-  let {dispatch, ...passedProps} = props;
+  let { dispatch, ...passedProps } = props;
 
   return (
     <TransitionLink
@@ -291,6 +291,10 @@ const PageTransitionLink = connect()((props) => {
             //window.dispatchEvent(new Event("resize"));
           }, props.duration * 1000);
         }
+
+        setTimeout(() => {
+          dispatch({ type: "TRANSITION_END" });
+        }, props.duration * 1000);
       }}
       {...passedProps}
     >
