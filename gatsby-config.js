@@ -103,6 +103,24 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-source-faunadb`,
+      options: {
+        secret: process.env.FAUNA_SECRET_KEY,
+        index: `allUpdates`,
+        type: "updates",
+        size: 100
+      },
+    },
+    {
+      resolve: `gatsby-source-faunadb`,
+      options: {
+        secret: process.env.FAUNA_SECRET_KEY,
+        index: `allTracks`,
+        type: "tracks",
+        size: 100
+      },
+    },
     `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-purgecss`,

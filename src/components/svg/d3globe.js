@@ -119,7 +119,7 @@ const D3Globe = (props) => {
 
     // stop rotation when component unmounted
     return () => {
-      clearInterval(rotation);
+      rotation.stop();
     };
   }, []);
 
@@ -141,7 +141,7 @@ D3Globe.defaultProps = {
   vTilt: -10,
   hTilt: 0,
   ringWidth: 10,
-  xOffset: 70,
+  xOffset: 68.5,
   fps: 10,
   silhouetteScale: 0.25,
   colors: {
