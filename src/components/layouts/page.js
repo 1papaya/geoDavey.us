@@ -16,6 +16,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const logoRef = useRef(null);
   const contentParentRef = useRef(null);
 
+  window.alert(`isTransitioning ${props.isTransitioning}`);
+
   const [isPreloaded, setIsPreloaded] = useState(false);
   let isMap = "pageContext" in props && "isMap" in props.pageContext;
 
@@ -255,6 +257,7 @@ const PageTransitionLink = connect()((props) => {
 
         // hide the content during animation, for performance
         tlEdges.style.setProperty("display", "none");
+        window.alert("ismap");
 
         if (!isMap) {
           // commit style changes. transition to new w/h
@@ -281,6 +284,7 @@ const PageTransitionLink = connect()((props) => {
           });
 
           setTimeout(() => {
+            window.alert('timeout');
             container.style.removeProperty("margin");
             tlEdges.style.setProperty("display", "initial");
             container.style.setProperty("width", `auto`);
@@ -288,6 +292,7 @@ const PageTransitionLink = connect()((props) => {
 
             props.dispatch({ type: "TRANSITION_END" });
             window.dispatchEvent(new Event("resize"));
+            window.alert("transition");
           }, props.duration * 1000);
         }
       }}
