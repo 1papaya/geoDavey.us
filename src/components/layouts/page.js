@@ -67,12 +67,17 @@ const PageLayout = connect(mapStateToProps)((props) => {
           }, animLength * 1000);
         } else {
           requestAnimationFrame(() => {
+            props.dispatch({ type: "TRANSITION_START" });
             logo.style.setProperty("opacity", "0");
-            logo.style.setProperty("width", "0px");
-            logo.style.setProperty("height", "0px");
-            
-            setTimeout(() => {  
+            //logo.style.setProperty("width", "0px");
+            //logo.style.setProperty("height", "0px");
+
+            setTimeout(() => {
               setIsPreloaded(true);
+              setTimeout(
+                () => props.dispatch({ type: "TRANSITION_END" }),
+                1000
+              );
             }, animLength * 1000);
           });
         }
