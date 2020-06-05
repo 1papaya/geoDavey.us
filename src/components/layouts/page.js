@@ -6,7 +6,6 @@ import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
 import { connect } from "react-redux";
-import { dispatch } from "d3";
 
 const mapStateToProps = ({ isTransitioning }) => {
   return { isTransitioning };
