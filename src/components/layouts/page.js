@@ -288,7 +288,7 @@ const PageTransitionLink = connect()((props) => {
             container.style.setProperty("height", `auto`);
 
             dispatch({ type: "TRANSITION_END" });
-            window.dispatchEvent(new Event("resize"));
+            //window.dispatchEvent(new Event("resize"));
           }, props.duration * 1000);
         }
       }}
