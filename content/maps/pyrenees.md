@@ -1,7 +1,7 @@
 ---
 title: Live Pyrenees Backpacking Tracker
-slug: pyrenees
-url: /map/pyrenees
+slug: now
+url: /now
 image: ./img/botebetebe.jpg
 
 github: 1papaya/gl-pyrenees

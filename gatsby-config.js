@@ -34,6 +34,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        path: `${__dirname}/src/components/maps`,
+        name: `maps_js`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         path: `${__dirname}/content/battlestations`,
         name: `battlestations`,
       },

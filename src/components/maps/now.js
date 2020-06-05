@@ -7,7 +7,6 @@ import PyreneesMap from "@1papaya/gl-pyrenees";
 import { graphql } from "gatsby";
 
 export default (props) => {
-  console.log(props);
   return (
     <MapContent>
       <SEO title="pyrenees" />

@@ -17,7 +17,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const contentParentRef = useRef(null);
 
   const [isPreloaded, setIsPreloaded] = useState(false);
-  const isMap = props.location.pathname.indexOf("/map/") !== -1;
+  let isMap = "pageContext" in props && "isMap" in props.pageContext;
 
   // splash animation for regular page
   useEffect(() => {
@@ -198,7 +198,7 @@ PageContent.defaultProps = {
 const MapContent = (props) => {
   return (
     <div
-      className={`page-content fixed top-0 left-0 w-full h-full`}
+      className={`page-content geodavey-map fixed top-0 left-0 w-full h-full`}
       style={{ width: props.width }}
     >
       {props.children}
@@ -208,7 +208,6 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
-  let isMap = props.to.indexOf("/map/") !== -1;
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -233,6 +232,9 @@ const PageTransitionLink = connect()((props) => {
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
+
+        // barbaric, i know
+        let isMap = entry.querySelectorAll(".geodavey-map").length > 0;
 
         // get parent page content div
         const tlEdges = entry.parentNode;
