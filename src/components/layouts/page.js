@@ -229,7 +229,7 @@ const PageTransitionLink = connect()((props) => {
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
         if (props.to !== document.location.pathname)
-          dispatch({ type: "TRANSITION_START" });
+          props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
@@ -265,17 +265,13 @@ const PageTransitionLink = connect()((props) => {
 
           // remove transitioning class after animation complete
           // and set let container size be dynamic again in case of resize
-          setTimeout(
-            (dispatch) => {
-              tlEdges.style.setProperty("display", "initial");
-              container.style.setProperty("width", `auto`);
-              container.style.setProperty("height", `auto`);
+          setTimeout(() => {
+            tlEdges.style.setProperty("display", "initial");
+            container.style.setProperty("width", `auto`);
+            container.style.setProperty("height", `auto`);
 
-              dispatch({ type: "TRANSITION_END" });
-            },
-            props.duration * 1000,
-            dispatch
-          );
+            props.dispatch({ type: "TRANSITION_END" });
+          }, props.duration * 1000);
         } else {
           container.style.setProperty("margin", "0", "important");
 
@@ -284,19 +280,15 @@ const PageTransitionLink = connect()((props) => {
             container.style.setProperty("height", `100vh`);
           });
 
-          setTimeout(
-            (dispatch) => {
-              container.style.removeProperty("margin");
-              tlEdges.style.setProperty("display", "initial");
-              container.style.setProperty("width", `auto`);
-              container.style.setProperty("height", `auto`);
+          setTimeout(() => {
+            container.style.removeProperty("margin");
+            tlEdges.style.setProperty("display", "initial");
+            container.style.setProperty("width", `auto`);
+            container.style.setProperty("height", `auto`);
 
-              dispatch({ type: "TRANSITION_END" });
-              window.dispatchEvent(new Event("resize"));
-            },
-            props.duration * 1000,
-            dispatch
-          );
+            props.dispatch({ type: "TRANSITION_END" });
+            window.dispatchEvent(new Event("resize"));
+          }, props.duration * 1000);
         }
       }}
       {...passedProps}
