@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { PageContent } from "../../components/layouts/page";
-import SEO from "../../components/seo";
+import { PageContent } from "../layouts/page";
+import SEO from "../seo";
 
 import { graphql } from "gatsby";
 

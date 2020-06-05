@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-import { MapContent } from "../../components/layouts/page";
-import SEO from "../../components/seo";
+import { MapContent } from "../layouts/page";
+import SEO from "../seo";
 
+import { connect } from "react-redux";
 import PyreneesMap from "@1papaya/gl-pyrenees";
 import { graphql } from "gatsby";
 

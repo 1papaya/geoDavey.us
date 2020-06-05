@@ -6,6 +6,7 @@ import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
 import { connect } from "react-redux";
+import { dispatch } from "d3";
 
 const mapStateToProps = ({ isTransitioning }) => {
   return { isTransitioning };
@@ -214,6 +215,8 @@ const PageTransitionLink = connect()((props) => {
     setPrevPath(document.location.pathname);
   }, []);
 
+  let {dispatch, ...passedProps} = props;
+
   return (
     <TransitionLink
       state={{ prevPath, globe: props.globe }}
@@ -227,7 +230,7 @@ const PageTransitionLink = connect()((props) => {
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
         if (props.to !== document.location.pathname)
-          props.dispatch({ type: "TRANSITION_START" });
+          dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
@@ -268,7 +271,7 @@ const PageTransitionLink = connect()((props) => {
             container.style.setProperty("width", `auto`);
             container.style.setProperty("height", `auto`);
 
-            props.dispatch({ type: "TRANSITION_END" });
+            dispatch({ type: "TRANSITION_END" });
           }, props.duration * 1000);
         } else {
           container.style.setProperty("margin", "0", "important");
@@ -285,11 +288,11 @@ const PageTransitionLink = connect()((props) => {
             container.style.setProperty("height", `auto`);
 
             window.dispatchEvent(new Event("resize"));
-            props.dispatch({ type: "TRANSITION_END" });
+            dispatch({ type: "TRANSITION_END" });
           }, props.duration * 1000);
         }
       }}
-      {...props}
+      {...passedProps}
     >
       {props.children}
     </TransitionLink>
