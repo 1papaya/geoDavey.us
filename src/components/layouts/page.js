@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { css } from "@emotion/core";
 
-//import TransitionLink from "../../../../../gatsby-plugin-transition-link/lib";
-import TransitionLink from "@1papaya/gatsby-plugin-transition-link";
+import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 

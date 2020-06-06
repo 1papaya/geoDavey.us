@@ -44,6 +44,7 @@
     "gatsby-transformer-xml": "^2.3.1",
     "node-sass": "^4.13.1",
     "ol": "^5.3.3",
+    "patch-package": "^6.2.2",
     "prism-react-renderer": "^1.1.0",
     "prismjs": "^1.20.0",
     "react": "^16.13.1",
@@ -77,6 +78,7 @@
   "scripts": {
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
     "develop": "gatsby develop",
+    "postinstall": "patch-package",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },

@@ -58,7 +58,7 @@ module.exports = {
     `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
     {
-      resolve: "@1papaya/gatsby-plugin-transition-link",
+      resolve: "gatsby-plugin-transition-link",
       options: {
         layout: require.resolve(`./src/components/layouts/page.js`),
       },
