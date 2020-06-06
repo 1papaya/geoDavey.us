@@ -52,6 +52,10 @@ module.exports = {
         name: `data`,
       },
     },
+    {
+      resolve: "gatsby-plugin-netlify-headers",
+
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

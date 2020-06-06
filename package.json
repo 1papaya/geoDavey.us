@@ -21,6 +21,8 @@
     "gatsby-image-background-slider": "0.0.2",
     "gatsby-plugin-emotion": "^4.2.2",
     "gatsby-plugin-mdx": "^1.2.6",
+    "gatsby-plugin-netlify": "^2.3.4",
+    "gatsby-plugin-netlify-headers": "^1.0.1",
     "gatsby-plugin-postcss": "^2.2.3",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-react-svg": "^3.0.0",
