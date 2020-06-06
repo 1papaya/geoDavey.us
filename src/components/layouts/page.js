@@ -214,12 +214,10 @@ const PageTransitionLink = connect()((props) => {
     <TransitionLink
       state={{ prevPath, globe: props.globe }}
       entry={{
-        trigger: (entry, node) => { console.log("entry/node", entry, node) },
         length: props.duration,
         appearAfter: props.duration,
       }}
       exit={{
-        trigger: (exit, node) => { console.log("exit/node", exit, node) },
         length: props.duration,
       }}
       trigger={async (pages) => {
@@ -228,8 +226,10 @@ const PageTransitionLink = connect()((props) => {
           props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
+        console.log("pages before");
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
+        console.log("pages after");
 
         // barbaric, i know
         let isMap = entry.querySelectorAll(".geodavey-map").length > 0;

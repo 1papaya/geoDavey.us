@@ -22,7 +22,7 @@ export default connect()((props) => {
           },
         }}
         dataBaseURL="https://gl-pyrenees.geodavey.us"
-        onLoad={(e) => props.dispatch({ type: "TRANSITION_END" })}
+        // onLoad={(e) => props.dispatch({ type: "TRANSITION_END" })}
       />
     </MapContent>
   );
