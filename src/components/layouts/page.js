@@ -214,10 +214,12 @@ const PageTransitionLink = connect()((props) => {
     <TransitionLink
       state={{ prevPath, globe: props.globe }}
       entry={{
+        trigger: (entry, node) => { console.log("entry/node", entry, node) },
         length: props.duration,
         appearAfter: props.duration,
       }}
       exit={{
+        trigger: (exit, node) => { console.log("exit/node", exit, node) },
         length: props.duration,
       }}
       trigger={async (pages) => {

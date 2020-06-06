@@ -2,9 +2,3 @@
   base = "/"
   publish = "/public/"
   command = "npm run build"
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Cache-Control = "max-age=3600"
