@@ -69,15 +69,10 @@ const PageLayout = connect(mapStateToProps)((props) => {
           requestAnimationFrame(() => {
             props.dispatch({ type: "TRANSITION_START" });
             logo.style.setProperty("opacity", "0");
-            //logo.style.setProperty("width", "0px");
-            //logo.style.setProperty("height", "0px");
 
             setTimeout(() => {
               setIsPreloaded(true);
-              setTimeout(
-                () => props.dispatch({ type: "TRANSITION_END" }),
-                1000
-              );
+              props.dispatch({ type: "TRANSITION_END" });
             }, animLength * 1000);
           });
         }
@@ -230,11 +225,9 @@ const PageTransitionLink = connect()((props) => {
         if (props.to !== document.location.pathname)
           props.dispatch({ type: "TRANSITION_START" });
 
-          console.log("pages", pages);
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
-        console.log("entry");
 
         // barbaric, i know
         let isMap = entry.querySelectorAll(".geodavey-map").length > 0;
@@ -256,7 +249,6 @@ const PageTransitionLink = connect()((props) => {
 
         // hide the content during animation, for performance
         tlEdges.style.setProperty("display", "none");
-        console.log("ismap");
 
         if (!isMap) {
           // commit style changes. transition to new w/h
@@ -283,7 +275,6 @@ const PageTransitionLink = connect()((props) => {
           });
 
           setTimeout(() => {
-            console.log("timeout");
             container.style.removeProperty("margin");
             tlEdges.style.setProperty("display", "initial");
             container.style.setProperty("width", `auto`);
@@ -291,7 +282,6 @@ const PageTransitionLink = connect()((props) => {
 
             props.dispatch({ type: "TRANSITION_END" });
             window.dispatchEvent(new Event("resize"));
-            console.log("postdispatch");
           }, props.duration * 1000);
         }
       }}
