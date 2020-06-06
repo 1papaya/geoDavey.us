@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 import { css } from "@emotion/core";
 
-import TransitionLink from "gatsby-plugin-transition-link";
+//import TransitionLink from "../../../../../gatsby-plugin-transition-link/lib";
+import TransitionLink from "@1papaya/gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
 
 import { connect } from "react-redux";
+import "../../styles/site.scss";
 
 const mapStateToProps = ({ isTransitioning }) => {
   return { isTransitioning };
@@ -202,6 +204,7 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
+  let linkRef = useRef();
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -212,12 +215,15 @@ const PageTransitionLink = connect()((props) => {
 
   return (
     <TransitionLink
+      ref={linkRef}
       state={{ prevPath, globe: props.globe }}
       entry={{
+        trigger: (e) => { console.log("entry", e) },
         length: props.duration,
         appearAfter: props.duration,
       }}
       exit={{
+        trigger: (e) => { console.log("exit", e) },
         length: props.duration,
       }}
       trigger={async (pages) => {
