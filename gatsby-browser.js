@@ -1,5 +1,7 @@
-import "./src/styles/site.scss";
+const { wrapWithProvider } = require("./src/state/wrap-with-provider");
+require("./src/styles/site.scss");
 
-import wrapWithProvider from "./src/state/wrap-with-provider";
-export const wrapRootElement = wrapWithProvider;
-export const { disableCorePrefetching } = () => true;
+module.exports = {
+    wrapRootElement: wrapWithProvider,
+    disableCorePrefetching: () => true
+}
