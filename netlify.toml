@@ -4,6 +4,6 @@
   command = "npm run build"
 
 [[headers]]
-  for = "/*/*-data.json"
+  for = "/*"
     [headers.values]
-      "Cache-Control" = "public, max-age=0"
+    Access-Control-Allow-Origin = "*"
