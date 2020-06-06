@@ -225,11 +225,6 @@ const PageTransitionLink = connect()((props) => {
         if (props.to !== document.location.pathname)
           props.dispatch({ type: "TRANSITION_START" });
 
-        setTimeout(
-          () => props.dispatch({ type: "TRANSITION_END" }),
-          props.duration * 1000
-        );
-
         console.log("pages", pages);
         // wait for both entry and exit pages to load
         const { node: exit } = await pages.exit;

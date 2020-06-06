@@ -10,7 +10,6 @@ import { graphql } from "gatsby";
 export default connect()((props) => {
   return (
     <MapContent>
-      <SEO title="pyrenees" />
       <PyreneesMap
         data={{
           tracks: {
