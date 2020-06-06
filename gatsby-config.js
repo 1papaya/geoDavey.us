@@ -54,7 +54,6 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-netlify-headers",
-
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
@@ -120,7 +119,7 @@ module.exports = {
         secret: process.env.FAUNA_SECRET_KEY,
         index: `allUpdates`,
         type: "updates",
-        size: 100
+        size: 100,
       },
     },
     {
@@ -129,7 +128,7 @@ module.exports = {
         secret: process.env.FAUNA_SECRET_KEY,
         index: `allTracks`,
         type: "tracks",
-        size: 100
+        size: 100,
       },
     },
     `gatsby-transformer-remark`,
