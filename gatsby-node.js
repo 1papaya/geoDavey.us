@@ -66,7 +66,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // make route for maps on top level (ex. gdv.us/map-name)
   maps.data.allFile.nodes.forEach((node) => {
     createPage({
-      path: `/${node.name}/`,
+      path: `/${node.name}`,
       component: node.absolutePath,
       context: {
         isMap: true

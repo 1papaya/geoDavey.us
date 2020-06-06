@@ -55,6 +55,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
     {
       resolve: "gatsby-plugin-transition-link",

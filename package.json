@@ -26,6 +26,7 @@
     "gatsby-plugin-postcss": "^2.2.3",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-react-svg": "^3.0.0",
+    "gatsby-plugin-remove-trailing-slashes": "^2.3.4",
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-plugin-sharp": "^2.6.0",
     "gatsby-plugin-transition-link": "^1.18.0",
