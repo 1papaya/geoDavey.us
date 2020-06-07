@@ -216,13 +216,13 @@ const PageTransitionLink = connect()((props) => {
     <TransitionLink
       ref={linkRef}
       state={{ prevPath, globe: props.globe }}
-      entry={{
-        length: props.duration,
-        appearAfter: props.duration,
-      }}
-      exit={{
-        length: props.duration,
-      }}
+      // entry={{
+      //   length: props.duration,
+      //   appearAfter: props.duration,
+      // }}
+      // exit={{
+      //   length: props.duration,
+      // }}
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
         if (props.to !== document.location.pathname)
