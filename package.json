@@ -4,7 +4,6 @@
   "description": "",
   "main": "n/a",
   "dependencies": {
-    "@1papaya/gatsby-plugin-transition-link": "^2.0.1",
     "@1papaya/gl-pyrenees": "0.0.14",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
