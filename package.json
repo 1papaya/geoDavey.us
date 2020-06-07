@@ -75,7 +75,7 @@
     "winston": "^3.2.1"
   },
   "scripts": {
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+    "build": "gatsby build --log-pages",
     "develop": "gatsby develop",
     "postinstall": "patch-package",
     "serve": "gatsby serve",
