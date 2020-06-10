@@ -78,7 +78,6 @@
   "scripts": {
     "build": "gatsby build --log-pages",
     "develop": "gatsby develop",
-    "postinstall": "patch-package",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
