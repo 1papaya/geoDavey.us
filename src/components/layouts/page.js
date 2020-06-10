@@ -209,9 +209,7 @@ const PageTransitionLink = connect()((props) => {
   useEffect(() => {
     setPrevPath(document.location.pathname);
 
-    ___loader.enqueue(
-      parsePath(rewriteLinkPath(props.to, window.location.pathname)).pathname
-    );
+    window.___loader.hovering(parsePath(props.to).pathname)
   }, []);
 
   let { dispatch, ...passedProps } = props;
