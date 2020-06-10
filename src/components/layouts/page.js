@@ -109,7 +109,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
       )}
 
       <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
-        { (!isMap || !isPreloaded) &&
+        {(!isMap || !isPreloaded) && (
           <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
@@ -152,7 +152,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               <span>about</span>
             </PageTransitionLink>
           </div>
-        }
+        )}
 
         <div
           ref={contentParentRef}
@@ -202,7 +202,6 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
-  let linkRef = useRef();
 
   // set the prev path on render, for back buttons
   useEffect(() => {
@@ -213,7 +212,6 @@ const PageTransitionLink = connect()((props) => {
 
   return (
     <TransitionLink
-      ref={linkRef}
       state={{ prevPath, globe: props.globe }}
       entry={{
         trigger: (e) => {
