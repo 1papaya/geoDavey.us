@@ -4,6 +4,7 @@ import { css } from "@emotion/core";
 import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "react-loader-spinner";
+import { parsePath } from "gatsby-link";
 
 import { connect } from "react-redux";
 
@@ -202,17 +203,22 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
+  let linkRef = useRef();
 
   // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
+
+    ___loader.enqueue(
+      parsePath(rewriteLinkPath(props.to, window.location.pathname)).pathname
+    );
   }, []);
 
   let { dispatch, ...passedProps } = props;
 
   return (
     <TransitionLink
-      state={{ prevPath, globe: props.globe }}
+      state={{ prevPath }}
       entry={{
         trigger: (e) => {
           console.log("entry", e);
@@ -220,6 +226,7 @@ const PageTransitionLink = connect()((props) => {
         length: props.duration,
         appearAfter: props.duration,
       }}
+      innerRef={linkRef}
       exit={{
         trigger: (e) => {
           console.log("exit", e);
