@@ -208,7 +208,7 @@ const PageTransitionLink = connect()((props) => {
   // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
-    window.___loader.prefetch(parsePath(props.to).pathname)
+    window.___loader.hovering(parsePath(props.to).pathname)
   }, []);
 
   let { dispatch, ...passedProps } = props;
