@@ -63,6 +63,10 @@ const SEO = ({ description, meta, title }) => {
           name: `description`,
           content: seoDescription,
         },
+        {
+          name: "viewport",
+          content: "width=device-width; height=device-height; initial-scale=1",
+        },
       ].concat(meta)}
     />
   );
