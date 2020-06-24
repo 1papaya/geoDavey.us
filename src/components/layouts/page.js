@@ -3,7 +3,8 @@ import { css } from "@emotion/core";
 
 import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
-import Loader from "react-loader-spinner";
+import Loader from "../loader";
+import isMobile from "is-mobile";
 import { parsePath } from "gatsby-link";
 
 import { connect } from "react-redux";
@@ -32,8 +33,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
     // set logo initial
     logo.style.setProperty("width", "310px");
     logo.style.setProperty("height", "310px");
-    logo.style.setProperty("opacity", "1", "important");
-    logo.style.setProperty("transition", `all ${animLength}s`);
+    logo.style.setProperty("opacity", "0");
 
     // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
@@ -43,6 +43,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
     // commit style changes
     requestAnimationFrame(() => {
+      logo.style.setProperty("transition", `opacity 3s ease-out`);
+      logo.style.setProperty("opacity", "1", "important");
+
       // (1) pause...
       setTimeout(() => {
         // (2) trigger logo and content transition
@@ -50,7 +53,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
         if (!isMap) {
           parent.style.setProperty("width", `${pWidth}px`);
-          parent.style.setProperty("height", `${pHeight}px`);
+
+          if (isMobile()) parent.style.setProperty("height", `${pHeight}px`);
+          else parent.style.setProperty("height", "calc(100vh - 48px)");
 
           // (3) commit style changes, release logo w/h changes
           requestAnimationFrame(() => {
@@ -73,7 +78,6 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
             setTimeout(() => {
               setIsPreloaded(true);
-              props.dispatch({ type: "TRANSITION_END" });
             }, animLength * 1000);
           });
         }
@@ -99,15 +103,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
         }
       `}
     >
-      {props.isTransitioning && (
-        <Loader
-          type="TailSpin"
-          color="#ccc"
-          height={80}
-          width={80}
-          className="fixed z-50 bg-white bg-opacity-50 top-0 left-0 h-full w-full flex justify-center items-center"
-        />
-      )}
+      <Loader />
 
       <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         {(!isMap || !isPreloaded) && (
@@ -164,6 +160,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
+              minHeight: isMobile() ? "calc(100vh - 48px)" : "initial",
             }}
           >
             {props.children}
@@ -208,7 +205,10 @@ const PageTransitionLink = connect()((props) => {
   // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
-    window.___loader.hovering(parsePath(props.to).pathname)
+
+    // force gatsby to prefetch all transitionlink page data onload
+    // for some reason standard prefetching doesn't happen in production
+    window.___loader.hovering(parsePath(props.to).pathname);
   }, []);
 
   let { dispatch, ...passedProps } = props;
@@ -217,18 +217,11 @@ const PageTransitionLink = connect()((props) => {
     <TransitionLink
       state={{ prevPath }}
       entry={{
-        trigger: (e) => {
-          console.log("entry", e);
-        },
         length: props.duration,
         appearAfter: props.duration,
       }}
       innerRef={linkRef}
       exit={{
-        trigger: (e) => {
-          console.log("exit", e);
-        },
-        delay: 1,
         length: props.duration,
       }}
       trigger={async (pages) => {
@@ -237,10 +230,8 @@ const PageTransitionLink = connect()((props) => {
           props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
-        console.log("pages before");
         const { node: exit } = await pages.exit;
         const { node: entry } = await pages.entry;
-        console.log("pages after");
 
         // barbaric, i know
         let isMap = entry.querySelectorAll(".geodavey-map").length > 0;
@@ -293,7 +284,7 @@ const PageTransitionLink = connect()((props) => {
             container.style.setProperty("width", `auto`);
             container.style.setProperty("height", `auto`);
 
-            props.dispatch({ type: "TRANSITION_END" });
+            // fire resize to make sure map element resizes too
             window.dispatchEvent(new Event("resize"));
           }, props.duration * 1000);
         }

@@ -1,39 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { MapContent } from "../layouts/page";
 import SEO from "../seo";
 
+import PyreneesMap from "@geodavey/gl-pyrenees";
 import { connect } from "react-redux";
-import PyreneesMap from "@1papaya/gl-pyrenees";
 import { graphql } from "gatsby";
 
-export default connect()((props) => {
-  let [map, setMap] = useState(false);
+const mapStateToProps = ({ isLoadingSuppressed }) => {
+  return { isLoadingSuppressed };
+};
 
+export default connect(mapStateToProps)((props) => {
+  let mapRef = useRef();
+
+  // if loading is suppressed by user, fire fake loading event
+  // will cause map controls to render even before real load
   useEffect(() => {
-    import("@1papaya/gl-pyrenees").then((map) => {
-      setMap(map);
-    });
-  }, []);
+    if (props.isLoadingSuppressed && mapRef.current) {
+      mapRef.current.getMap().fire("load", { fake: true });
+    }
+  }, [props.isLoadingSuppressed])
 
   return (
     <MapContent>
-      {map && (
-        <PyreneesMap
-          data={{
-            tracks: {
-              type: "FeatureCollection",
-              features: props.data.allTracks.nodes,
-            },
-            updates: {
-              type: "FeatureCollection",
-              features: props.data.allUpdates.nodes,
-            },
-          }}
-          dataBaseURL="https://gl-pyrenees.geodavey.us"
-          onLoad={(e) => props.dispatch({ type: "TRANSITION_END" })}
-        />
-      )}
+      <PyreneesMap
+        ref={mapRef}
+        data={{
+          tracks: {
+            type: "FeatureCollection",
+            features: props.data.allTracks.nodes,
+          },
+          updates: {
+            type: "FeatureCollection",
+            features: props.data.allUpdates.nodes,
+          },
+        }}
+        dataBaseURL="https://gl-pyrenees.geodavey.us"
+        onLoad={(e) => props.dispatch({ type: "TRANSITION_END" })}
+      />
     </MapContent>
   );
 });
