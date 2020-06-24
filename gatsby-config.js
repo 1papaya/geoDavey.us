@@ -139,6 +139,7 @@ module.exports = {
           "src/styles/base.scss",
           "gatsby-plugin-transition-link/",
           "prismjs/",
+          "mapbox-gl/"
         ],
       },
     },
