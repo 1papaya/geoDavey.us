@@ -4,7 +4,6 @@ import { css } from "@emotion/core";
 import TransitionLink from "gatsby-plugin-transition-link";
 import D3Globe from "../svg/d3globe";
 import Loader from "../loader";
-import isMobile from "is-mobile";
 import { parsePath } from "gatsby-link";
 
 import { connect } from "react-redux";
@@ -14,6 +13,7 @@ const mapStateToProps = ({ isTransitioning }) => {
 };
 
 const PageLayout = connect(mapStateToProps)((props) => {
+  const isMobile = window.innerWidth <= 768;
   const contentRef = useRef(null);
   const logoRef = useRef(null);
   const contentParentRef = useRef(null);
@@ -53,9 +53,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
         if (!isMap) {
           parent.style.setProperty("width", `${pWidth}px`);
-
-          if (isMobile()) parent.style.setProperty("height", `${pHeight}px`);
-          else parent.style.setProperty("height", "calc(100vh - 48px)");
+          parent.style.setProperty("height", isMobile ? "calc(100vh - 48px)": `${pHeight}px`);
 
           // (3) commit style changes, release logo w/h changes
           requestAnimationFrame(() => {
@@ -118,7 +116,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-              to="/now"
+              to="/now/"
               activeClassName="font-bold"
             >
               <span>/now/</span>
@@ -136,14 +134,14 @@ const PageLayout = connect(mapStateToProps)((props) => {
             </div>
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center md:justify-right outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-              to="/projects"
+              to="/projects/"
               activeClassName="font-bold"
             >
               <span>projects</span>
             </PageTransitionLink>
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-              to="/contact"
+              to="/contact/"
               activeClassName="font-bold"
             >
               <span>about</span>
@@ -160,7 +158,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
             style={{
               background: "rgba(0,0,0,0.075)",
-              minHeight: isMobile() ? "calc(100vh - 48px)" : "initial",
+              minHeight: isMobile ? "calc(100vh - 48px)" : "initial",
             }}
           >
             {props.children}
@@ -200,6 +198,7 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
+  let isMobile = window.innerWidth < 768;
   let linkRef = useRef();
 
   // set the prev path on render, for back buttons
@@ -226,7 +225,7 @@ const PageTransitionLink = connect()((props) => {
       }}
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
-        if (props.to !== document.location.pathname)
+        if (props.to !== document.location.pathname )
           props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
