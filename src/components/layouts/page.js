@@ -13,7 +13,7 @@ const mapStateToProps = ({ isTransitioning }) => {
 };
 
 const PageLayout = connect(mapStateToProps)((props) => {
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = document.documentElement.clientWidth <= 768;
   const contentRef = useRef(null);
   const logoRef = useRef(null);
   const contentParentRef = useRef(null);
@@ -203,7 +203,7 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
-  let isMobile = window.innerWidth < 768;
+  let isMobile = document.documentElement.clientWidth < 768;
   let linkRef = useRef();
 
   // set the prev path on render, for back buttons
