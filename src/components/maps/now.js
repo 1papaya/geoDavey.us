@@ -7,6 +7,8 @@ import PyreneesMap from "@geodavey/gl-pyrenees";
 import { connect } from "react-redux";
 import { graphql } from "gatsby";
 
+import "mapbox-gl/dist/mapbox-gl.css";
+
 const mapStateToProps = ({ isLoadingSuppressed }) => {
   return { isLoadingSuppressed };
 };
