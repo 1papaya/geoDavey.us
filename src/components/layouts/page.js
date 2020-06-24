@@ -160,10 +160,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
         >
           <div
             ref={contentRef}
-            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important relative md:rounded-lg box-content"
+            className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important sm:h-screen-minus-nav relative md:rounded-lg box-content"
             style={{
-              background: "rgba(0,0,0,0.075)",
-              minHeight: isMobile ? "calc(100vh - 48px)" : "initial",
+              background: "rgba(0,0,0,0.075)"
             }}
           >
             {props.children}

@@ -113,6 +113,9 @@ p {
   .min-h-screen-fix {
     min-height: -webkit-fill-available !important;
   }
+  .sm\:h-screen-minus-nav {
+    min-height: calc(100vh - 48px);
+  }
 }
 
 .tl-edges {
