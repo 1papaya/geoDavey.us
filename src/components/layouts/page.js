@@ -13,7 +13,6 @@ const mapStateToProps = ({ isTransitioning }) => {
 };
 
 const PageLayout = connect(mapStateToProps)((props) => {
-  const isMobile = document.documentElement.clientWidth <= 768;
   const contentRef = useRef(null);
   const logoRef = useRef(null);
   const contentParentRef = useRef(null);
@@ -23,6 +22,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
   // splash animation for regular page
   useEffect(() => {
+    const isMobile = document.documentElement.clientWidth <= 768;
     const parent = contentParentRef.current;
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
@@ -203,7 +203,6 @@ const MapContent = (props) => {
 
 const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
-  let isMobile = document.documentElement.clientWidth < 768;
   let linkRef = useRef();
 
   // set the prev path on render, for back buttons
@@ -229,6 +228,8 @@ const PageTransitionLink = connect()((props) => {
         length: props.duration,
       }}
       trigger={async (pages) => {
+        let isMobile = document.documentElement.clientWidth < 768;
+
         // no transition spinner if link goes to current page
         if (props.to !== document.location.pathname)
           props.dispatch({ type: "TRANSITION_START" });
