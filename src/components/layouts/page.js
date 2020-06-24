@@ -44,42 +44,47 @@ const PageLayout = connect(mapStateToProps)((props) => {
     // commit style changes
     requestAnimationFrame(() => {
       logo.style.setProperty("transition", `opacity 3s ease-out`);
-      logo.style.setProperty("opacity", "1", "important");
+      logo.style.setProperty("opacity", "1");
 
-      // (1) pause...
-      setTimeout(() => {
-        // (2) trigger logo and content transition
-        logo.style.setProperty("transition", `all ${animLength}s`);
+      requestAnimationFrame(() => {
+        // (1) pause...
+        setTimeout(() => {
+          // (2) trigger logo and content transition
+          logo.style.setProperty("transition", `all ${animLength}s`);
 
-        if (!isMap) {
-          parent.style.setProperty("width", `${pWidth}px`);
-          parent.style.setProperty("height", isMobile ? "calc(100vh - 48px)": `${pHeight}px`);
+          if (!isMap) {
+            parent.style.setProperty("width", `${pWidth}px`);
+            parent.style.setProperty(
+              "height",
+              isMobile ? "calc(100vh - 48px)" : `${pHeight}px`
+            );
 
-          // (3) commit style changes, release logo w/h changes
-          requestAnimationFrame(() => {
-            logo.style.removeProperty("height");
-            logo.style.removeProperty("width");
-          });
+            // (3) commit style changes, release logo w/h changes
+            requestAnimationFrame(() => {
+              logo.style.removeProperty("height");
+              logo.style.removeProperty("width");
+            });
 
-          // (4) on animation finish release content style changes
-          setTimeout(() => {
-            parent.style.setProperty("width", "auto");
-            parent.style.setProperty("height", "auto");
-            parent.style.setProperty("overflow", "visible");
-
-            setIsPreloaded(true);
-          }, animLength * 1000);
-        } else {
-          requestAnimationFrame(() => {
-            props.dispatch({ type: "TRANSITION_START" });
-            logo.style.setProperty("opacity", "0");
-
+            // (4) on animation finish release content style changes
             setTimeout(() => {
+              parent.style.setProperty("width", "auto");
+              parent.style.setProperty("height", "auto");
+              parent.style.setProperty("overflow", "visible");
+
               setIsPreloaded(true);
             }, animLength * 1000);
-          });
-        }
-      }, pausLength * 1000);
+          } else {
+            requestAnimationFrame(() => {
+              props.dispatch({ type: "TRANSITION_START" });
+              logo.style.setProperty("opacity", "0");
+
+              setTimeout(() => {
+                setIsPreloaded(true);
+              }, animLength * 1000);
+            });
+          }
+        }, pausLength * 1000);
+      });
     });
   }, []);
 
@@ -225,7 +230,7 @@ const PageTransitionLink = connect()((props) => {
       }}
       trigger={async (pages) => {
         // no transition spinner if link goes to current page
-        if (props.to !== document.location.pathname )
+        if (props.to !== document.location.pathname)
           props.dispatch({ type: "TRANSITION_START" });
 
         // wait for both entry and exit pages to load
@@ -271,6 +276,7 @@ const PageTransitionLink = connect()((props) => {
           }, props.duration * 1000);
         } else {
           container.style.setProperty("margin", "0", "important");
+          if (isMobile) container.style.removeProperty("transition");
 
           requestAnimationFrame(() => {
             container.style.setProperty("width", `100vw`);
