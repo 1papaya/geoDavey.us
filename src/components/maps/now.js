@@ -36,7 +36,7 @@ export default connect(mapStateToProps)((props) => {
             features: props.data.allUpdates.nodes,
           },
         }}
-        dataBaseURL="https://gl-pyrenees.geodavey.us"
+        baseDataURL="https://gl-pyrenees.geodavey.us"
         onLoad={(e) => props.dispatch({ type: "TRANSITION_END" })}
       />
     </MapContent>
