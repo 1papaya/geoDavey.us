@@ -51,8 +51,7 @@ export const pageQuery = graphql`
         properties {
           caption
           photo
-          id
-          time
+          date
         }
         geometry {
           coordinates
