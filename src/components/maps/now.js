@@ -26,6 +26,7 @@ export default connect(mapStateToProps)((props) => {
     <MapContent>
       <PyreneesMap
         ref={mapRef}
+        zoom={11.5}
         data={{
           tracks: {
             type: "FeatureCollection",
