@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageContent, PageTransitionLink } from "../components/layouts/page";
+import { PageContent, PageTransitionLink } from "../components/page";
 import SEO from "../components/seo";
 
 export default () => {

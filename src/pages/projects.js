@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageContent, PageTransitionLink } from "../components/layouts/page";
+import { PageContent, PageTransitionLink } from "../components/page";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";

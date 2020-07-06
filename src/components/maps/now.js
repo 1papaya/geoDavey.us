@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { MapContent } from "../layouts/page";
+import { MapContent } from "../page";
 import SEO from "../seo";
 
 import PyreneesMap from "@geodavey/gl-pyrenees";
@@ -24,6 +24,7 @@ export default connect(mapStateToProps)((props) => {
 
   return (
     <MapContent>
+      <SEO title="/now/"></SEO>
       <PyreneesMap
         ref={mapRef}
         zoom={11.5}

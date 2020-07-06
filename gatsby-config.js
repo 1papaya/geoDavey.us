@@ -60,7 +60,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-transition-link",
       options: {
-        layout: require.resolve(`./src/components/layouts/page.js`),
+        layout: require.resolve(`./src/components/page.js`),
       },
     },
     `gatsby-transformer-json`,

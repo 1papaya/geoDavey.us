@@ -1,5 +1,5 @@
 import React from "react";
-import { PageContent } from "../components/layouts/page";
+import { PageContent } from "../components/page";
 import MDXContent from "../components/mdx";
 
 import { graphql } from "gatsby";

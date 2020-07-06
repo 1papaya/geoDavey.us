@@ -1,7 +1,7 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { PageTransitionLink } from "./layouts/page";
+import { PageTransitionLink } from "./page";
 import theme from "prism-react-renderer/themes/nightOwlLight";
 import Highlight, { defaultProps } from "prism-react-renderer";
 

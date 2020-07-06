@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { css } from "@emotion/core";
 
 import TransitionLink from "gatsby-plugin-transition-link";
-import D3Globe from "../svg/d3globe";
-import Loader from "../loader";
+import D3Globe from "./svg/d3globe";
+import Loader from "./loader";
 import { parsePath } from "gatsby-link";
 
 import { connect } from "react-redux";
@@ -73,8 +73,11 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
               setIsPreloaded(true);
             }, animLength * 1000);
-          } else {
+          }
+          
+          if (isMap) {
             requestAnimationFrame(() => {
+              // fire TRANSITION_START, map will fire TRANSITION_END once loaded
               props.dispatch({ type: "TRANSITION_START" });
               logo.style.setProperty("opacity", "0");
 
@@ -146,10 +149,10 @@ const PageLayout = connect(mapStateToProps)((props) => {
             </PageTransitionLink>
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
-              to="/contact/"
+              to="/1love/"
               activeClassName="font-bold"
             >
-              <span>about</span>
+              <span>1love</span>
             </PageTransitionLink>
           </div>
         )}
@@ -274,9 +277,10 @@ const PageTransitionLink = connect()((props) => {
 
             props.dispatch({ type: "TRANSITION_END" });
           }, props.duration * 1000);
-        } else {
+        }
+
+        if (isMap) {
           container.style.setProperty("margin", "0", "important");
-          if (isMobile) container.style.removeProperty("transition");
 
           requestAnimationFrame(() => {
             container.style.setProperty("width", `100vw`);
