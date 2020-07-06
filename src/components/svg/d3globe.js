@@ -131,7 +131,7 @@ D3Globe.defaultProps = {
   vTilt: -10,
   hTilt: 0,
   ringWidth: 10,
-  xOffset: 68.5,
+  xOffset: 80.5,
   fps: 30,
   silhouetteScale: 0.25,
   colors: {

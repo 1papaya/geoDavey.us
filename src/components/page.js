@@ -27,14 +27,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 4.2;
+    const pausLength = 5.5;
     const animLength = 2;
-
-    // set logo initial
-    logo.style.setProperty("width", "310px");
-    logo.style.setProperty("height", "310px");
-    logo.style.setProperty("opacity", "0");
-
+    
     // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
     parent.style.setProperty("height", "0px");
@@ -43,7 +38,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
     // commit style changes
     requestAnimationFrame(() => {
-      logo.style.setProperty("transition", `opacity 3s ease-out`);
+      logo.style.setProperty("transition", `opacity 3s ease-in-out, height 3s ease-in-out, width 3s ease-in-out`);
+      logo.style.setProperty("width", "310px");
+      logo.style.setProperty("height", "310px");
       logo.style.setProperty("opacity", "1");
 
       requestAnimationFrame(() => {
@@ -74,7 +71,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               setIsPreloaded(true);
             }, animLength * 1000);
           }
-          
+
           if (isMap) {
             requestAnimationFrame(() => {
               // fire TRANSITION_START, map will fire TRANSITION_END once loaded
@@ -133,6 +130,11 @@ const PageLayout = connect(mapStateToProps)((props) => {
               <div
                 ref={logoRef}
                 className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
+                style={isPreloaded ? {} : {
+                  opacity: 0,
+                  width: 100,
+                  height: 100
+                }}
               >
                 <D3Globe
                   className="absolute w-full h-full"
@@ -165,7 +167,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             ref={contentRef}
             className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important sm:h-screen-minus-nav relative md:rounded-lg box-content"
             style={{
-              background: "rgba(0,0,0,0.075)"
+              background: "rgba(0,0,0,0.075)",
             }}
           >
             {props.children}
