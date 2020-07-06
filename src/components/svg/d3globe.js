@@ -1,9 +1,8 @@
-import { geoOrthographic, geoGraticule, geoPath } from "d3-geo";
-import { useStaticQuery, graphql } from "gatsby";
+import { geoOrthographic, geoPath } from "d3-geo";
 import React, { useRef, useEffect } from "react";
 import { select } from "d3-selection";
 import { feature } from "topojson-client";
-import { timer } from "d3-timer";
+import { interval } from "d3-timer";
 
 import landTopo from "../../data/land-110m.json";
 import silData from "../../data/silhouette.json";
@@ -98,17 +97,8 @@ const D3Globe = (props) => {
       .attr("transform", silTransform)
       .style("fill", props.colors.bandana);
 
-    // text
-    let text = svg
-      .append("text")
-      .attr("transform", ` ${silTransform} matrix(${silData.text.matrix})`)
-      .style("font-family", "BadScript")
-      .style("font-size", `${silData.text.size}px`)
-      .style("fill", props.colors.text)
-      .html("geoDavey");
-
     // globe rotation
-    const rotation = timer((elapsed) => {
+    const rotation = interval((elapsed) => {
       proj.rotate([
         -props.speed * elapsed + props.xOffset,
         props.vTilt,
@@ -142,7 +132,7 @@ D3Globe.defaultProps = {
   hTilt: 0,
   ringWidth: 10,
   xOffset: 68.5,
-  fps: 10,
+  fps: 30,
   silhouetteScale: 0.25,
   colors: {
     outerRing: "#ef3147",
