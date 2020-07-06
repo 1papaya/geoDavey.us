@@ -11,7 +11,7 @@ export default (props) => {
 
   return (
     <PageContent width={900} className="p-0">
-      <SEO title="blog" />
+      <SEO title="projects" />
 
       <div className="posts md:grid md:grid-cols-2">
         <div className="md:row-span-2">

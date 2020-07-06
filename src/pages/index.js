@@ -26,13 +26,13 @@ function Home(props) {
       </div>
       <div className="flex">
         <div className="flex-col p-1 w-1/3">
-          <Img className="rounded-lg" fluid={props.data.heart.fluid} />
+          <Img className="rounded-lg" sizes={{...props.data.guguy.fluid, aspectRatio: 4/3 }} />
         </div>
         <div className="flex-col p-1 w-1/3">
-          <Img className="rounded-lg" fluid={props.data.heart.fluid} />
+          <Img className="rounded-lg" sizes={{...props.data.uvm095.fluid, aspectRatio: 4/3 }} />
         </div>
         <div className="flex-col p-1 w-1/3">
-          <Img className="rounded-lg" fluid={props.data.heart.fluid} />
+          <Img className="rounded-lg" sizes={{...props.data.autumn.fluid, aspectRatio: 4/3 }} />
         </div>
       </div>
     </PageContent>
@@ -49,8 +49,20 @@ export const pageQuery = graphql`
       }
     }
 
-    heart: imageSharp(fluid: { originalName: { eq: "shambhalaheart.jpg" } }) {
-      fluid(maxWidth: 500) {
+    uvm095: imageSharp(fluid: { originalName: { eq: "uvm095.jpg" } }) {
+      fluid(maxWidth: 200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+
+    autumn: imageSharp(fluid: { originalName: { eq: "autumn.jpg" } }) {
+      fluid(maxWidth: 200) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+
+    guguy: imageSharp(fluid: { originalName: { eq: "guguy.jpg" } }) {
+      fluid(maxWidth: 200) {
         ...GatsbyImageSharpFluid
       }
     }

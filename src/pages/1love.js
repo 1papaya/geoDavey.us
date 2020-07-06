@@ -28,11 +28,11 @@ export default (props) => {
                 </div>
               </div>
             </div>
-            <div className="text-center w-64 text-sm mt-4 mx-auto md:m-0 md:w-5/12 md:flex md:flex-col md:items-right md:justify-center md:text-right">
+            <div className="text-center w-64 text-sm mt-4 mx-auto md:m-0 md:w-5/12 md:leading-snug md:flex md:flex-col md:items-right md:justify-center md:text-right">
               <div className="">
-                thank you to the open source &amp; OSM communities for making this site possible!
+                thank you to the FOSSGIS community &amp; everyone for making this site possible!
               </div>
-              <div className="mt-3 md:mt-0">viva la open source! 1love</div>
+              <div className="mt-3 md:mt-2">¡viva la open source! 1love</div>
             </div>
           </div>
         </div>
