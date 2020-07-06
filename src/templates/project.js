@@ -12,7 +12,7 @@ export default ({ data }) => {
   return (
     <PageContent width={520} className="p-0 md:p-2">
       {meta.image && (
-        <div className="w-full">
+        <div className="w-full mb-2">
           <Img className="w-full" fluid={meta.image.childImageSharp.fluid} />
           <div className="text-xs md:text-sm text-center text-gray-700">pic: {meta.caption}</div>
         </div>
@@ -28,7 +28,7 @@ export default ({ data }) => {
           </div>
           <div className="flex-grow text-right">{meta.date}</div>
         </div>
-        <div className="text-sm  border-t border-white">
+        <div className="text-sm pt-2 border-t border-white">
           <MDXContent>{body}</MDXContent>
         </div>
       </div>

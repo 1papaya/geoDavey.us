@@ -60,14 +60,14 @@ export default (props) => {
                 )}
               </div>
               <div
-                className={`title ${textAlign} md:text-left leading-tight font-barlow text-xl md:text-2xl`}
+                className={`title ${textAlign} md:text-left leading-none font-barlow text-xl md:text-2xl`}
               >
                 <PageTransitionLink to={meta.url}>
                   {meta.title}
                 </PageTransitionLink>
               </div>
               <div
-                className={`meta ${textAlign} md:text-left text-gray-700 mb-1 text-xs`}
+                className={`meta ${textAlign} mt-1 md:text-left text-gray-700 mb-1 text-xs`}
               >
                 {meta.tags.join(" ")}
               </div>
