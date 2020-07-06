@@ -2,8 +2,8 @@
 title: The Making of an Icon
 slug: geodavey-icon
 url: /proj/geodavey-icon/
-image: img/geodavey-icon.jpg
-caption: "First rendition of geoDavey icon, with OpenLayers"
+image: img/geodavey-icon2.jpg
+caption: "geoDavey icon wireframe on top of original photo"
 date: 2020-04-29
 tags: ["javascript", "d3", "openlayers"]
 
