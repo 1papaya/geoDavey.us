@@ -118,15 +118,19 @@ p {
   }
 }
 
-.gatsby-resp-image-wrapper + .gatsby-resp-image-figcaption {
-  font-size: 0.875rem;
-  color: rgba(74, 85, 104, 1);
-  text-align: center;
+.gatsby-resp-image-figure {
+  margin: 0;
 
-  &:before {
-    content: "pic:";
-    padding-right: 0.2em;
-    display: inline-block;
+  .gatsby-resp-image-wrapper + .gatsby-resp-image-figcaption {
+    font-size: 0.875rem;
+    color: rgba(74, 85, 104, 1);
+    text-align: center;
+  
+    &:before {
+      content: "pic:";
+      padding-right: 0.2em;
+      display: inline-block;
+    }
   }
 }
 
