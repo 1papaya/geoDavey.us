@@ -16,7 +16,7 @@ import arc from "arc";
 
 import "../styles/ol-globe.scss";
 
-class OLGlobe extends React.Component {
+class OLGlobe extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,10 +45,8 @@ class OLGlobe extends React.Component {
       <div
         className="ol-globe square"
         style={{
-          width: "100%",
-          height: "100%",
-          maxWidth: this.props.maxWidth,
-          maxHeight: this.props.maxWidth,
+          width: 310,
+          height: 310,
         }}
       >
         <div
@@ -59,8 +57,8 @@ class OLGlobe extends React.Component {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            width: 310,
+            height: 310,
           }}
         ></div>
         <div
@@ -86,7 +84,7 @@ class OLGlobeMap extends Map {
     // opt:
     //   target: target map container element
     //   initBounds: initial bounds to fit to viewport before rotation, in wgs84
-    //   places: array of objects with ["node"]["x"] and ["node"]["y"] properties
+    //   places: array of objects with ["x"] and ["y"] properties
     //   duration: duration in msec of one globe rotation for rotation animation
     //   onLoad: callback for once map is initially loaded
 
@@ -101,7 +99,7 @@ class OLGlobeMap extends Map {
           name: "osm_topo",
           baseLayer: true,
           source: new XYZ({
-            url: "/assets/opentopomap/{z}/{x}/{y}.png",
+            url: "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
           }),
         })
       ],
@@ -138,7 +136,7 @@ class OLGlobeMap extends Map {
     }
 
     for (var i = 0; i < places.length; i++) {
-      let plc = places[i]["node"];
+      let plc = places[i];
 
       var ft = new Feature({
         name: plc["address"],
@@ -178,8 +176,8 @@ class OLGlobeMap extends Map {
     };
 
     for (var i = 0; i < places.length - 1; i++) {
-      let a = places[i]["node"];
-      let b = places[i + 1]["node"];
+      let a = places[i];
+      let b = places[i + 1];
 
       var arcGen = new arc.GreatCircle(
         { x: parseFloat(a["x"]), y: parseFloat(a["y"]) },
@@ -211,7 +209,7 @@ class OLGlobeMap extends Map {
     this.addLayer(lnsLayer);
   }
 
-  animate(msec) {
+  async animate(msec) {
     // animate globe rotation west -> east with `msec` to make one full rotation
 
     let view = this.getView();
