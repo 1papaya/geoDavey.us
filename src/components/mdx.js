@@ -1,4 +1,5 @@
 import React from "react";
+import loadable from "@loadable/component";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { PageTransitionLink } from "./page";
@@ -16,10 +17,7 @@ const Code = (props) => {
       language={language}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre
-          className="text-xs p-2 overflow-x-auto"
-          style={{ ...style }}
-        >
+        <pre className="text-xs p-2 overflow-x-auto" style={{ ...style }}>
           {tokens.map((line, i) => {
             if (i !== tokens.length - 1)
               // ignore last line
@@ -37,6 +35,8 @@ const Code = (props) => {
   );
 };
 
+let OLGlobeLoadable = loadable(() => import("./olglobe"), {fallback: null});
+
 const components = {
   code: (props) => <Code {...props} />,
   a: (props) => {
@@ -48,7 +48,8 @@ const components = {
       );
     else return <a {...props} />;
   },
-  PageTransitionLink
+  PageTransitionLink,
+  OLGlobeLoadable,
 };
 
 export default (props) => (
