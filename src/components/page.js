@@ -27,9 +27,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
 
-    const pausLength = 5.5;
+    const pausLength = 4.4;
     const animLength = 2;
-    
+
     // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
     parent.style.setProperty("height", "0px");
@@ -38,7 +38,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
     // commit style changes
     requestAnimationFrame(() => {
-      logo.style.setProperty("transition", `opacity 3s ease-in-out, height 3s ease-in-out, width 3s ease-in-out`);
+      logo.style.setProperty("transition", `opacity 5s ease-in-out`);
       logo.style.setProperty("width", "310px");
       logo.style.setProperty("height", "310px");
       logo.style.setProperty("opacity", "1");
@@ -132,8 +132,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
                 className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
                 style={isPreloaded ? {} : {
                   opacity: 0,
-                  width: 100,
-                  height: 100
+                  width: 310,
+                  height: 310
                 }}
               >
                 <D3Globe
@@ -214,7 +214,6 @@ const PageTransitionLink = connect()((props) => {
     setPrevPath(document.location.pathname);
 
     // force gatsby to prefetch all transitionlink page data onload
-    // for some reason standard prefetching doesn't happen in production
     window.___loader.hovering(parsePath(props.to).pathname);
   }, []);
 

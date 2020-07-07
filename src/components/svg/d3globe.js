@@ -131,8 +131,8 @@ D3Globe.defaultProps = {
   vTilt: -10,
   hTilt: 0,
   ringWidth: 10,
-  xOffset: 80.5,
-  fps: 30,
+  xOffset: 72.5,
+  fps: 25,
   silhouetteScale: 0.25,
   colors: {
     outerRing: "#ef3147",
