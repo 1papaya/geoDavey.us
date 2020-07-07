@@ -130,11 +130,15 @@ const PageLayout = connect(mapStateToProps)((props) => {
               <div
                 ref={logoRef}
                 className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
-                style={isPreloaded ? {} : {
-                  opacity: 0,
-                  width: 310,
-                  height: 310
-                }}
+                style={
+                  isPreloaded
+                    ? {}
+                    : {
+                        opacity: 0,
+                        width: 310,
+                        height: 310,
+                      }
+                }
               >
                 <D3Globe
                   className="absolute w-full h-full"
