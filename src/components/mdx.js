@@ -40,7 +40,6 @@ const Code = (props) => {
 const components = {
   code: (props) => <Code {...props} />,
   a: (props) => {
-    console.log(props);
     if (props.href.indexOf("//") === -1)
       return (
         <PageTransitionLink to={props.href}>
