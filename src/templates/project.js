@@ -1,6 +1,7 @@
 import React from "react";
 import { PageContent } from "../components/page";
 import MDXContent from "../components/mdx";
+import SEO from "../components/seo";
 
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
@@ -11,6 +12,7 @@ export default ({ data }) => {
 
   return (
     <PageContent width={520} className="p-0 md:p-2">
+      <SEO title={meta.title}/>
       {meta.image && (
         <div className="w-full mb-2">
           <Img className="w-full" fluid={meta.image.childImageSharp.fluid} />
