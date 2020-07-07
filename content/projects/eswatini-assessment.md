@@ -22,9 +22,7 @@ While effective, this method proved to be time-consuming, costly and it lacked t
 
 Together with EIABP, I designed a scalable assessment methodology, developed a workflow to organize site surveys, and trained four staff members to carry out the field assessments.
 
-**Check out my presentation on the needs assessment at State of the Map 2019!**
-
-`youtube: B6bzW-V0zW4`
+[**Click here to see my presentation on the needs assessment, given at State of the Map 2019 in Heidelberg, Germany!**](https://youtu.be/B6bzW-V0zW4)
 
 Here is how it works:
 

@@ -6,8 +6,9 @@ image: ./img/sprawl.jpg
 caption: "Sko Buffs"
 date: 2016-01-01
 tags: ["grass", "gdal", "landsat", "bash"]
+display: true
 
-blurb: Skoo Buff
+blurb: Calculating the rate of Dubai's Urban sprawl by classifying and comparing Landsat satellite imagery using open-source GRASS GIS
 ---
 
 Freely available satellite imagery is a fabulous resource for use in geospatial analysis, including land cover classification. GRASS GIS -- a free, powerful suite of open source tools -- provides various methods to classify source imagery which can be used to perform land cover classification.

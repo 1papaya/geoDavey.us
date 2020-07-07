@@ -16,11 +16,9 @@ Routing analysis is a critically useful tool in geospatial analysis, enabling an
 
 However, while possible with open source software, the existing routing analysis implementations lacked robustness and ease of use for the average end-user to perform various types of custom routing analysis.
 
-While assisting with the eSwatini National Needs Assessment, I witnessed this gap in available software and developed [tebetebe](https://github.com/1papaya/tebetebe), a python package to easily perform custom routing analysis.
+While assisting with the eSwatini National Needs Assessment, I witnessed this gap in available software and developed [tebetebe](https://github.com/geoDavey/tebetebe), a python package to easily perform custom routing analysis.
 
-**Check out my presentation on *tebetebe* at State of the Map 2019!**
-
-<iframe width="560" height="515" style="height:315px !important;" src="https://www.youtube.com/embed/B6bzW-V0zW4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[**Click here to see my presentation on tebetebe, given at State of the Map 2019 in Heidelberg, Germany**](https://youtu.be/B6bzW-V0zW4)
 
 Here are a list of tebetebe's features:
 
@@ -38,7 +36,7 @@ Under the hood, tebetebe manages the scenario compilation and associated file op
 
 Furthermore, tebetebe provides methods for downloading live data from the OSM database to be used in routing analysis, using the Overpass API. This enables users to dynamically download route networks, origins and destination points, allowing for updatable and reproducible analysis.
 
-[Check out the documentation for some examples](https://1papaya.github.io/tebetebe/)!
+[Check out the documentation for some examples](https://geoDavey.github.io/tebetebe/)!
 
 # **3. Plugin Support**
 
@@ -54,5 +52,5 @@ tebetebe provides a low-level API into the routing engine, which can be incorpor
 
 **Other links:**
 
-* [tebetebe](https://github.com/1papaya/tebetebe/) on GitHub
-* [tebetebe documentation](https://1papaya.github.io/tebetebe/)
+* [tebetebe](https://github.com/geoDavey/tebetebe/) on GitHub
+* [tebetebe documentation](https://geoDavey.github.io/tebetebe/)
