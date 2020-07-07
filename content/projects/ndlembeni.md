@@ -9,8 +9,14 @@ display: true
 date: 2018-07-01
 tags: ["community", "pick-axe", "shovel", "1love"]
 
-blurb: "Our second footbridge project in Swaziland, wrought with many technical and social challenges, overcome with innovation & style."
+blurb: "Our second footbridge project in Swaziland, an eventful build with many technical and social challenges, overcome with innovation & style."
 ---
+
+# Background
+
+Back in the summer of 2018 as part of the Swaziland Footbridge Program, our CU chapter worked with a local community at Ndlembeni, to build an 83 meter suspended footbridge over the Nkomati river. Altogether it was a profound joyful experience for all those involved and was fully powered by the human spirit. Together we came together, overcome lots of challenges and endured hard work all with the common goal of a better future, and had lots of fun too.
+
+Below is a series of updates sent out on a mailing list to individuals who had donated to fund our cause, to keep the folks updated and to share our gratitude. They detail all that went on during the project :)
 
 # Update #1: Sanbonani y’all!!!
 
@@ -290,7 +296,7 @@ We love you Vusi!!
 If anyone would like to donate specifically to our bridge celebration, you can donate a goat to the celebration for $52.24 (R700), a round of cold beverages for $26.12 (R350), or a pack of "Polaroid" instant photos for $13.10. Please make sure to donate that exact amount so we can ensure your donation goes to the right place :)
 
 ![One more fun fact: We thank the Engineering Excellence Fund at the University of Colorado Boulder for granting us our survey equipment! Siyabonga kakhulu!!](./img/ndlembeni/surveyor-temba.jpg)
-*
+
 ### We love you all!! Thank you for reading!!
 
 Stay tuned for our further updates as we charge to completion to the bridge!!
@@ -298,3 +304,38 @@ Stay tuned for our further updates as we charge to completion to the bridge!!
 Hamba kahle y'all, siyabonga kakhulu!!
 
 <3 from eSwatini
+
+# Update #3: Sesicedzile (We Are Done!)
+
+## Sanbonani everybody!!!
+
+We are Finished!!!11!!! Yesterday was our last day on the bridge site and we are in a limbo zone now until we make our next move. It has been a total whirlwind the last many days and reality definitely has not sunk in yet!
+
+Here are some images from these last couple days !!
+
+![The moment of truth came when we went to splice our 4th cable in and pull it through the anchor......it worked! :)](./img/ndlembeni/cable-splice.jpg)
+
+![Tightening up them clamps!!](./img/ndlembeni/hoisting.jpg)
+
+![Greasin' up them cables!! ;P](./img/ndlembeni/greasy.jpg)
+
+![All four cables hoisted!](./img/ndlembeni/hoisted.jpg)
+
+![Bridge all nice and decked! Just add fencing.](./img/ndlembeni/decked.jpg)
+
+![Last day of work, 24 July 2018](./img/ndlembeni/last-day.jpg)
+
+# 2018 Ndlembeni Footbridge Inauguration
+
+![My man Joster on the grill. Thank you all so much for your guys' donations for meat and beverages!! They were consumed with joy](./img/ndlembeni/joster-grill.jpg)
+
+![Lots of reasons to be happy today](./img/ndlembeni.jpg)
+
+![Program Manager Sam Sweet "Vusi" made a speech in siSwati at the inauguration, which was a crowd favourite.](./img/ndlembeni/andile-vusi.jpg)
+
+![CU Boulder Bridge Fam!](./img/ndlembeni/cu-fam.jpg)
+
+Thank you so much for staying along with us during this footbridge build!! It has been one heck of a time, a lifetime of memories.
+
+See ya next year!!!
+&lt;3
