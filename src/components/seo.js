@@ -38,8 +38,8 @@ const SEO = ({ description, meta, title }) => {
         lang: "en",
       }}
       title={title}
-      defaultTitle={"gDv.us"}
-      titleTemplate={`gDv: %s`}
+      defaultTitle={"geoDavey.us"}
+      titleTemplate={`%s`}
       link={[
         {
           rel: "icon",
