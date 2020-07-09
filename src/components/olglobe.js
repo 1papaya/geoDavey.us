@@ -14,8 +14,6 @@ import XYZ from "ol/source/XYZ";
 import { linear } from "ol/easing";
 import arc from "arc";
 
-import "../styles/ol-globe.scss";
-
 class OLGlobe extends React.PureComponent {
   constructor(props) {
     super(props);
