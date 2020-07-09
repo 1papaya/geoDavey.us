@@ -140,6 +140,7 @@ module.exports = {
         tailwind: true,
         ignore: [
           "src/styles/base.scss",
+          "src/styles/ol-globe.scss",
           "gatsby-plugin-transition-link/",
           "prismjs/",
           "mapbox-gl/"
