@@ -14,7 +14,9 @@ blurb: "Our second footbridge project in Swaziland, an eventful build with many 
 
 # Background
 
-Back in the summer of 2018 as part of the Swaziland Footbridge Program, our CU chapter worked with a local community at Ndlembeni, to build an 83 meter suspended footbridge over the Nkomati river. Altogether it was a profound joyful experience for all those involved and was fully powered by the human spirit. Together we came together, overcome lots of challenges and endured hard work all with the common goal of a better future, and had lots of fun too.
+Back in the summer of 2018 as part of the Swaziland Footbridge Program, our CU chapter worked with a local community at Ndlembeni, to build an 83 meter suspended footbridge over the Nkomati river.
+
+Altogether, the project was a profound success for all those involved and is a testament to the power of the human spirit. We united ourselves, overcame challenges, endured hard work and had lots of fun, all with the common goal of a better future, and it worked out. Woohoo!
 
 Below is a series of updates sent out on a mailing list to individuals who had donated to fund our cause, to keep the folks updated and to share our gratitude. They detail all that went on during the project :)
 

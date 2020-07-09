@@ -149,6 +149,29 @@ p {
 .bg-standard {
   background: $bg-color;
 }
+
+// ol-globe
+.square {
+  position: relative;
+
+  &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+  }
+}
+
+.ol-globe {
+  margin: 0 auto;
+  
+  .ol-viewport {
+      border-radius: 50%;
+  }
+  .ol-globe-container {
+      width: 100%;
+      height: 100%;
+  }
+}
 /*! purgecss end ignore */
 
 @tailwind components;

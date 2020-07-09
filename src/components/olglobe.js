@@ -69,8 +69,8 @@ class OLGlobe extends React.PureComponent {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            width: 310,
+            height: 310,
             backgroundSize: "100% 100%",
             zIndex: 1337,
           }}
@@ -111,6 +111,8 @@ class OLGlobeMap extends Map {
     this.once("rendercomplete", opt.onLoad);
     this.once("rendercomplete", () => { this.animate(opt.duration) });
 
+    console.log("here");
+    console.log(this);
     this.addPointsLayer(opt.places);
     this.addLinesLayer(opt.places);
 

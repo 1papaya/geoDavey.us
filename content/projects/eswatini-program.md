@@ -13,3 +13,5 @@ tags: ["initiative", "luck", "1love"]
 
 blurb: "An extraordinary intercontinental collaboration and triumph of the human spirit. Building bridges with luck, initiative, and a whole lot of love"
 ---
+
+`youtube: BSj-5oeZPRI`
