@@ -138,6 +138,7 @@ module.exports = {
       options: {
         printRejected: true,
         tailwind: true,
+        purge: false,
         ignore: [
           "src/styles/base.scss",
           "src/styles/ol-globe.scss",
