@@ -20,7 +20,15 @@ export default connect(mapStateToProps)((props) => {
     if (props.isLoadingSuppressed && mapRef.current) {
       mapRef.current.getMap().fire("load", { fake: true });
     }
-  }, [props.isLoadingSuppressed])
+  }, [props.isLoadingSuppressed]);
+
+  // release the map to be navigated after 5 seconds of loading
+  // or if all assets load, whichever is first
+  useEffect(() => {
+    setTimeout(() => {
+      mapRef.current.getMap().fire("load", { fake: true });
+    }, 5000);
+  }, []);
 
   return (
     <MapContent>
