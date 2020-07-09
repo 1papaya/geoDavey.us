@@ -35,8 +35,6 @@ const Code = (props) => {
   );
 };
 
-let OLGlobeLoadable = loadable(() => import("./olglobe"), {fallback: null});
-
 const components = {
   code: (props) => <Code {...props} />,
   a: (props) => {
@@ -49,11 +47,11 @@ const components = {
     else return <a {...props} />;
   },
   PageTransitionLink,
-  OLGlobeLoadable,
+  OLGlobe: loadable(() => import("./olglobe")),
 };
 
 export default (props) => (
-  <MDXProvider components={components}>
+  <MDXProvider components={{ ...components }}>
     <MDXRenderer>{props.children}</MDXRenderer>
   </MDXProvider>
 );

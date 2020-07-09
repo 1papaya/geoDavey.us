@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef, memo } from "react";
 
 import { Map, View } from "ol";
 
@@ -12,44 +12,53 @@ import Feature from "ol/Feature";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 import { linear } from "ol/easing";
+import { css } from "@emotion/core";
 import arc from "arc";
 
-class OLGlobe extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const OLGlobe = (props) => {
+  let [globe, setGlobe] = useState(null);
+  let mapRef = useRef();
 
-    this.state = {
-      olGlobe: null,
-    };
-
-    this.mapRef = React.createRef();
-  }
-
-  componentDidMount() {
-    // once component is mounted, render OL map inside mapRef container
-    this.setState({
-      olGlobe: new OLGlobeMap({
-        target: this.mapRef.current,
-        places: this.props.places,
-        duration: this.props.duration,
-        onLoad: this.props.onLoad,
+  useEffect(() => {
+    setTimeout(() => {
+      let olGlobe = new OLGlobeMap({
+        target: mapRef.current,
+        places: props.places,
+        duration: props.duration,
+        onLoad: props.onLoad,
         initBounds: [-180, -55, -180, 72],
-      }),
-    });
-  }
+      });
 
-  render() {
-    return (
+      setGlobe(olGlobe);
+    }, 3000);
+  }, []);
+
+  console.log("render");
+
+  return (
+    <div>
       <div
         className="ol-globe square"
         style={{
           width: 310,
           height: 310,
-          margin: "1em auto"
+          position: "relative",
+          margin: "0em auto",
         }}
+        css={css`
+          &:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+          }
+
+          .ol-viewport {
+            border-radius: 50%;
+          }
+        `}
       >
         <div
-          ref={this.mapRef}
+          ref={mapRef}
           className="ol-globe-container"
           style={{
             borderRadius: "50%",
@@ -74,9 +83,16 @@ class OLGlobe extends React.PureComponent {
           }}
         ></div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+OLGlobe.defaultProps = {
+  places: [],
+  duration: 1000,
+  onLoad: () => {},
+  initBounds: [-180, -55, -180, 72],
+};
 
 class OLGlobeMap extends Map {
   constructor(opt) {
@@ -100,17 +116,17 @@ class OLGlobeMap extends Map {
           source: new XYZ({
             url: "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
           }),
-        })
+        }),
       ],
       view: new FitView(opt.target, initBounds),
       loadTilesWhileAnimating: true,
     });
 
     this.once("rendercomplete", opt.onLoad);
-    this.once("rendercomplete", () => { this.animate(opt.duration) });
+    this.once("rendercomplete", () => {
+      this.animate(opt.duration);
+    });
 
-    console.log("here");
-    console.log(this);
     this.addPointsLayer(opt.places);
     this.addLinesLayer(opt.places);
 
@@ -134,7 +150,7 @@ class OLGlobeMap extends Map {
           angle: Math.PI / 4,
         }),
       });
-    }
+    };
 
     for (var i = 0; i < places.length; i++) {
       let plc = places[i];

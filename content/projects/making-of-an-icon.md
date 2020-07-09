@@ -37,17 +37,17 @@ This image, with a strong edge between the foreground/background is like cake to
 
 # First Rendition: OpenLayers
 
-<OLGlobeLoadable
+<OLGlobe
 places={[
-{ "id": "0", "address": "Denver, CO, USA", "x": -104.9903, "y": 39.7392 },
-{ "id": "1", "address": "Boston, MA, USA", "x": -71.0589, "y": 42.3601 },
-{ "id": "2", "address": "Mbabane, Eswatini", "x": 31.1367, "y": -26.3054 },
-{ "id": "3", "address": "Heidelberg, Germany", "x": 8.6724, "y": 49.3988 },
-{ "id": "4", "address": "Alcudia, Spain", "x": 3.124, "y": 39.8533 },
-{ "id": "5", "address": "Vilaflor, Spain", "x": -16.6372, "y": 28.1578 }
+  { "id": "0", "address": "Denver, CO, USA", "x": -104.9903, "y": 39.7392 },
+  { "id": "1", "address": "Boston, MA, USA", "x": -71.0589, "y": 42.3601 },
+  { "id": "2", "address": "Mbabane, Eswatini", "x": 31.1367, "y": -26.3054 },
+  { "id": "3", "address": "Heidelberg, Germany", "x": 8.6724, "y": 49.3988 },
+  { "id": "4", "address": "Alcudia, Spain", "x": 3.124, "y": 39.8533 },
+  { "id": "5", "address": "Vilaflor, Spain", "x": -16.6372, "y": 28.1578 }
 ]}
 duration={31000}
-onLoad={()=>{}}
+onLoad={()=>{ window.dispatchEvent(new Event("resize")) }}
 />
 
 The first rendition I went for the "raster" approach with my tried and tested pals, Photoshop and OpenLayers.
