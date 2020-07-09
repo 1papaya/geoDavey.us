@@ -47,6 +47,7 @@ class OLGlobe extends React.PureComponent {
         style={{
           width: 310,
           height: 310,
+          margin: "1em auto"
         }}
       >
         <div

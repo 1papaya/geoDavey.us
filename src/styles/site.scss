@@ -38,11 +38,11 @@ $bg-color: #f5f3f0;
 }
 
 @font-face {
-  font-family: 'Barlow Condensed';
+  font-family: "Barlow Condensed";
   font-style: normal;
   font-weight: 400;
-  src: local('Barlow Condensed Regular'), local('BarlowCondensed-Regular'),
-       url('./fonts/barlow-condensed-v4-latin-regular.woff2') format('woff2'), 
+  src: local("Barlow Condensed Regular"), local("BarlowCondensed-Regular"),
+    url("./fonts/barlow-condensed-v4-latin-regular.woff2") format("woff2");
 }
 
 .font-barlow {
@@ -70,26 +70,43 @@ a {
   color: #3273dc;
 }
 
-
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   @apply font-barlow;
   @apply font-bold;
 }
 h1 {
   @apply text-2xl;
+  @apply my-1;
 }
 
 h2 {
   @apply text-xl;
+  @apply my-2;
 }
 
 h3 {
   @apply text-lg;
+  @apply mb-2;
+}
+
+ul {
+  li:before {
+    content: "·";
+
+    @apply mr-2;
+    @apply text-lg;
+  }
 }
 
 ol {
   @apply list-decimal;
   @apply ml-5;
+}
+
+li {
+  @apply my-1;
 }
 
 p {
@@ -125,7 +142,7 @@ p {
     font-size: 0.875rem;
     color: rgba(74, 85, 104, 1);
     text-align: center;
-  
+
     &:before {
       content: "pic:";
       padding-right: 0.2em;
