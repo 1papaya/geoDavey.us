@@ -323,6 +323,8 @@ Here are some images from these last couple days !!
 
 ![All four cables hoisted!](./img/ndlembeni/hoisted.jpg)
 
+![Temnotfo decking it up](./img/ndlembeni/temnotfo.jpg)
+
 ![Bridge all nice and decked! Just add fencing.](./img/ndlembeni/decked.jpg)
 
 ![Last day of work, 24 July 2018](./img/ndlembeni/last-day.jpg)
