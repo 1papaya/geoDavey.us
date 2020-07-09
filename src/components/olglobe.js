@@ -33,8 +33,6 @@ const OLGlobe = (props) => {
     }, 3000);
   }, []);
 
-  console.log("render");
-
   return (
     <div>
       <div
@@ -54,6 +52,7 @@ const OLGlobe = (props) => {
 
           .ol-viewport {
             border-radius: 50%;
+            overflow: hidden;
           }
         `}
       >
