@@ -42,6 +42,7 @@ const OLGlobe = (props) => {
           height: 310,
           overflow: "hidden",
           borderRadius: "50%",
+          transform: "translateZ(0)",
           position: "relative",
           margin: "0em auto",
         }}
@@ -52,9 +53,10 @@ const OLGlobe = (props) => {
             padding-bottom: 100%;
           }
 
-          & .ol-viewport {
+          & * {
             border-radius: 50%;
             overflow: hidden;
+            transform: translateZ(0);
           }
         `}
       >
