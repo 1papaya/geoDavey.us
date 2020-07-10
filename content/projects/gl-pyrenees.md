@@ -5,7 +5,7 @@ url: /proj/gl-pyrenees/
 image: ./img/gl-pyrenees.jpg
 caption: "Screenshot of gl-pyrenees map with location update"
 
-display: true
+display: false
 date: 2020-07-01
 tags: ["mapbox-gl", "openmaptiles", "netlify", "telegram"]
 

@@ -7,7 +7,7 @@ caption: "The whole website redesign was coded at this desk"
 date: 2020-04-29
 tags: ["javascript", "react", "gatsby", "tailwind"]
 
-display: true
+display: false
 blurb: 'Creative outlet for open source geo projects, built with mucho love on a new school tech stack. A dream come true. Viva la Open Source!'
 ---
 
