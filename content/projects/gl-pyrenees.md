@@ -122,5 +122,6 @@ In spite of some issues with the plugin (this is new technology after all) the m
 
 * Travelling is a privilege and not a right. I'm grateful for the opportunity to do this! &lt;3
 * For those curious, the idea of this trip isn't to hike the whole Pyrenees. It's to do whatever I want, all the time. My expectations end once I take the first step :)
+* The data downloaded from pyrenees-refuges.com didn't come with any license that I could find on their website. I have sent them a mail about my usage of the data, if they are not keen I will remove it from the map.
 * Special thanks to [OSM user Apprit](https://www.openstreetmap.org/user/Appirit) for all their work on the massive HRP route relation! And also thanks to all the OSM communities in France Spain and Andorra for contributing such quality data! Merci Beaucoup / Muchas Gracias / Moltes Gràcies!
 * I'm aware there is an ongoing global pandemic. At every step of the way I follow local regulations and minimize my exposure to others. Plus I currently live in Spain so for me this is local travel.
