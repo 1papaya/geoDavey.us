@@ -8,7 +8,7 @@ date: 2019-07-29
 tags: ["javascript", "d3", "openlayers"]
 
 display: true
-blurb: "Building the geoDavey animated globe icon: A journey from a massive granite mountaintop in Swaziland, through the lush forests of Adobe Illustrator and Photoshop, to the open shores of OpenLayers and D3"
+blurb: "A journey from a massive granite mountaintop in Swaziland, through the lush forests of Adobe Illustrator and Photoshop, to the open shores of OpenLayers and D3"
 ---
 
 import D3Globe from "../../src/components/svg/d3globe";
@@ -127,7 +127,7 @@ addLinesLayer(places) {
 }
 ```
 
-### Check out the source code for this globe on GitHub!
+### [Check out the source code for this globe on GitHub!](https://github.com/geoDavey/geoDavey.us/blob/master/src/components/olglobe.js)
 
 # Second Rendition: d3
 
@@ -214,7 +214,7 @@ let silhouette = svg
   .style("fill", props.colors.silhouette);
 ```
 
-### Click here to see the icon source code on GitHub!
+### [Click here to see the icon source code on GitHub!](https://github.com/geoDavey/geoDavey.us/blob/master/src/components/svg/d3globe.js)
 
 # Reflection
 
