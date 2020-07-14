@@ -16,15 +16,13 @@ blurb: "Interactive hiking map of the Pyrenees mountain range using OSM data, wi
 
 ### *"The Mountains are Calling and I Must Go"*
 
-What does it feel like to actually live in the moment? What do you even *do* all day long if you're not constantly working towards the future? When is the last time you just watched the clouds go by?
+What does it feel like to actually live in the moment? When's the last time you went 24 hours without looking at a screen? What do you even *do* all day if you're not constantly working towards your future?
 
-For me personally: I can't remember. After years and years of analytical thinking on the daily---through engineering school, working as a software developer, being a child of the American rat race---I am so caught up in my thoughts that I could almost be convinced that this is what life is.
+For me personally: I don't remember. After years and years of analytical thinking on the daily---through engineering school, working as a software developer, being a child of the information age---I am so caught up in my thoughts and LCD screens that I could almost be convinced that this is what life is.
 
-But I know it's not. There is more to life than git commits and successful production builds. There are also rocks, trees, and dirt, to name a few.
+But I know it's not. As much as I love computers and programming, there is more to life than two-dimensional backlit screens and infinite scrolls of information. There are also rocks, trees, and dirt, to name a few.
 
-All my future plans having been cancelled due to the pandemic, I figured this is as good an opportunity as any to leave my laptop behind, follow my short term desires, and bask in sweet synchronicity.
-
-So I decided to backpack the Pyrenees! And to help me prepare I designed and built an online interactive map of all the trails in the region, plus a print version, and coded up a system to update my location as I'm hiking.
+In pursuit of exploring some of these other things, I decided to leave my laptop behind, follow my short term desires, and backpack the Pyrenees! And to help me prepare I built an online interactive map of all the trails in the region, plus a print version, and coded up a system to update my location on the map as I'm hiking.
 
 # The Map: gl-pyrenees
 
