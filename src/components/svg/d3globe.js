@@ -4,7 +4,7 @@ import { select } from "d3-selection";
 import { feature } from "topojson-client";
 import { interval } from "d3-timer";
 
-import landTopo from "../../data/land-110m.json";
+import landTopo from "../../data/land-110m-simplified.json";
 import silData from "../../data/silhouette.json";
 
 const D3Globe = (props) => {
