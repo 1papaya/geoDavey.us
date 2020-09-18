@@ -20,15 +20,17 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const [isPreloaded, setIsPreloaded] = useState(false);
   let isMap = "pageContext" in props && "isMap" in props.pageContext;
 
+  const globeWidth = 340;
+  const fadeInLength = 5;
+  const pausLength = 6.4;
+  const animLength = 2;
+
   // splash animation for regular page
   useEffect(() => {
     const isMobile = document.documentElement.clientWidth <= 768;
     const parent = contentParentRef.current;
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
-
-    const pausLength = 4.4;
-    const animLength = 2;
 
     // set up initial transition, shrink the content
     parent.style.setProperty("width", "0px");
@@ -39,8 +41,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
     // commit style changes
     requestAnimationFrame(() => {
       logo.style.setProperty("transition", `opacity 5s ease-in-out`);
-      logo.style.setProperty("width", "310px");
-      logo.style.setProperty("height", "310px");
+      logo.style.setProperty("width", `${globeWidth}px`);
+      logo.style.setProperty("height", `${globeWidth}px`);
       logo.style.setProperty("opacity", "1");
 
       requestAnimationFrame(() => {
@@ -49,6 +51,20 @@ const PageLayout = connect(mapStateToProps)((props) => {
           // (2) trigger logo and content transition
           logo.style.setProperty("transition", `all ${animLength}s`);
 
+          // if page is a map, fade out logo
+          if (isMap) {
+            requestAnimationFrame(() => {
+              // fire TRANSITION_START, map will fire TRANSITION_END once loaded
+              props.dispatch({ type: "TRANSITION_START" });
+              logo.style.setProperty("opacity", "0");
+
+              setTimeout(() => {
+                setIsPreloaded(true);
+              }, animLength * 1000);
+            });
+          }
+
+          // if page is regular, animate icon
           if (!isMap) {
             parent.style.setProperty("width", `${pWidth}px`);
             parent.style.setProperty(
@@ -71,18 +87,6 @@ const PageLayout = connect(mapStateToProps)((props) => {
               setIsPreloaded(true);
             }, animLength * 1000);
           }
-
-          if (isMap) {
-            requestAnimationFrame(() => {
-              // fire TRANSITION_START, map will fire TRANSITION_END once loaded
-              props.dispatch({ type: "TRANSITION_START" });
-              logo.style.setProperty("opacity", "0");
-
-              setTimeout(() => {
-                setIsPreloaded(true);
-              }, animLength * 1000);
-            });
-          }
         }, pausLength * 1000);
       });
     });
@@ -96,7 +100,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
       css={css`
         .fade-in {
           opacity: 1;
-          transition: all 1.5s;
+          transition: all ${fadeInLength}s fade-in-out;
         }
         &.preloading {
           overflow: hidden;
@@ -126,17 +130,19 @@ const PageLayout = connect(mapStateToProps)((props) => {
             >
               <span>/now/</span>
             </PageTransitionLink>
-            <div className="flex flex-shrink mt-1 mb-1 justify-center md:w-auto md:justify-end">
+            <div className="flex flex-shrink my-1 mx-2 py-1 justify-center md:w-auto md:justify-end">
               <div
                 ref={logoRef}
-                className="logo md:m-0 relative h-10 w-10 md:w-20 md:h-20"
+                className="logo md:m-0 relative h-10 w-10 md:w-24 md:h-24"
                 style={
                   isPreloaded
                     ? {}
                     : {
                         opacity: 0,
-                        width: 310,
-                        height: 310,
+                        width: globeWidth,
+                        height: globeWidth,
+                        maxWidth: "95vw",
+                        maxHeight: "95vw"
                       }
                 }
               >
