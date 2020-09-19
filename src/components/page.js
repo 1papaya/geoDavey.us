@@ -19,6 +19,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
   const contentParentRef = useRef(null);
 
   const [isPreloaded, setIsPreloaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(null);
   let isMap = "pageContext" in props && "isMap" in props.pageContext;
 
   const globeWidth = 340;
@@ -38,6 +39,8 @@ const PageLayout = connect(mapStateToProps)((props) => {
     parent.style.setProperty("height", "0px");
     parent.style.setProperty("overflow", "hidden");
     parent.style.setProperty("transition", `all ${animLength}s`);
+
+    setIsMobile(isMobile);
 
     // commit style changes
     requestAnimationFrame(() => {
@@ -163,10 +166,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
                     left: "50%",
                     width: "200vw",
                     transform: "translate(-50%, -50%)",
-                    maxHeight:
-                      !isPreloaded && document.documentElement.clientWidth <= 768
-                        ? "200vh"
-                        : "100vh",
+                    maxHeight: !isPreloaded && isMobile ? "200vh" : "100vh",
                   }}
                   scale={1.2}
                   center={[90, 0]}
