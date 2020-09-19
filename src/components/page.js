@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { css } from "@emotion/core";
 
 import TransitionLink from "gatsby-plugin-transition-link";
+import GraticuleBg from "../components/svg/graticuleBg";
 import D3Globe from "./svg/d3globe";
 import Loader from "./loader";
 import { parsePath } from "gatsby-link";
@@ -112,11 +113,11 @@ const PageLayout = connect(mapStateToProps)((props) => {
     >
       <Loader />
 
-      <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+      <div className="content z-10 flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         {(!isMap || !isPreloaded) && (
-          <div className="nav bg-standard flex self-stretch text-center items-stretch md:sticky md:bg-standard md:text-right text-xs md:text-sm md:m-0 sticky md:static z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col sticky">
+          <div className="nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:text-sm md:m-0 md:sticky z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col overflow-hidden md:overflow-visible">
             <PageTransitionLink
-              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 md:pt-2 w-2/12 md:w-auto"
+              className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
               to="/"
               activeClassName="font-bold"
             >
@@ -142,10 +143,24 @@ const PageLayout = connect(mapStateToProps)((props) => {
                         width: globeWidth,
                         height: globeWidth,
                         maxWidth: "95vw",
-                        maxHeight: "95vw"
+                        maxHeight: "95vw",
                       }
                 }
               >
+                <GraticuleBg
+                  className="absolute"
+                  style={{
+                    zIndex: -10,
+                    top: "50%",
+                    left: "50%",
+                    width: "200vw",
+                    transform: "translate(-50%, -50%)",
+                    maxHeight: "100vh"
+                  }}
+                  scale={1.2}
+                  center={[90, 0]}
+                  rotate={[0, 0, 90]}
+                />
                 <D3Globe
                   className="absolute w-full h-full"
                   silhouetteScale={0.47}
@@ -171,7 +186,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
         <div
           ref={contentParentRef}
-          className="flex fade-in flex-col md:justify-center"
+          className="z-10 flex fade-in flex-col md:justify-center"
         >
           <div
             ref={contentRef}

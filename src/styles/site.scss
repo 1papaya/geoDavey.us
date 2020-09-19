@@ -61,6 +61,10 @@ body {
   background-color: $bg-color !important;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #___gatsby,
 #gatsby-focus-wrapper {
   height: 100%;
