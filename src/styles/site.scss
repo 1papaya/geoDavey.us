@@ -1,4 +1,6 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 //
 // Variables
@@ -130,6 +132,18 @@ p {
   }
 }
 
+@media (min-width: 768px) {
+  .md\:w-28 {
+    width: 7rem;
+  }
+  .md\:h-28 {
+    height: 7rem;
+  }
+  .md\:shadow-outline2 {
+    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px
+  }
+}
+
 .gatsby-resp-image-figure {
   margin: 0;
 
@@ -159,20 +173,18 @@ p {
   position: relative;
 
   &:after {
-      content: "";
-      display: block;
-      padding-bottom: 100%;
+    content: "";
+    display: block;
+    padding-bottom: 100%;
   }
 }
 
 .ol-globe {
   margin: 0 auto;
-  
+
   .ol-viewport {
-      border-radius: 50%;
+    border-radius: 50%;
   }
 }
 /*! purgecss end ignore */
 
-@tailwind components;
-@tailwind utilities;

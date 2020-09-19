@@ -11,7 +11,7 @@ export default ({ data }) => {
   const body = data.mdx.body;
 
   return (
-    <PageContent width={720} className="p-0 md:p-2">
+    <PageContent width={520} className="p-0 md:p-2 bg-gray-300 bg-opacity-75">
       <SEO title={meta.title}/>
       {meta.image && (
         <div className="w-full mb-2">
@@ -30,7 +30,7 @@ export default ({ data }) => {
           </div>
           <div className="flex-grow text-right">{meta.date}</div>
         </div>
-        <div className="pt-2 border-t border-white">
+        <div className="pt-2 text-sm border-t border-white">
           <MDXContent>{body}</MDXContent>
         </div>
       </div>

@@ -115,13 +115,19 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
       <div className="content z-10 flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         {(!isMap || !isPreloaded) && (
-          <div className="nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:text-sm md:m-0 md:sticky z-10 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col overflow-hidden md:overflow-visible">
+          <div
+            className={`nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:m-0 sticky z-20 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col md:overflow-visible ${
+              isPreloaded ? "overflow-hidden" : ""
+            }`}
+          >
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
               to="/"
               activeClassName="font-bold"
             >
-              <span>home</span>
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+                home
+              </span>
             </PageTransitionLink>
 
             <PageTransitionLink
@@ -129,12 +135,14 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/now/"
               activeClassName="font-bold"
             >
-              <span>/now/</span>
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+                /now/
+              </span>
             </PageTransitionLink>
             <div className="flex flex-shrink my-1 mx-2 py-1 justify-center md:w-auto md:justify-end">
               <div
                 ref={logoRef}
-                className="logo md:m-0 relative h-10 w-10 md:w-24 md:h-24"
+                className="logo md:m-0 relative h-10 w-10 md:w-28 md:h-28"
                 style={
                   isPreloaded
                     ? {}
@@ -155,7 +163,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
                     left: "50%",
                     width: "200vw",
                     transform: "translate(-50%, -50%)",
-                    maxHeight: "100vh"
+                    maxHeight: isPreloaded ? "100vh" : "200vh",
                   }}
                   scale={1.2}
                   center={[90, 0]}
@@ -172,21 +180,25 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/projects/"
               activeClassName="font-bold"
             >
-              <span>projects</span>
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+                projects
+              </span>
             </PageTransitionLink>
             <PageTransitionLink
               className="flex overflow-hidden text-black fade-in justify-center md:justify-end items-center outline-none whitespace-no-wrap p-1 w-2/12 md:w-auto"
               to="/1love/"
               activeClassName="font-bold"
             >
-              <span>1love</span>
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+                1love
+              </span>
             </PageTransitionLink>
           </div>
         )}
 
         <div
           ref={contentParentRef}
-          className="z-10 flex fade-in flex-col md:justify-center"
+          className="z-20 flex fade-in flex-col md:justify-center"
         >
           <div
             ref={contentRef}
@@ -206,7 +218,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 const PageContent = (props) => {
   return (
     <div
-      className={`page-content sm:w-full-important md:w-auto ${props.className}`}
+      className={`page-content sm:w-full-important md:w-auto md:shadow md:rounded ${props.className}`}
       style={{ width: props.width }}
     >
       {props.children}
