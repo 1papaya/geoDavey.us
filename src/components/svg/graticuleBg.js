@@ -29,7 +29,8 @@ const StereographicBg = (props) => {
       .attr("class", "graticule")
       .attr("d", path)
       .style("fill", "none")
-      .style("stroke", "rgba(0,0,0,0.2)");
+      .style("stroke", "rgba(0,0,0,0.3)")
+      .attr("stroke-width", "2px");
   }, []);
 
   return (
@@ -47,7 +48,7 @@ StereographicBg.defaultProps = {
   rotate: [0, 0, 90],
   scale: 2,
   style: {},
-  width: 1024,
+  width: 4096,
   color: "#000",
 };
 

@@ -128,7 +128,7 @@ p {
     min-height: -webkit-fill-available !important;
   }
   .sm\:h-screen-minus-nav {
-    min-height: calc(100vh - 48px);
+    min-height: calc(100vh - 56px);
   }
 }
 
@@ -140,7 +140,7 @@ p {
     height: 7rem;
   }
   .md\:shadow-outline2 {
-    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px
+    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
   }
 }
 

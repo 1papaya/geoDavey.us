@@ -70,7 +70,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             parent.style.setProperty("width", `${pWidth}px`);
             parent.style.setProperty(
               "height",
-              isMobile ? "calc(100vh - 48px)" : `${pHeight}px`
+              isMobile ? "calc(100vh - 56px)" : `${pHeight}px`
             );
 
             // (3) commit style changes, release logo w/h changes
@@ -116,7 +116,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
       <div className="content z-10 flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         {(!isMap || !isPreloaded) && (
           <div
-            className={`nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:m-0 sticky z-20 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col md:overflow-visible ${
+            className={`nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:m-0 sticky z-30 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col md:overflow-visible ${
               isPreloaded ? "overflow-hidden" : ""
             }`}
           >
@@ -163,7 +163,10 @@ const PageLayout = connect(mapStateToProps)((props) => {
                     left: "50%",
                     width: "200vw",
                     transform: "translate(-50%, -50%)",
-                    maxHeight: isPreloaded ? "100vh" : "200vh",
+                    maxHeight:
+                      !isPreloaded && document.documentElement.clientWidth <= 768
+                        ? "200vh"
+                        : "100vh",
                   }}
                   scale={1.2}
                   center={[90, 0]}
@@ -180,7 +183,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/projects/"
               activeClassName="font-bold"
             >
-              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+              <span className="fade-in md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
                 projects
               </span>
             </PageTransitionLink>
@@ -189,7 +192,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/1love/"
               activeClassName="font-bold"
             >
-              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+              <span className="fade-in md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
                 1love
               </span>
             </PageTransitionLink>
