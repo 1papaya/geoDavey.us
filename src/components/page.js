@@ -201,7 +201,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
         <div
           ref={contentParentRef}
-          className="z-20 flex fade-in flex-col md:justify-center"
+          className="z-20 md:z-30 flex fade-in flex-col md:justify-center"
         >
           <div
             ref={contentRef}
