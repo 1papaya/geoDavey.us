@@ -23,7 +23,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
   let isMap = "pageContext" in props && "isMap" in props.pageContext;
 
   const globeWidth = 340;
-  const fadeInLength = 5;
+  const fadeInLength = 2;
   const pausLength = 6.4;
   const animLength = 2;
 
@@ -104,7 +104,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
       css={css`
         .fade-in {
           opacity: 1;
-          transition: all ${fadeInLength}s fade-in-out;
+          transition: opacity ${fadeInLength}s ease-in-out;
         }
         &.preloading {
           overflow: hidden;
@@ -183,7 +183,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/projects/"
               activeClassName="font-bold"
             >
-              <span className="fade-in md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
                 projects
               </span>
             </PageTransitionLink>
@@ -192,7 +192,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
               to="/1love/"
               activeClassName="font-bold"
             >
-              <span className="fade-in md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
+              <span className="md:bg-white md:px-3 md:py-1 md:rounded md:bg-opacity-75 md:shadow-outline2">
                 1love
               </span>
             </PageTransitionLink>
