@@ -20,7 +20,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
   const [isPreloaded, setIsPreloaded] = useState(false);
   const [isMobile, setIsMobile] = useState(null);
-  let isMap = "pageContext" in props && "isMap" in props.pageContext;
+  const isMap = "pageContext" in props && "isMap" in props.pageContext;
 
   const globeWidth = 340;
   const fadeInLength = 2;
@@ -63,6 +63,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
               setTimeout(() => {
                 setIsPreloaded(true);
+                console.log("is Preloaded");
               }, animLength * 1000);
             });
           }
@@ -236,7 +237,7 @@ PageContent.defaultProps = {
 const MapContent = (props) => {
   return (
     <div
-      className={`page-content geodavey-map fixed top-0 left-0 w-full h-full`}
+      className={`z-30 page-content geodavey-map fixed top-0 left-0 w-full h-full`}
       style={{ width: props.width }}
     >
       {props.children}
