@@ -166,7 +166,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
                     left: "50%",
                     width: "200vw",
                     transform: "translate(-50%, -50%)",
-                    maxHeight: !isPreloaded && isMobile ? "200vh" : "100vh",
+                    maxHeight: isMobile ? "200vh" : "100vh",
                   }}
                   scale={1.2}
                   center={[90, 0]}
