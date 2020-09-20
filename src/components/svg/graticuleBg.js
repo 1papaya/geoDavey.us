@@ -21,7 +21,7 @@ const StereographicBg = (props) => {
       .rotate([0, 0, 0]);
 
     let path = geoPath().projection(proj);
-    let graticule = geoGraticule().step([10, 15]);
+    let graticule = geoGraticule().step([12, 15]);
 
     svg
       .append("path")
