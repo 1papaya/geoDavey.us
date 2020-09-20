@@ -29,7 +29,6 @@ const PageLayout = connect(mapStateToProps)((props) => {
 
   // splash animation for regular page
   useEffect(() => {
-    const isMobile = document.documentElement.clientWidth <= 768;
     const parent = contentParentRef.current;
     const logo = logoRef.current;
     let [pWidth, pHeight] = [parent.clientWidth, parent.clientHeight];
@@ -40,7 +39,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
     parent.style.setProperty("overflow", "hidden");
     parent.style.setProperty("transition", `all ${animLength}s`);
 
-    setIsMobile(isMobile);
+    setIsMobile(document.documentElement.clientWidth <= 768);
 
     // commit style changes
     requestAnimationFrame(() => {
@@ -73,7 +72,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             parent.style.setProperty("width", `${pWidth}px`);
             parent.style.setProperty(
               "height",
-              isMobile ? "calc(100vh - 56px)" : `${pHeight}px`
+              document.documentElement.clientWidth <= 768 ? "calc(100vh - 56px)" : `${pHeight}px`
             );
 
             // (3) commit style changes, release logo w/h changes
@@ -104,7 +103,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
       css={css`
         .fade-in {
           opacity: 1;
-          transition: opacity ${fadeInLength}s ease-in-out;
+          transition: all ${fadeInLength}s ease-in-out;
         }
         &.preloading {
           overflow: hidden;
@@ -116,7 +115,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
     >
       <Loader />
 
-      <div className="content z-10 flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
+      <div className="content flex flex-col md:items-center w-full md:w-auto md:flex-row h-full md:rounded-lg">
         {(!isMap || !isPreloaded) && (
           <div
             className={`nav bg-standard flex self-stretch text-center items-stretch md:bg-standard md:text-right text-xs md:m-0 sticky z-30 top-0 max-h-screen select-none font-palanquin justify-center md:top-4 md:flex-col md:overflow-visible ${
