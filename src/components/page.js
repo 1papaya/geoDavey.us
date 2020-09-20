@@ -237,7 +237,7 @@ PageContent.defaultProps = {
 const MapContent = (props) => {
   return (
     <div
-      className={`z-30 page-content geodavey-map fixed top-0 left-0 w-full h-full`}
+      className={`z-30 page-content geodavey-map fixed top-0 left-0 w-full h-full bg-black`}
       style={{ width: props.width }}
     >
       {props.children}
