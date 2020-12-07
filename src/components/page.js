@@ -73,7 +73,9 @@ const PageLayout = connect(mapStateToProps)((props) => {
             parent.style.setProperty("width", `${pWidth}px`);
             parent.style.setProperty(
               "height",
-              document.documentElement.clientWidth <= 768 ? "calc(100vh - 56px)" : `${pHeight}px`
+              document.documentElement.clientWidth <= 768
+                ? "calc(100vh - 56px)"
+                : `${pHeight}px`
             );
 
             // (3) commit style changes, release logo w/h changes
@@ -207,7 +209,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             ref={contentRef}
             className="page-container md:ml-4 md:mt-4 md:mb-4 sm:w-full-minus-important sm:h-screen-minus-nav relative md:rounded-lg box-content"
             style={{
-              background: "rgba(0,0,0,0.075)",
+              background: isMobile ? "#f5f3f0" : "rgba(0,0,0,0.1)",
             }}
           >
             {props.children}
@@ -219,10 +221,15 @@ const PageLayout = connect(mapStateToProps)((props) => {
 });
 
 const PageContent = (props) => {
+  let isMobile = document.documentElement.clientWidth < 768;
+
   return (
     <div
-      className={`page-content sm:w-full-important md:w-auto md:shadow md:rounded ${props.className}`}
-      style={{ width: props.width }}
+      className={`page-content bg-white md:bg-transparent sm:w-full-important md:w-auto md:shadow md:rounded ${props.className}`}
+      style={{
+        width: props.width,
+        background: isMobile ? "#f5f3f0" : "transparent",
+      }}
     >
       {props.children}
     </div>
@@ -249,6 +256,8 @@ const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
   let linkRef = useRef();
 
+  let isMobile = document.documentElement.clientWidth < 768;
+
   // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
@@ -263,15 +272,15 @@ const PageTransitionLink = connect()((props) => {
     <TransitionLink
       state={{ prevPath }}
       entry={{
-        length: props.duration,
-        appearAfter: props.duration,
+        length: isMobile ? 0 : props.duration,
+        appearAfter: isMobile ? 0 : props.duration,
       }}
       innerRef={linkRef}
       exit={{
-        length: props.duration,
+        length: isMobile ? 0 : props.duration,
       }}
       trigger={async (pages) => {
-        let isMobile = document.documentElement.clientWidth < 768;
+        if (isMobile) return;
 
         // no transition spinner if link goes to current page
         if (props.to !== document.location.pathname)

@@ -17,7 +17,7 @@ export default (props) => {
         <div className="md:row-span-2">
           <div className="md:p-2">
             <div
-              className="text-sm relative h-full md:min-h-auto"
+              className="text-sm relative h-full z-10 md:min-h-auto"
               style={{ minHeight: 320 }}
             >
               <BackgroundSlider
