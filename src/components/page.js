@@ -266,7 +266,7 @@ const PageTransitionLink = connect()((props) => {
     setPrevPath(document.location.pathname);
 
     // force gatsby to prefetch all transitionlink page data onload
-    window.___loader.hovering(parsePath(props.to).pathname);
+    //window.___loader.hovering(parsePath(props.to).pathname);
   }, []);
 
   let [isMobile, setIsMobile] = useState(null);
