@@ -221,7 +221,12 @@ const PageLayout = connect(mapStateToProps)((props) => {
 });
 
 const PageContent = (props) => {
-  let isMobile = document.documentElement.clientWidth < 768;
+  let [isMobile, setIsMobile] = useState(null);
+
+  useEffect(() => {
+    let isMobile = document.documentElement.clientWidth < 768;
+    setIsMobile(isMobile);
+  }, []);
 
   return (
     <div
@@ -256,14 +261,19 @@ const PageTransitionLink = connect()((props) => {
   let [prevPath, setPrevPath] = useState(null);
   let linkRef = useRef();
 
-  let isMobile = document.documentElement.clientWidth < 768;
-
   // set the prev path on render, for back buttons
   useEffect(() => {
     setPrevPath(document.location.pathname);
 
     // force gatsby to prefetch all transitionlink page data onload
     window.___loader.hovering(parsePath(props.to).pathname);
+  }, []);
+
+  let [isMobile, setIsMobile] = useState(null);
+
+  useEffect(() => {
+    let isMobile = document.documentElement.clientWidth < 768;
+    setIsMobile(isMobile);
   }, []);
 
   let { dispatch, ...passedProps } = props;
@@ -280,6 +290,9 @@ const PageTransitionLink = connect()((props) => {
         length: isMobile ? 0 : props.duration,
       }}
       trigger={async (pages) => {
+
+        let isMobile = document.documentElement.clientWidth < 768;
+
         if (isMobile) return;
 
         // no transition spinner if link goes to current page
