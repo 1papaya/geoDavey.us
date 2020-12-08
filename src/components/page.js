@@ -147,7 +147,7 @@ const PageLayout = connect(mapStateToProps)((props) => {
             <div className="flex flex-shrink my-1 mx-2 py-1 justify-center md:w-auto md:justify-end">
               <div
                 ref={logoRef}
-                className="logo md:m-0 relative h-10 w-10 md:w-28 md:h-28"
+                className="logo md:m-0 relative h-10 w-10 md:w-32 md:h-32"
                 style={
                   isPreloaded
                     ? {}
